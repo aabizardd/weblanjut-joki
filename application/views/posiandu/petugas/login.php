@@ -13,16 +13,16 @@
 
         <!-- Custom fonts for this template-->
         <link href="<?php echo base_url(
-                    'assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet'
-                ); ?>" type="text/css">
+    'assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet'
+); ?>" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="<?= base_url(
-                    'assets/css/sb-admin-2.min.css'
-                ) ?>" rel="stylesheet">
+        <link href="<?=base_url(
+    'assets/css/sb-admin-2.min.css'
+)?>" rel="stylesheet">
 
     </head>
 
@@ -30,7 +30,7 @@
 
         <style type="text/css">
         .bck-log {
-            background: url("<?= base_url('assets/img/bakti-husada.png') ?>");
+            background: url("<?=base_url('assets/img/bakti-husada.png')?>");
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -57,13 +57,13 @@
                                             <h1 class="h4 text-gray-900 mb-4">Login Posyandu</h1>
                                         </div>
 
-                                        <?= $this->session->flashdata('message') ?>
+                                        <?=$this->session->flashdata('message')?>
 
 
 
-                                        <form class="user" action="<?= site_url(
-                                                                    'posyandu/PetugasPosiandu'
-                                                                ) ?>" method="POST">
+                                        <form class="user" action="<?=site_url(
+    'posyandu/PetugasPosiandu'
+)?>" method="POST">
                                             <div class="form-group">
                                                 <input type="email" name="email" class="form-control form-control-user"
                                                     id="exampleInputEmail" aria-describedby="emailHelp"
@@ -82,8 +82,8 @@
 
                                         <div class="text-center">
                                             <a class="small" href="<?php echo base_url(
-                                                                    'home/reza'
-                                                                ); ?>">Kembali ke menu utama</a>
+    'home/reza'
+); ?>">Kembali ke menu utama</a>
                                         </div>
 
 
@@ -92,8 +92,8 @@
 
                                         <div class="text-center">
                                             <a class="small" href="<?php echo site_url(
-                                                                    'posyandu/PetugasPosiandu/registrasi'
-                                                                ); ?>">Create an Account!</a>
+    'posyandu/PetugasPosiandu/registrasi'
+); ?>">Create an Account!</a>
                                         </div>
                                     </div>
                                 </div>
@@ -107,62 +107,23 @@
 
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="notifSukses" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Berhasil Login!</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" action="<?php echo site_url(
-                                                    'posyandu/home'
-                                                ); ?>">
-                            <div class="form-group">
-                                <label for="inputState">Wilayah</label>
-                                <select name="wilayah" id="inputState" class="form-control">
-                                    <?php foreach ($wilayah as $data) : ?>
-                                    <option value="<?php echo $data->id_wilayah; ?>"><?php echo $data->nama_wilayah; ?>
-                                    </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            </select>
 
-                    </div>
-                    <div class="modal-footer">
-                        <a href="<?php echo site_url(
-                                    'posyandu/PetugasPosiandu/logout'
-                                ); ?>"><button type="button" class="btn btn-danger">Tidak</button></a>
-                        <input type="submit" name="" class="btn btn-primary" value="Lanjut">
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
 
         <!-- end moda; -->
 
-        <?php if ($this->session->flashdata('success')) : ?>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $('#notifSukses').modal('show');
-        });
-        </script>
-        <?php endif; ?>
+
 
         <!-- Bootstrap core JavaScript-->
-        <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
-        <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+        <script src="<?=base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+        <script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
 
         <!-- Core plugin JavaScript-->
-       
- <script src="<?= base_url('assets/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
+
+        <script src="<?=base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="<?= base_url('assets/js/sb-admin-2.min.js') ?>"></script>
+        <script src="<?=base_url('assets/js/sb-admin-2.min.js')?>"></script>
 
     </body>
 

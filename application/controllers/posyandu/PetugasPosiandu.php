@@ -37,13 +37,26 @@ class PetugasPosiandu extends CI_Controller
                             'success',
                             'Berhasil Login'
                         );
+
+                        $data = [
+                            'id_wilayah' => $user['id_wilayah'],
+                        ];
+
+                        $this->session->set_userdata($data);
+
                         //var_dump($this->session->user_logged->username)."<br>".;die;
-                        redirect(site_url('posyandu/PetugasPosiandu'));
+                        redirect(site_url('posyandu/home'));
                     } else {
                         $this->session->set_flashdata(
-                            'error',
-                            'Username atau Password Salah'
+                            'message',
+                            '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Maaf!</strong> username atau password salah!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                              </div>'
                         );
+                        redirect('posyandu/login_posyandu');
                     }
                 }
             } else {
@@ -60,17 +73,19 @@ class PetugasPosiandu extends CI_Controller
                 redirect('posyandu/login_posyandu');
             }
         } else {
-            //email belum terdaftar
+
             // $this->session->set_flashdata(
-            //     'alert',
+            //     'message',
             //     '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            // <strong>Maaf!</strong> akun kamu belum terdaftar!
-            // <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            // <span aria-hidden="true">&times;</span>
-            // </button>
-            //   </div>'
+            //     <strong>Maaf!</strong> username password salah!
+            //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            //     <span aria-hidden="true">&times;</span>
+            //     </button>
+            //       </div>'
             // );
-            // redirect('puskesmas/login_puskesmas');
+            // $this->session->sess_destroy();
+
+            // redirect('posyandu/PetugasPosiandu');
         }
 
         // tampilkan halaman login
@@ -87,7 +102,10 @@ class PetugasPosiandu extends CI_Controller
     public function registrasi()
     {
         //fungsi default
-        $this->load->view('posiandu/petugas/registrasi');
+
+        $data['wilayah'] = $this->wilayah_model->getAll();
+
+        $this->load->view('posiandu/petugas/registrasi', $data);
     }
 
     public function wilayah()
@@ -173,7 +191,7 @@ class PetugasPosiandu extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'rezaayu613@gmail.com',
-            'smtp_pass' => '211199aja',
+            'smtp_pass' => 'Telkom!!',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -188,23 +206,23 @@ class PetugasPosiandu extends CI_Controller
             $this->email->subject('Account Verification');
             $this->email->message(
                 'click this link to verify your account : <a href="' .
-                    base_url() .
-                    'posyandu/PetugasPosiandu/verify?email=' .
-                    $this->input->post('email') .
-                    '&token=' .
-                    urlencode($token) .
-                    '">Activate</a>'
+                base_url() .
+                'posyandu/PetugasPosiandu/verify?email=' .
+                $this->input->post('email') .
+                '&token=' .
+                urlencode($token) .
+                '">Activate</a>'
             );
         } elseif ($type == 'forgot') {
             $this->email->subject('Reset Password');
             $this->email->message(
                 'click this link to reset your password : <a href="' .
-                    base_url() .
-                    'puskesmas/Registrasi/resetpassword?email=' .
-                    $this->input->post('email') .
-                    '&token=' .
-                    urlencode($token) .
-                    '">Reset Password</a>'
+                base_url() .
+                'puskesmas/Registrasi/resetpassword?email=' .
+                $this->input->post('email') .
+                '&token=' .
+                urlencode($token) .
+                '">Reset Password</a>'
             );
         }
 
@@ -244,8 +262,8 @@ class PetugasPosiandu extends CI_Controller
                         'message',
                         '<div class="alert alert-success alert-dismissible fade show" role="alert">
             			<strong>Selamat!</strong> ' .
-                            $email .
-                            ' Sudah aktif. Silahkan Login!
+                        $email .
+                        ' Sudah aktif. Silahkan Login!
            				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
               			<span aria-hidden="true">&times;</span>
             			</button>

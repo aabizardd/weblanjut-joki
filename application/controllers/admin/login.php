@@ -41,9 +41,15 @@ class Login extends CI_Controller
                         redirect(site_url('admin/dashboard'));
                     } else {
                         $this->session->set_flashdata(
-                            'error',
-                            'Username atau Password Salah'
+                            'message',
+                            '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<strong>Maaf!</strong> username atau password salah!
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+							  </div>'
                         );
+                        redirect('admin/login');
                     }
                 }
             } else {
@@ -57,7 +63,7 @@ class Login extends CI_Controller
 					</button>
 					  </div>'
                 );
-                redirect('admin/login_superadmin');
+                redirect('admin/login');
             }
         } else {
             //email belum terdaftar

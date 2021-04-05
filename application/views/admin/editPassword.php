@@ -8,16 +8,20 @@
                         </i>
                     </div>
                     <div>Edit Password</div>
+                    <br>
                 </div>
             </div>
         </div>
+
+        <?=$this->session->flashdata('alert')?>
+
 
         <div class="row">
             <div class="col-sm">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
 
-                        <form class="" method="POST" action="<?= base_url('admin/dashboard/ubahPw') ?>">
+                        <form class="" method="POST" action="<?=base_url('admin/dashboard/ubahPw')?>">
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
@@ -44,16 +48,16 @@
                             <!-- <button onclick="myFunction()">Show dialog</button> -->
                         </form>
 
-                        <!-- <?= $this->session->flashdata('success') ?> -->
+                        <!-- <?=$this->session->flashdata('success')?> -->
 
-                        <?php if ($this->session->flashdata('success')) : ?>
+                        <?php if ($this->session->flashdata('success')): ?>
                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                         <script type="text/javascript">
                         $(document).ready(function() {
                             $('#exampleModal').modal('show');
                         });
                         </script>
-                        <?php endif; ?>
+                        <?php endif;?>
 
                     </div>
                 </div>
@@ -86,13 +90,13 @@
     </div>
 </div>
 
-<!-- <?php if($this->session->flashdata('success')) :?>
+<!-- <?php if ($this->session->flashdata('success')): ?>
 
 <script>
 var person = prompt("Please enter your name", "Harry Potter");
 </script>
 
-<?php endif; ?> -->
+<?php endif;?> -->
 
 
-<script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<script src="<?=base_url('assets/vendor/jquery/jquery.min.js');?>"></script>

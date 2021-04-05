@@ -15,6 +15,7 @@
             <div class="col-sm">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
+                    <!-- <a class="mb-2 mr-2 btn btn-success" style="color: white;" href="<?= base_url('admin/posyandu/tambahPetugas') ?>">Tambah</a> -->
                         <table class="display" id="example">
                             <thead>
                                 <tr>
@@ -24,6 +25,7 @@
                                     <th>Foto</th>
                                     <th>Password</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,6 +37,14 @@
                                         <td><img src="<?= base_url('upload/petugas_posyandu/').$value->foto; ?>" alt="" style="width: 150px; height: 150px;"></td>
                                         <td><?php echo $value->password; ?></td>
                                         <td><?php echo $value->status; ?></td>
+                                        <td>
+                                            <a class="btn btn-warning" href="<?php echo base_url(
+                                                                                    'admin/posyandu/editPetugas/' . $value->id_petugas
+                                                                                ); ?>">Update</a>
+                                            <a class="btn btn-danger" href="<?php echo base_url(
+                                                                                'admin/posyandu/deletePetugas/' . $value->id_petugas
+                                                                            ); ?>">Delete</a>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

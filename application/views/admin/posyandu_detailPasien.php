@@ -13,6 +13,10 @@
         </div>
         <div class="row">
             <div class="col-sm">
+
+                <a href="<?=base_url('admin/posyandu/daftarPasien')?>" class="btn btn-danger mb-2"><i
+                        class="fas fa-arrow-left"></i> Kembali</a>
+
                 <div class="main-card mb-3 card">
                     <div class="card-body">
 
@@ -32,7 +36,7 @@
                                     <tr>
                                         <td>Tempat, Tanggal Lahir</td>
                                         <td>:</td>
-                                        <td><?php echo $pendaftaran->tempat_lahir.", ".$pendaftaran->tanggal_lahir?>
+                                        <td><?php echo $pendaftaran->tempat_lahir . ", " . $pendaftaran->tanggal_lahir ?>
                                         </td>
                                     </tr>
                                     <tr>

@@ -20,7 +20,7 @@ foreach ($this->uri->segments as $segment): ?>
   <div class="sidebar-brand-icon rotate-n-15">
     <i class="fas fa-laugh-wink"></i>
   </div>
-  <div class="sidebar-brand-text mx-3">Web Lanjut <sup>2</sup></div>
+  <div class="sidebar-brand-text mx-3">POLI KIA</sup></div>
 </a>
 
 <!-- Divider -->

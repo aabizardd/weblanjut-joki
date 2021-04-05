@@ -169,6 +169,7 @@ class Pencatatan_model extends CI_Model
     public function update()
     {
         $post = $this->input->post();
+
         $this->id_pencatatan = $post["id_pencatatan"];
         $this->no_pasien = $post["no_pasien"];
         $this->nama_bidan = $post["nama_bidan"];
@@ -270,5 +271,16 @@ class Pencatatan_model extends CI_Model
         $this->db->where('pencatatan.status', 1);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function getNamaAnak($id)
+    {
+        $this->db->select('nama_anak');
+        $this->db->from('regisanak r');
+        $this->db->join('pencatatan p', 'p.no_pasien = r.no_pasien');
+        $this->db->where('p.id_pencatatan', $id);
+        // $this->db->where('pencatatan.status', 1);
+        $query = $this->db->get();
+        return $query;
     }
 }

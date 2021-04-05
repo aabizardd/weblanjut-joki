@@ -20,8 +20,11 @@
             Bulan
         </button>
         <div class="dropdown-menu">
-            <?php foreach ($bulan as $b): ?>
-            <a class="dropdown-item" href="#"><?=$b?></a>
+            <?php
+$no = 1;
+foreach ($bulan as $b): ?>
+            <a class="dropdown-item"
+                href="<?=base_url('posyandu/Laporan/index/') . date('Y') . '-' . str_pad($no++, 2, "0", STR_PAD_LEFT);?>"><?=$b?></a>
             <?php endforeach;?>
 
         </div>

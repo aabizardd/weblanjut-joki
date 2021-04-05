@@ -13,22 +13,30 @@
         </div>
         <div class="row">
             <div class="col-sm">
+
+
+                <a href="<?=base_url('admin/posyandu/wilayahPosyandu')?>" class="btn btn-danger mb-2"><i
+                        class="fas fa-arrow-left"></i> Kembali</a>
+
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Ubah Wilayah</h5>
-                        <form class="" action="<?= base_url('admin/posyandu/ubahWilayah') ?>" method="post">
+                        <form class="" action="<?=base_url('admin/posyandu/ubahWilayah')?>" method="post">
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="exampleEmail11" class="">Nama Wilayah</label>
-                                        <input name="nama_wilayah" id="exampleEmail11" type="text" class="form-control" required value="<?= $current->nama_wilayah; ?>">
-                                        <input name="id_wilayah" id="exampleEmail11" type="text" class="form-control" required value="<?= $current->id_wilayah; ?>" hidden>
+                                        <input name="nama_wilayah" id="exampleEmail11" type="text" class="form-control"
+                                            required value="<?=$current->nama_wilayah;?>">
+                                        <input name="id_wilayah" id="exampleEmail11" type="text" class="form-control"
+                                            required value="<?=$current->id_wilayah;?>" hidden>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="examplePassword11" class="">Kelurahan</label>
-                                        <input name="kelurahan" id="examplePassword11" type="text" class="form-control" required value="<?= $current->kelurahan; ?>">
+                                        <input name="kelurahan" id="examplePassword11" type="text" class="form-control"
+                                            required value="<?=$current->kelurahan;?>">
                                     </div>
                                 </div>
                             </div>
@@ -36,13 +44,15 @@
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="exampleCity" class="">RW</label>
-                                        <input name="rw" id="exampleCity" type="text" class="form-control" required value="<?= $current->rw; ?>">
+                                        <input name="rw" id="exampleCity" type="text" class="form-control" required
+                                            value="<?=$current->rw;?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="exampleState" class="">RT</label>
-                                        <input name="rt" id="exampleState" type="text" class="form-control" required value="<?= $current->rt; ?>">
+                                        <input name="rt" id="exampleState" type="text" class="form-control" required
+                                            value="<?=$current->rt;?>">
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +60,8 @@
                                 <div class="col-md-6">
                                     <div class="position-relative form-group">
                                         <label for="exampleState" class="">Nama Posyandu</label>
-                                        <input name="nama_posyandu" id="exampleState" type="text" class="form-control" required value="<?= $current->nama_posyandu; ?>">
+                                        <input name="nama_posyandu" id="exampleState" type="text" class="form-control"
+                                            required value="<?=$current->nama_posyandu;?>">
                                     </div>
                                 </div>
                             </div>
@@ -60,9 +71,9 @@
                 </div>
             </div>
             <script>
-                $(document).ready(function() {
-                    $('#myTable').DataTable();
-                });
+            $(document).ready(function() {
+                $('#myTable').DataTable();
+            });
             </script>
         </div>
     </div>

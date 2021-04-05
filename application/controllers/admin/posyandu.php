@@ -17,10 +17,15 @@ class Posyandu extends CI_Controller
         $this->load->model("Petugas_model");
         $this->load->model('pasienrujukan_model');
         $this->load->model('M_Admin');
+        $this->load->model("pasienrujukan_modelP");
+
+        $this->load->library('form_validation');
 
         if ($this->Petugas_model->isNotLogin()) {
             redirect(site_url('posyandu/PetugasPosiandu'));
         }
+
+        $this->foot['showGraph'] = null;
 
     }
 
@@ -50,32 +55,36 @@ class Posyandu extends CI_Controller
         $pecah = explode("-", $ubah);
         $tahun = $pecah[0];
 
+        $tamp['showGraph'] = null;
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu', $tamp);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $tamp);
     }
 
     public function kodeAkses()
     {
         $data = [
             'kodeAkses' => $this->M_Admin->getKodeAkses('Posyandu')->result(),
+            'showGraph' => null,
         ];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_kodeAkses', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function editKodeAkses($id)
     {
         $data = [
             'kodeAkses' => $this->M_Admin->getKode($id)->row(),
+            'showGraph' => null,
         ];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_editkodeAkses', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function updateKode()
@@ -92,17 +101,23 @@ class Posyandu extends CI_Controller
     {
         //fungsi default
         $jadwal = $this->Mjadwal->selectData();
+
+        $data = ['showGraph' => null];
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
         $this->load->view('admin/posyandu_jadwal', [
             'data' => $jadwal, //model ke view
         ]);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function tambahJadwal()
     {
+
+        $data = ['showGraph' => null];
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
@@ -110,10 +125,11 @@ class Posyandu extends CI_Controller
             'data' => $this->Mjadwal->selectData(),
             'login' => $this->session->userdata(),
             'petugas' => $this->M_Admin->getAllPetugas()->result_array(),
-            'wilayah' => $this->M_Admin->getAllWilayah(), //model ke view
+            'wilayah' => $this->M_Admin->getAllWilayah(),
+            'showGraph' => null, //model ke view
         ];
         $this->load->view('admin/posyandu_tambahJadwal', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function editJadwal($id)
@@ -128,7 +144,7 @@ class Posyandu extends CI_Controller
             'wilayah' => $this->M_Admin->getAllWilayah(), //model ke view
         ];
         $this->load->view('admin/posyandu_ubahJadwal', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $this->foot);
     }
 
     public function addJadwal()
@@ -168,25 +184,28 @@ class Posyandu extends CI_Controller
     {
         //fungsi default
         $wilayah = $this->Wilayah_model->getAll();
+
+        $data = ['showGraph' => null];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
         $this->load->view('admin/posyandu_wilayah', [
             'data' => $wilayah, //model ke view
         ]);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function tambahWilayah()
     {
         $wilayah = $this->Wilayah_model->getAll();
+        $data = ['showGraph' => null];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
         $this->load->view('admin/posyandu_tambahWilayah', [
             'data' => $wilayah, //model ke view
         ]);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function addWilayah()
@@ -213,9 +232,10 @@ class Posyandu extends CI_Controller
             'current' => $this->M_Admin->getwilayah($id)->row(),
             'petugas' => $this->M_Admin->getAllPetugas()->result_array(),
             'wilayah' => $this->M_Admin->getAllWilayah(), //model ke view
+            'showGraph' => null,
         ];
         $this->load->view('admin/posyandu_ubahWilayah', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function ubahWilayah()
@@ -236,31 +256,166 @@ class Posyandu extends CI_Controller
     public function dataPetugas()
     {
         $petugas = $this->Mpetugas;
-        $data['daftarpetugas'] = $petugas->getAll();
+        $data['daftarpetugas'] = $this->db->get_where('petugas', array('status' => 'posyandu'))->result();
+
+        $data['showGraph'] = null;
 
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
         $this->load->view('admin/posyandu_petugas', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
+    }
+    public function tambahPetugas()
+    {
+        $petugas = $this->Mpetugas->getAll();
+        $data = ['showGraph' => null];
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $this->load->view('admin/posyandu_tambahPetugas', [
+            'data' => $petugas, //model ke view
+        ]);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function editPetugas($id)
+    {
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data["petugas"] = $this->Mpetugas->getById($id);
+
+        $data["petugas"] = $this->Mpetugas->getById($id);
+
+        $this->load->view('admin/posyandu_ubahPetugas', $data);
+        $this->load->view('admin/template/footer', $this->foot);
+    }
+
+    public function deletePetugas($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        if ($this->Mpetugas->delete($id)) {
+            $this->session->set_flashdata('success', 'Berhasil dihapus');
+            redirect(site_url('admin/posyandu_Petugas'));
+        }
     }
 
     public function daftarPasien()
     {
         $data["pendaftaran"] = $this->M_Admin->getAllPasienPosyandu();
+        $data["showGraph"] = null;
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_daftarPasien', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
+    }
+    public function tambahPendaftaran()
+    {
+        $data["pendaftaran"] = $this->M_Admin->getAllPasienPosyandu();
+        $data = ['showGraph' => null];
+
+        $data['wilayah'] = $this->db->get('wilayah')->result();
+
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $this->load->view('admin/posyandu_tambahPendaftaran', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function editPendaftaran($id)
+    {
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data["pendaftaran"] = $this->Regisanak_model->getById($id);
+
+        $data["pendaftaran"] = $this->Regisanak_model->getById($id);
+
+        $this->load->view('admin/posyandu_ubahPendaftaran', $data);
+        $this->load->view('admin/template/footer', $this->foot);
+    }
+
+    public function deletePendaftaran($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        $this->db->where('no_pasien', $id);
+        $this->db->delete('regisanak');
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Data berhasil dihapus!
+		</div>');
+
+        redirect('admin/posyandu/daftarPasien');
+
     }
 
     public function pencatatanMedis()
     {
         $data["pencatatan"] = $this->M_Admin->get_by_role_pencatatanMedis();
+        // $data = ['showGraph' => null];
+        $data['showGraph'] = null;
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_pencatatanMedis', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function tambahPencatatan1()
+    {
+        $data["pendaftaran"] = $this->M_Admin->getAllPasienPosyandu();
+        $data["showGraph"] = null;
+
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+        $this->load->view('admin/posyandu_tambahPencatatan1', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function tambahPencatatan2($id)
+    {
+        $data["pencatatan"] = $this->M_Admin->getAllPasienPosyandu();
+        $data = ['showGraph' => null];
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data['pasien'] = $this->db->get_where('regisanak', ['no_pasien' => $id])->row_array();
+
+        $this->load->view('admin/posyandu_tambahPencatatan2', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function editPencatatan($id)
+    {
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data["pencatatan"] = $this->Pencatatan_model->getById($id);
+
+        $data['pasien'] = $this->Pencatatan_model->getNamaAnak($id)->row_array();
+
+        // $data["pencatatan"] = $this->Pencatatan_model->getById($id);
+
+        $this->load->view('admin/posyandu_ubahPencatatan', $data);
+        $this->load->view('admin/template/footer', $this->foot);
+    }
+
+    public function deletePencatatan($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        if ($this->pencatatan_model->delete($id)) {
+            $this->session->set_flashdata('success', 'Berhasil dihapus');
+            redirect(site_url('posyandu/pencatatan'));
+        }
     }
 
     public function laporan($bln = null)
@@ -298,10 +453,13 @@ class Posyandu extends CI_Controller
     {
         $data["pendaftaran"] = $this->M_Admin->getById($id);
         $data["pencatatan"] = $this->M_Admin->getJoinAll($id);
+        $data["showGraph"] = null;
+
+        // $data = ['showGraph' => null];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_laporanDetail', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function historyLaporan()
@@ -310,16 +468,133 @@ class Posyandu extends CI_Controller
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_historyLaporan', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $this->foot);
     }
 
     public function pasienRujukan()
     {
-        $data["pasienrujukans"] = $this->M_Admin->getAllPasienRujukan();
+        $data["pasienrujukans"] = $this->db->get_where('pasienrujukan', array('pasien_rujukan_dari' => 'Posyandu'))->result();
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_pasienRujukan', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $this->foot);
+    }
+
+    public function delete($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        if ($this->pasienrujukan_modelP->delete($id)) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Berhasil!</strong> ID Rujukan ' . $id . ' Berhasil dihapus.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>');
+            redirect(site_url('admin/posyandu/pasienRujukan'));
+        }
+    }
+
+    public function edit_form($id)
+    {
+
+        $data["pasienrujukans"] = $this->M_Admin->getAllPasienRujukan();
+        $data = ['showGraph' => null];
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data["pasienrujukan"] = $this->pasienrujukan_modelP->getById($id);
+
+        $this->load->view('admin/posyandu_editRujukan', $data);
+        $this->load->view('admin/template/footer', $data);
+
+    }
+
+    public function rujukan_edit_save($id = null)
+    {
+        if (!isset($id)) {
+            redirect('puskesmas/pasienrujukan');
+        }
+
+        $pasienrujukan = $this->pasienrujukan_modelP;
+        // $validation = $this->form_validation;
+        // $validation->set_rules($bidan->rules());
+
+        // var_dump($this->input->post());die;
+
+        // $this->session->set_flashdata('error', 'Data gagal diedit');
+
+        // if ($validation->run()) {
+        $pasienrujukan->update();
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Berhasil!</strong> ID Rujukan ' . $id . ' Berhasil diedit.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>');
+
+        // $this->session->set_flashdata('error');
+        redirect(site_url('admin/posyandu/pasienRujukan'));
+        // redirect(site_url('puskesmas/bidan_index'.$id));
+        // }
+
+        $data["pasienrujukan"] = $pasienrujukan->getById($id);
+        if (!$data["pasienrujukan"]) {
+            show_404();
+        }
+
+    }
+
+    public function tambahRujukan1()
+    {
+        $data["pencatatan"] = $this->M_Admin->get_by_role_pencatatanMedis();
+        // $data = ['showGraph' => null];
+        $data['showGraph'] = null;
+
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+        $this->load->view('admin/posyandu_tambahRujukan1', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
+    public function tambahRujukan2($id)
+    {
+        $data["pasienrujukans"] = $this->M_Admin->getAllPasienRujukan();
+        $data = ['showGraph' => null];
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data['pencatatan'] = $this->M_Admin->getDataCatatAnak($id);
+
+        $this->load->view('admin/posyandu_tambahRujukan2', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function editRujukan($id)
+    {
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data["pasienrujukans"] = $this->Regisanak_model->getById($id);
+
+        $data["pasienrujukans"] = $this->Regisanak_model->getById($id);
+
+        $this->load->view('admin/posyandu_ubahRujukan', $data);
+        $this->load->view('admin/template/footer', $this->foot);
+    }
+
+    public function deleteRujukan($id = null)
+    {
+        if (!isset($id)) {
+            show_404();
+        }
+
+        if ($this->Mpetugas->delete($id)) {
+            $this->session->set_flashdata('success', 'Berhasil dihapus');
+            redirect(site_url('admin/posyandu_Pasienrujukan'));
+        }
     }
 
     public function deleteWilayah($id_wilayah)
@@ -341,7 +616,7 @@ class Posyandu extends CI_Controller
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_detailPasien', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $this->foot);
     }
 
     public function kelolaKategori()
@@ -350,10 +625,13 @@ class Posyandu extends CI_Controller
         $data['imunisasi'] = $this->M_Admin->selectAll('imunisasi')->result_array();
         $data['vitamin'] = $this->M_Admin->selectAll('vitamin')->result_array();
         $data['obatCacing'] = $this->M_Admin->selectAll('obat_cacing')->result_array();
+
+        $data['showGraph'] = null;
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/posyandu_KategoriMedis', $data);
-        $this->load->view('admin/template/footer');
+        $this->load->view('admin/template/footer', $data);
     }
 
     public function getKategori($type, $id)
@@ -361,17 +639,17 @@ class Posyandu extends CI_Controller
         if ($type == 'kategoriUsia') {
             $data = $this->M_Admin->selectWhere('kategori_usia', ['id_usia' => $id])->row();
             echo json_encode($data);
-        }elseif ($type == 'imunisasi') {
+        } elseif ($type == 'imunisasi') {
             $data = $this->M_Admin->selectWhere('imunisasi', ['id_imunisasi' => $id])->row();
             echo json_encode($data);
-        }elseif ($type == 'vitamin') {
+        } elseif ($type == 'vitamin') {
             $data = $this->M_Admin->selectWhere('vitamin', ['id_vitamin' => $id])->row();
             echo json_encode($data);
-        }elseif ($type == 'obatCacing') {
+        } elseif ($type == 'obatCacing') {
             $data = $this->M_Admin->selectWhere('obat_cacing', ['id_obat' => $id])->row();
             echo json_encode($data);
         }
-        
+
     }
 
     public function addKategori($type)
@@ -380,28 +658,28 @@ class Posyandu extends CI_Controller
             $data = [
                 'usia' => $this->input->post('kategoriUsia'),
             ];
-    
+
             $this->M_Admin->insert('kategori_usia', $data);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'imunisasi') {
+        } elseif ($type == 'imunisasi') {
             $data = [
                 'imunisasi' => $this->input->post('jenisImunisasi'),
             ];
-    
+
             $this->M_Admin->insert('imunisasi', $data);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'vitamin') {
+        } elseif ($type == 'vitamin') {
             $data = [
                 'vitamin' => $this->input->post('vitamin'),
             ];
-    
+
             $this->M_Admin->insert('vitamin', $data);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'obatCacing') {
+        } elseif ($type == 'obatCacing') {
             $data = [
                 'obatCacing' => $this->input->post('obatCacing'),
             ];
-    
+
             $this->M_Admin->insert('obat_cacing', $data);
             redirect('admin/posyandu/kelolaKategori');
         }
@@ -413,25 +691,25 @@ class Posyandu extends CI_Controller
             $data = [
                 'usia' => $this->input->post('kategoriUsia'),
             ];
-            $this->M_Admin->updatekategori('kategori_usia', ['id_usia' => $id ], $data);
+            $this->M_Admin->updatekategori('kategori_usia', ['id_usia' => $id], $data);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'imunisasi') {
+        } elseif ($type == 'imunisasi') {
             $data = [
                 'imunisasi' => $this->input->post('jenisImunisasi'),
             ];
-            $this->M_Admin->updatekategori('imunisasi', ['id_imunisasi' => $id ], $data);
+            $this->M_Admin->updatekategori('imunisasi', ['id_imunisasi' => $id], $data);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'vitamin') {
+        } elseif ($type == 'vitamin') {
             $data = [
                 'vitamin' => $this->input->post('vitamin'),
             ];
-            $this->M_Admin->updatekategori('vitamin', ['id_vitamin' => $id ], $data);
+            $this->M_Admin->updatekategori('vitamin', ['id_vitamin' => $id], $data);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'obatCacing') {
+        } elseif ($type == 'obatCacing') {
             $data = [
                 'obatCacing' => $this->input->post('obatCacing'),
             ];
-            $this->M_Admin->updatekategori('obat_cacing', ['id_obat' => $id ], $data);
+            $this->M_Admin->updatekategori('obat_cacing', ['id_obat' => $id], $data);
             redirect('admin/posyandu/kelolaKategori');
         }
     }
@@ -441,15 +719,107 @@ class Posyandu extends CI_Controller
         if ($type == 'kategoriUsia') {
             $this->M_Admin->deleteKategori('kategori_usia', ['id_usia' => $id]);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'imunisasi') {
+        } elseif ($type == 'imunisasi') {
             $this->M_Admin->deleteKategori('imunisasi', ['id_imunisasi' => $id]);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'vitamin') {
+        } elseif ($type == 'vitamin') {
             $this->M_Admin->deleteKategori('vitamin', ['id_vitamin' => $id]);
             redirect('admin/posyandu/kelolaKategori');
-        }elseif ($type == 'obatCacing') {
+        } elseif ($type == 'obatCacing') {
             $this->M_Admin->deleteKategori('obat_cacing', ['id_obat' => $id]);
             redirect('admin/posyandu/kelolaKategori');
         }
+    }
+
+    public function add_data_pendaftar()
+    {
+
+        $data = [
+            'no_pasien' => $this->input->post('no_pasien'),
+            'id_wilayah' => $this->input->post('id_wilayah'),
+            'nama_ibu' => $this->input->post('nama_ibu'),
+            'nama_anak' => $this->input->post('nama_anak'),
+            'p_ibu' => $this->input->post('p_ibu'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+            'nama_ayah' => $this->input->post('nama_ayah'),
+            'jk' => $this->input->post('jk'),
+            'p_ayah' => $this->input->post('p_ayah'),
+            'alamat' => $this->input->post('alamat'),
+            'tgl_daftar' => $this->input->post('tgl_daftar'),
+        ];
+
+        $this->db->insert('regisanak', $data);
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Data berhasil ditambahkan! </div>');
+
+        redirect('admin/posyandu/daftarPasien');
+
+    }
+
+    public function ubahPendaftaran()
+    {
+        $data = [
+            'no_pasien' => $this->input->post('no_pasien'),
+            // 'id_wilayah' => $this->input->post('id_wilayah'),
+            'nama_ibu' => $this->input->post('nama_ibu'),
+            'nama_anak' => $this->input->post('nama_anak'),
+            'p_ibu' => $this->input->post('p_ibu'),
+            'tempat_lahir' => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+            'nama_ayah' => $this->input->post('nama_ayah'),
+            'jk' => $this->input->post('jk'),
+            'p_ayah' => $this->input->post('p_ayah'),
+            'alamat' => $this->input->post('alamat'),
+            'tgl_daftar' => $this->input->post('tgl_daftar'),
+        ];
+
+        $this->db->update('regisanak', $data, array('no_pasien' => $this->input->post('no_pasien')));
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Data berhasil diperbarui! </div>');
+
+        redirect('admin/posyandu/daftarPasien');
+    }
+
+    public function addPencatatan_medis()
+    {
+        $pencatatan = $this->Pencatatan_model;
+        $validation = $this->form_validation;
+        $validation->set_rules($pencatatan->rules());
+
+        if ($validation->run()) {
+            $pencatatan->save();
+
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Data berhasil ditambah! </div>');
+
+            redirect('admin/posyandu/pencatatanMedis');
+        } else {
+            redirect('admin/posyandu/pencatatanMedis');
+        }
+    }
+
+    public function ubahPencatatan()
+    {
+        $pencatatan = $this->Pencatatan_model;
+        $pencatatan->update();
+
+        redirect('admin/posyandu/pencatatanMedis/');
+
+    }
+
+    public function addRujukan()
+    {
+        $pasienrujukan = $this->pasienrujukan_model;
+        // $validation = $this->form_validation;
+        // $validation->set_rules($bidan->rules());
+
+        // $this->session->set_flashdata('error', 'Data gagal ditambahkan');
+
+        // if ($validation->run()) {
+        $pasienrujukan->save();
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Data berhasil ditambah! </div>');
+
+        redirect('admin/posyandu/pasienRujukan');
+
     }
 }

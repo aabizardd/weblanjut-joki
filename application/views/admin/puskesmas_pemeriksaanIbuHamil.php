@@ -11,13 +11,16 @@
                 </div>
             </div>
         </div>
-        <a href="<?= base_url('admin/puskesmas/kelolaKategori') ?>" class="mb-2 mr-2 btn btn-primary">Kelola
+        <a href="<?=base_url('admin/puskesmas/kelolaKategori')?>" class="mb-2 mr-2 btn btn-primary">Kelola
             Kategori</a>
         <div class="row">
             <div class="col-sm">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                    <a href="<?= base_url('admin/puskesmas/kelolaKategori') ?>" class="mb-2 mr-2 btn btn-primary">Kelola Kategori</a>
+                        <a class="btn btn-success mb-1" href="<?php echo base_url(
+    'admin/puskesmas/tambahPemeriksaan1/'); ?>"><i class="fas fa-plus"></i> Tambah</a>
+                        <!-- <a href="<?=base_url('admin/puskesmas/kelolaKategori')?>"
+                            class="mb-2 mr-2 btn btn-primary">Kelola Kategori</a> -->
                         <table class="display" id="example">
                             <thead>
                                 <tr>
@@ -30,20 +33,26 @@
                             </thead>
                             <tbody>
                                 <?php $no = 0;
-                                foreach ($pemeriksaans as $value) {
-                                    $no++; ?>
+foreach ($pemeriksaans as $value) {
+    $no++;?>
                                 <tr>
-                                    <td><?= $no; ?></td>
+                                    <td><?=$no;?></td>
                                     <td><?php echo $value->id_pemeriksaan; ?></td>
-                                    <td><?= $value->nama . " ( " . $value->umur . " Tahun )"; ?></td>
+                                    <td><?=$value->nama . " ( " . $value->umur . " Tahun )";?></td>
                                     <td><?php echo $value->pekerjaan; ?></td>
-                                    <td><a onclick="detailConfirm('<?= $value->id_pemeriksaan ?>','<?= $value->nama ?>','<?= $value->id_pasien ?>','<?= $value->id_petugas ?>','<?= $value->tgl_periksa ?>','<?= $value->gravida ?>','<?= $value->partes ?>','<?= $value->abortus ?>','<?= $value->jarak_kehamilan ?>','<?= $value->usia_kehamilan ?>','<?= $value->tinggi_badan ?>','<?= $value->lila ?>','<?= $value->sistol ?>','<?= $value->diastol ?>','<?= $value->tetanus_toksoid ?>','<?= $value->fe ?>','<?= $value->tfu ?>','<?= $value->letak_bayi ?>','<?= $value->detak_jantung ?>','<?= $value->hpht ?>','<?= $value->tp ?>','<?= $value->hb ?>','<?= $value->gol_dar ?>','<?= $value->namaobat ?>','<?= $value->tindakanmedis ?>','<?= $value->hbsag ?>','<?= $value->hiv ?>','<?= $value->sypilis ?>','<?= $value->pembayaran ?>')"
+                                    <td><a onclick="detailConfirm('<?=$value->id_pemeriksaan?>','<?=$value->nama?>','<?=$value->id_pasien?>','<?=$value->id_petugas?>','<?=$value->tgl_periksa?>','<?=$value->gravida?>','<?=$value->partes?>','<?=$value->abortus?>','<?=$value->jarak_kehamilan?>','<?=$value->usia_kehamilan?>','<?=$value->tinggi_badan?>','<?=$value->lila?>','<?=$value->sistol?>','<?=$value->diastol?>','<?=$value->tetanus_toksoid?>','<?=$value->fe?>','<?=$value->tfu?>','<?=$value->letak_bayi?>','<?=$value->detak_jantung?>','<?=$value->hpht?>','<?=$value->tp?>','<?=$value->hb?>','<?=$value->gol_dar?>','<?=$value->namaobat?>','<?=$value->tindakanmedis?>','<?=$value->hbsag?>','<?=$value->hiv?>','<?=$value->sypilis?>','<?=$value->pembayaran?>')"
                                             href="#" data-toggle="modal" data-target="#modalDetail"
                                             class="btn btn-small text-primary">
-                                            <i class="fas fa-info"></i> Detail</a><br></td>
+                                            <i class="fas fa-info"></i> Detail</a>
+                                        <a class="btn btn-warning" href="<?php echo base_url(
+        'admin/puskesmas/editPemeriksaan/' . $value->id_pemeriksaan); ?>">Update</a>
+
+                                    </td>
+
+
                                 </tr>
 
-                                <?php } ?>
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>
@@ -284,7 +293,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="gol_dar">Gologan Darah</label>
                                 </div>
-                                
+
                             <fieldset disabled="disabled">
                                 <select class="custom-select" id="gol-dar" name="gol_dar" disabled>
                                     <option >Pilih golongan darah</option>
@@ -377,7 +386,7 @@
 </div>
 
 
-<script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+<script src="<?=base_url('assets/vendor/jquery/jquery.min.js');?>"></script>
 <script>
 function detailConfirm(id_pemeriksaan, nama, id_pasien, id_petugas, tgl_periksa, gravida, partes, abortus,
     jarak_kehamilan, usia_kehamilan, tinggi_badan, lila, sistol, diastol, tetanus_toksoid, fe, tfu, letak_bayi,

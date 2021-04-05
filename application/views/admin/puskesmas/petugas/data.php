@@ -54,8 +54,7 @@
                             <td >
                                 <?= $petugas->nama;?>
                             </td>
-                            <td >
-                                <?= $petugas->foto;?>
+                            <td><img src="<?= base_url('upload/petugas_posyandu/').$petugas->foto;?>" width="200">
                             </td>
                             <td>
                                 <?= $petugas->status;?>

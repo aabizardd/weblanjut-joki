@@ -16,11 +16,14 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Ubah Kode Akses</h5>
-                        <form class="" action="<?= base_url('admin/posyandu/updateKode') ?>" method="post">
+                        <form class="" action="<?=base_url('admin/posyandu/updateKode')?>" method="post">
                             <div class="form-row">
                                 <div class="col-sm">
-                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Kode Akses</label><input name="kode" id="exampleEmail11" type="text" class="form-control" value="<?= $kodeAkses->password ?>">
-                                    <input name="id_kode" id="exampleEmail11" type="text" class="form-control" value="<?= $kodeAkses->id_password ?>" hidden>
+                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Kode
+                                            Akses</label><input name="kode" id="exampleEmail11" type="text"
+                                            class="form-control" value="<?=$kodeAkses->password?>">
+                                        <input name="id_kode" id="exampleEmail11" type="text" class="form-control"
+                                            value="<?=$kodeAkses->id_password?>" hidden>
                                     </div>
                                 </div>
                             </div>
@@ -30,10 +33,11 @@
                 </div>
             </div>
             <script>
-                $(document).ready(function() {
-                    $('#myTable').DataTable();
-                });
-            </script>
+            $(document).ready(function() {
+                $('#myTable').DataTable();
+            });
+      
+      </script>
         </div>
     </div>
 </div>

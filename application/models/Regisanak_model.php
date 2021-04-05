@@ -161,4 +161,11 @@ class Regisanak_model extends CI_Model
         return $result->result();
     }
 
+    public function getMaxValPosy()
+    {
+        $result = $this->db->query("SELECT `getMaxValPosy`() AS jml");
+
+        return $result->row();
+    }
+
 }

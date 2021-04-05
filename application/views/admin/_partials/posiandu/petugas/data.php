@@ -64,7 +64,7 @@
                                 <?= $petugas->nama;?>
                             </td>
                             <td>
-                                <?= $petugas->foto;?>
+                                <img src="<?= base_url('upload/petugas_posyandu/').$petugas->foto;?>" width="150">
                             </td> 
                             <!-- <td><img src="foto/<?= base_url()?> "$petugas; ?></td> -->
                              <!-- <td><img  src='<?=base_url()?>upload/<?=$r->filecover;?>'></td> -->

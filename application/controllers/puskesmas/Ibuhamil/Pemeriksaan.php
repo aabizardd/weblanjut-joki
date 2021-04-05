@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Pemeriksaan extends CI_Controller
 {
@@ -9,8 +9,13 @@ class Pemeriksaan extends CI_Controller
         parent::__construct();
 
         $this->load->model("Petugas_model");
-        if($this->Petugas_model->isNotLogin()) redirect(site_url('puskesmas/login'));
-        if($this->Petugas_model->cekStatus()!='puskesmas') redirect(site_url('posyandu'));
+        if ($this->Petugas_model->isNotLogin()) {
+            redirect(site_url('puskesmas/login'));
+        }
+
+        if ($this->Petugas_model->cekStatus() != 'puskesmas') {
+            redirect(site_url('posyandu'));
+        }
 
         $this->load->model("ibuhamil_model");
         $this->load->model("pemeriksaan_model");
@@ -18,11 +23,11 @@ class Pemeriksaan extends CI_Controller
         // load form and url helpers
         $this->load->helper(array('form', 'url'));
     }
-    
+
     public function index()
     {
         $pemeriksaan = $this->pemeriksaan_model;
-        
+
         $data['pemeriksaans'] = $pemeriksaan->getAll();
 
         $this->load->view('layout/head');
@@ -35,33 +40,42 @@ class Pemeriksaan extends CI_Controller
         $pemeriksaan = $this->pemeriksaan_model;
         $validation = $this->form_validation;
         $validation->set_rules($pemeriksaan->rules());
-        
+
         $this->session->set_flashdata('error', 'Data gagal ditambahkan');
-        
+
         if ($validation->run()) {
             $pemeriksaan->save();
             $this->session->set_flashdata('success', 'Berhasil ditambahkan');
-            $this->session->set_flashdata('error');    
+            $this->session->set_flashdata('error');
         }
-        
+
         redirect(site_url('puskesmas/ibuhamil/pemeriksaan/'));
     }
 
     public function edit($id = null)
     {
+
+        $data['letakBayi'] = $this->ibuhamil_model->getAllKategori("Letak Bayi");
+        $data['hb'] = $this->ibuhamil_model->getAllKategori("HB");
+        $data['pembayaran'] = $this->ibuhamil_model->getAllKategori("Jenis Pembayaran");
+        $data['count'] = $this->pemeriksaan_model->getId();
+        // $data['pemeriksaan'] = $this->ibuhamil_model->getById($id);
+
         $this->load->view('layout/head');
-        
+
         $data["pemeriksaan"] = $this->pemeriksaan_model->getById($id);
-        
+
         $this->load->view("admin/puskesmas/ibuhamil/pemeriksaan/formEdit", $data);
-        
-		$this->load->view('layout/foot');
+
+        $this->load->view('layout/foot');
     }
-    
+
     public function edit_save($id = null)
     {
-        if (!isset($id)) redirect('puskesmas/ibuhamil/pemeriksaan');
-       
+        if (!isset($id)) {
+            redirect('puskesmas/ibuhamil/pemeriksaan');
+        }
+
         $pemeriksaan = $this->pemeriksaan_model;
 
         $validation = $this->form_validation;
@@ -81,33 +95,32 @@ class Pemeriksaan extends CI_Controller
         redirect(site_url('puskesmas/ibuhamil/pemeriksaan/'));
     }
 
-    public function delete($id=null)
+    public function delete($id = null)
     {
-        if (!isset($id)) show_404();
-        
+        if (!isset($id)) {
+            show_404();
+        }
+
         if ($this->pemeriksaan_model->delete($id)) {
             $this->session->set_flashdata('success', 'Berhasil dihapus');
             redirect(site_url('puskesmas/ibuhamil/pemeriksaan'));
         }
     }
 
-    public function tambah($id=null)
+    public function tambah($id = null)
     {
         $this->load->view('layout/head');
-     
-        if($id == null)
-        {
-			$data['letakBayi'] = "";
-			$data['hb'] = "";
-			$data['pembayaran'] = "";
+
+        if ($id == null) {
+            $data['letakBayi'] = "";
+            $data['hb'] = "";
+            $data['pembayaran'] = "";
             $data['ibuhamils'] = $this->ibuhamil_model->getAll();
             $this->load->view("admin/puskesmas/ibuhamil/pemeriksaan/dataPilih", $data);
-        }
-        else
-        {
-			$data['letakBayi'] = $this->ibuhamil_model->getAllKategori("Letak Bayi");
-			$data['hb'] = $this->ibuhamil_model->getAllKategori("HB");;
-			$data['pembayaran'] = $this->ibuhamil_model->getAllKategori("Jenis Pembayaran");;
+        } else {
+            $data['letakBayi'] = $this->ibuhamil_model->getAllKategori("Letak Bayi");
+            $data['hb'] = $this->ibuhamil_model->getAllKategori("HB");
+            $data['pembayaran'] = $this->ibuhamil_model->getAllKategori("Jenis Pembayaran");
             $data['count'] = $this->pemeriksaan_model->getId();
             $data['pemeriksaan'] = $this->ibuhamil_model->getById($id);
             $this->load->view("admin/puskesmas/ibuhamil/pemeriksaan/formTambah", $data);

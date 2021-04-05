@@ -48,7 +48,7 @@
                       <td><?php echo $data->tempat_lahir.", ".$data->tanggal_lahir ?></td>
                       <td><?php echo $data->nama_ibu ?></td>
                       <td width="250">
-                        <a href="<?php echo site_url('posyandu/pencatatan/create_input_pencatatan/'.$data->no_pasien) ?>" class="btn btn- text-info"><i class="fas fa-edit"></i> Catatat</a>
+                        <a href="<?php echo site_url('posyandu/pencatatan/create_input_pencatatan/'.$data->no_pasien) ?>" class="btn btn- text-info"><i class="fas fa-edit"></i> Catat</a>
                       </td>
                     </tr>
                     <?php endforeach; ?>

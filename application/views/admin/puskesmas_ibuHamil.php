@@ -7,7 +7,7 @@
                         <i class="pe-7s-info icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Daftar Pasien</div>
+                    <div>Data Ibu Hamil</div>
                 </div>
             </div>
         </div>
@@ -15,6 +15,12 @@
             <div class="col-sm">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
+
+                        <?=$this->session->flashdata('pesan')?>
+
+
+                        <a class="btn btn-success mb-1" href="<?php echo base_url(
+    'admin/puskesmas/tambahIbuhamil/'); ?>"><i class="fas fa-plus"></i> Tambah</a>
                         <table class="display" id="example">
                             <thead>
                                 <tr>
@@ -29,25 +35,37 @@
                                     <th>Alamat</th>
                                     <th>kelurahan</th>
                                     <th>No Telp</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no=0; foreach ($ibuhamil as $value) {  $no++;?>
-                                    <tr>
-                                        <td><?= $no; ?></td>
-                                        <td><?php echo $value->id_reg; ?></td>
-                                        <td><?php echo $value->nama; ?></td>
-                                        <td><?php echo $value->pekerjaan ?></td>
-                                        <td><?php echo $value->gol_dar; ?></td>
-                                        <td><?php echo $value->nama_suami; ?></td>
-                                        <td><?php echo $value->pekerjaan_suami; ?></td>
-                                        <td><?php echo $value->umur; ?></td>
-                                        <td><?php echo $value->alamat; ?></td>
-                                        <td><?php echo $value->kelurahan; ?></td>
-                                        <td><?php echo $value->notelp; ?></td>
-                                    </tr>
+                                <?php $no = 0;foreach ($ibuhamil as $value) {$no++;?>
+                                <tr>
+                                    <td><?=$no;?></td>
+                                    <td><?php echo $value->id_reg; ?></td>
+                                    <td><?php echo $value->nama; ?></td>
+                                    <td><?php echo $value->pekerjaan ?></td>
+                                    <td><?php echo $value->gol_dar; ?></td>
+                                    <td><?php echo $value->nama_suami; ?></td>
+                                    <td><?php echo $value->pekerjaan_suami; ?></td>
+                                    <td><?php echo $value->umur; ?></td>
+                                    <td><?php echo $value->alamat; ?></td>
+                                    <td><?php echo $value->kelurahan; ?></td>
+                                    <td><?php echo $value->notelp; ?></td>
+                                    <td>
 
-                                <?php } ?>
+                                        <a class="btn btn-warning mt-1" href="<?php echo base_url(
+    'admin/puskesmas/editIbuhamil/' . $value->id_reg
+); ?>"><i class="fas fa-pen"></i> Update</a>
+                                        <a class="btn btn-danger mt-1" href="<?php echo base_url(
+    'admin/puskesmas/deleteIbuhamil/' . $value->id_reg
+); ?>"><i class="fas fa-trash"></i> Delete</a>
+                                        </a>
+
+                                    </td>
+                                </tr>
+
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>

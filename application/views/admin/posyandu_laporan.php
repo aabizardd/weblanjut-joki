@@ -101,7 +101,9 @@ foreach ($pendaftaran as $data) {
                                     <td><?php echo $data->nama_anak ?></td>
                                     <td><?php echo $data->tempat_lahir . ", " . $data->tanggal_lahir ?></td>
                                     <td><?php echo $data->nama_ibu ?></td>
-                                    <td><a href="<?php echo site_url('admin/posyandu/laporanDetail/' . $data->no_pasien) ?>" class="btn btn-small text-info"><i class="fas fa-eye"></i> Detail Laporan</a></td>
+                                    <td><a href="<?php echo site_url('admin/posyandu/laporanDetail/' . $data->no_pasien) ?>"
+                                            class="btn btn-small text-info"><i class="fas fa-eye"></i> Detail
+                                            Laporan</a></td>
                                 </tr>
 
                                 <?php }?>

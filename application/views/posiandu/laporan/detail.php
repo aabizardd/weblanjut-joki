@@ -229,8 +229,8 @@
 		}
 		</script>
 
-<center>
+<!-- <center>
 <a class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Print</a>
-</center>
+</center> -->
         <!-- /.container-fluid -->
 		

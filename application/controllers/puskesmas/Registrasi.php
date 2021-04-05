@@ -114,7 +114,7 @@ class Registrasi extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'rezaayu613@gmail.com',
-            'smtp_pass' => '211199aja',
+            'smtp_pass' => 'Telkom!!',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -129,23 +129,23 @@ class Registrasi extends CI_Controller
             $this->email->subject('Account Verification');
             $this->email->message(
                 'click this link to verify your account : <a href="' .
-                    base_url() .
-                    'puskesmas/Registrasi/verify?email=' .
-                    $this->input->post('email') .
-                    '&token=' .
-                    urlencode($token) .
-                    '">Activate</a>'
+                base_url() .
+                'puskesmas/Registrasi/verify?email=' .
+                $this->input->post('email') .
+                '&token=' .
+                urlencode($token) .
+                '">Activate</a>'
             );
         } elseif ($type == 'forgot') {
             $this->email->subject('Reset Password');
             $this->email->message(
                 'click this link to reset your password : <a href="' .
-                    base_url() .
-                    'puskesmas/Registrasi/resetpassword?email=' .
-                    $this->input->post('email') .
-                    '&token=' .
-                    urlencode($token) .
-                    '">Reset Password</a>'
+                base_url() .
+                'puskesmas/Registrasi/resetpassword?email=' .
+                $this->input->post('email') .
+                '&token=' .
+                urlencode($token) .
+                '">Reset Password</a>'
             );
         }
 
@@ -185,8 +185,8 @@ class Registrasi extends CI_Controller
                         'success',
                         '<div class="alert alert-success alert-dismissible fade show" role="alert">
             			<strong>Selamat!</strong> ' .
-                            $email .
-                            ' Sudah aktif. Silahkan Login!
+                        $email .
+                        ' Sudah aktif. Silahkan Login!
            				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
               			<span aria-hidden="true">&times;</span>
             			</button>
@@ -375,8 +375,8 @@ class Registrasi extends CI_Controller
                 'alert',
                 '<div class="alert alert-success alert-dismissible fade show" role="alert">
                Password has been change ! Please Login <b><a href="' .
-                    base_url('home/reza') .
-                    '">Ke menu utama</a></b> 
+                base_url('home/reza') .
+                '">Ke menu utama</a></b>
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                  </button>

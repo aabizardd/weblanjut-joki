@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <?php $this->load->view("admin/_partials/breadcrumb.php") ?>
+    <?php $this->load->view("admin/_partials/breadcrumb.php")?>
 
     <div class="card mb-3">
         <div class="card-header">
@@ -13,7 +13,7 @@
                 novalidate>
                 <div class="form-group">
                     <label for="id_reg">ID Pasien *</label>
-                    <input class="form-control <?php echo form_error('id_reg') ? 'is-invalid':'' ?>" type="text"
+                    <input class="form-control <?php echo form_error('id_reg') ? 'is-invalid' : '' ?>" type="text"
                         name="id_reg" placeholder="ID Pasien"></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('nama_suami') ?>
@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="nama">Nama Pasien*</label>
-                    <input class="form-control <?php echo form_error('nama') ? 'is-invalid':'' ?>" type="text"
+                    <input class="form-control <?php echo form_error('nama') ? 'is-invalid' : '' ?>" type="text"
                         name="nama" placeholder="Nama Pasien" required />
                     <div class="invalid-feedback">
                         Nama harus di isi
@@ -35,7 +35,7 @@
 
                 <!-- <div class="form-group">
 								<label for="pekerjaan">Pekerjaan Pasien*</label>
-								<input class="form-control <?php echo form_error('pekerjaan') ? 'is-invalid':'' ?>"
+								<input class="form-control <?php echo form_error('pekerjaan') ? 'is-invalid' : '' ?>"
 								 type="text" name="pekerjaan" placeholder="Pekerjaan Pasien" />
 								<div class="invalid-feedback">
 									<?php echo form_error('pekerjaan') ?>
@@ -60,7 +60,7 @@
 
                 <!-- <div class="form-group">
 								<label for="gol_dar">Golongan Darah Pasien *</label>
-								<input class="form-control <?php echo form_error('gol_dar') ? 'is-invalid':'' ?>"
+								<input class="form-control <?php echo form_error('gol_dar') ? 'is-invalid' : '' ?>"
 								 type="text" name="gol_dar" placeholder="Golongan Darah Pasien"></textarea>
 								<div class="invalid-feedback">
 									<?php echo form_error('gol_dar') ?>
@@ -85,7 +85,7 @@
 
                 <div class="form-group">
                     <label for="nama_suami">Nama Suami *</label>
-                    <input class="form-control <?php echo form_error('nama_suami') ? 'is-invalid':'' ?>" type="text"
+                    <input class="form-control <?php echo form_error('nama_suami') ? 'is-invalid' : '' ?>" type="text"
                         name="nama_suami" placeholder="Nama Suami"></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('nama_suami') ?>
@@ -94,7 +94,7 @@
 
                 <!-- <div class="form-group">
 								<label for="pekerjaan_suami">Pekerjaan Suami *</label>
-								<input class="form-control <?php echo form_error('pekerjaan_suami') ? 'is-invalid':'' ?>"
+								<input class="form-control <?php echo form_error('pekerjaan_suami') ? 'is-invalid' : '' ?>"
 								 type="text" name="pekerjaan_suami" placeholder="Pekerjaan Suami"></textarea>
 								<div class="invalid-feedback">
 									<?php echo form_error('pekerjaan_suami') ?>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="form-group">
                     <label for="umur">Umur Pasien*</label>
-                    <input class="form-control <?php echo form_error('umur') ? 'is-invalid':'' ?>" type="number"
+                    <input class="form-control <?php echo form_error('umur') ? 'is-invalid' : '' ?>" type="number"
                         name="umur" placeholder="Umur Pasien"></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('umur') ?>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat *</label>
-                    <textarea class="form-control <?php echo form_error('alamat') ? 'is-invalid':'' ?>" id="alamat"
+                    <textarea class="form-control <?php echo form_error('alamat') ? 'is-invalid' : '' ?>" id="alamat"
                         name="alamat" placeholder="Alamat" rows="3"></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('alamat') ?>
@@ -147,7 +147,7 @@
 
                 <div class="form-group">
                     <label for="notelp">No Telephone *</label>
-                    <input class="form-control <?php echo form_error('notelp') ? 'is-invalid':'' ?>" type="text"
+                    <input class="form-control <?php echo form_error('notelp') ? 'is-invalid' : '' ?>" type="text"
                         name="notelp" placeholder="Nomor Telephone"></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('notelp') ?>

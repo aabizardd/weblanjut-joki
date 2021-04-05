@@ -10,6 +10,7 @@ class Petugas_model extends CI_Model
     public $nama;
     public $foto;
     public $status_aktif;
+    public $id_wilayah;
 
     public function rules()
     {
@@ -38,6 +39,7 @@ class Petugas_model extends CI_Model
         $this->foto = $this->_uploadImage();
         $this->status = 'posyandu';
         $this->status_aktif = 0;
+        $this->id_wilayah = $post['wilayah'];
         //  $this->pekerjaan = $post["pekerjaan"];
 
         return $this->db->insert($this->_table, $this);
@@ -84,7 +86,7 @@ class Petugas_model extends CI_Model
             // periksa password-nya
             //$isPasswordTrue = password_verify($post["password"], $user->password);
             $isPasswordTrue =
-                $post['password'] == $user->password ? 'True' : '';
+            $post['password'] == $user->password ? 'True' : '';
             // periksa role-nya
             //$isAdmin = $user->role == "admin";
             $isAdmin = 'admin';
@@ -127,7 +129,7 @@ class Petugas_model extends CI_Model
             // periksa password-nya
             //$isPasswordTrue = password_verify($post["password"], $user->password);
             $isPasswordTrue =
-                $post['password'] == $user->password ? 'True' : '';
+            $post['password'] == $user->password ? 'True' : '';
             // periksa role-nya
             //$isAdmin = $user->role == "admin";
             $isAdmin = 'admin';
@@ -170,7 +172,7 @@ class Petugas_model extends CI_Model
             // periksa password-nya
             //$isPasswordTrue = password_verify($post["password"], $user->password);
             $isPasswordTrue =
-                $post['password'] == $user->password ? 'True' : '';
+            $post['password'] == $user->password ? 'True' : '';
             // periksa role-nya
             //$isAdmin = $user->role == "admin";
             $isAdmin = 'admin';
@@ -192,19 +194,16 @@ class Petugas_model extends CI_Model
     public function setWilayah()
     {
 
-
-        $post = $this->input->post();
+        // $post = $this->input->post();
 
         $temp = $this->session->userdata('user_logged');
 
-        $temp['wilayah'] = $post['wilayah'];
-
+        $temp['wilayah'] = $this->session->userdata('id_wilayah');
 
         // var_dump($temp);die;
 
         $this->session->set_userdata('user_logged', $temp);
     }
-
 
     public function isNotLogin()
     {

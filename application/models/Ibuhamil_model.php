@@ -125,6 +125,7 @@ class Ibuhamil_model extends CI_Model
     public function update()
     {
         $post = $this->input->post();
+
         $this->id_reg = $post["id_reg"];
         $this->nama = $post["nama"];
         $this->pekerjaan = $post["pekerjaan"];
@@ -193,6 +194,16 @@ class Ibuhamil_model extends CI_Model
         $result = $this->db->query($query);
 
         return $result->result();
+    }
+
+    public function getIbuHamilAndPemeriksaan($id)
+    {
+        $this->db->select('ibuhamil.*, pemeriksaan.*');
+        $this->db->from('pemeriksaan');
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg');
+        $this->db->where('pemeriksaan.id_pasien', $id);
+        $query = $this->db->get();
+        return $query->row_array();
     }
 
 }

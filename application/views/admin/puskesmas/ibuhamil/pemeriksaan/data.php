@@ -31,7 +31,7 @@
             <div class="table-responsive">
                 <table class="table table-hover table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-dark">
-                        <tr>
+                        <tr align="center">
                             <th>No</th>
                             <th>Id Pemeriksaan</th>
                             <th>Nama</th>
@@ -44,17 +44,17 @@
                         $no = 1;
                         foreach ($pemeriksaans as $obj) : ?>
                             <tr>
-                                <td><?= $no++; ?></td>
-                                <td>
+                                <td width="10" align="center"><?= $no++; ?></td>
+                                <td width="100">
                                     <?= $obj->id_pemeriksaan; ?>
                                 </td>
-                                <td>
+                                <td width="100" align="center">
                                     <?= $obj->nama . " ( " . $obj->umur . " Tahun )"; ?>
                                 </td>
-                                <td>
+                                <td width="10" align="center">
                                     <?= $obj->pekerjaan; ?>
                                 </td>
-                                <td width="300" align="center">
+                                <td width="90" align="center">
                                     <a onclick="detailConfirm('<?= $obj->id_pemeriksaan ?>','<?= $obj->nama ?>','<?= $obj->id_pasien ?>','<?= $obj->id_petugas ?>','<?= $obj->tgl_periksa ?>','<?= $obj->gravida ?>','<?= $obj->partes ?>','<?= $obj->abortus ?>','<?= $obj->jarak_kehamilan ?>','<?= $obj->usia_kehamilan ?>','<?= $obj->tinggi_badan ?>','<?= $obj->lila ?>','<?= $obj->sistol ?>','<?= $obj->diastol ?>','<?= $obj->tetanus_toksoid ?>','<?= $obj->fe ?>','<?= $obj->tfu ?>','<?= $obj->letak_bayi ?>','<?= $obj->detak_jantung ?>','<?= $obj->hpht ?>','<?= $obj->tp ?>','<?= $obj->hb ?>','<?= $obj->gol_dar ?>','<?= $obj->namaobat ?>','<?= $obj->tindakanmedis ?>','<?= $obj->hbsag ?>','<?= $obj->hiv ?>','<?= $obj->sypilis ?>','<?= $obj->pembayaran ?>')" href="#" data-toggle="modal" data-target="#modalDetail" class="btn btn-small text-primary">
                                         <i class="fas fa-info"></i> Detail</a>
                                     <a href="<?= site_url('puskesmas/ibuhamil/pemeriksaan/edit/' . $obj->id_pemeriksaan) ?>" class="btn btn-small text-warning"><i class="fas fa-edit"></i> Edit</a>

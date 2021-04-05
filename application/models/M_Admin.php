@@ -66,6 +66,8 @@ class M_Admin extends CI_Model
             return $this->db->get_where('password_akses', ['role' => $role]);
         } elseif ($role == 'Puskesmas') {
             return $this->db->get_where('password_akses', ['role' => $role]);
+        } else {
+            return $this->db->get_where('password_akses', ['role' => $role]);
         }
     }
 
@@ -199,6 +201,17 @@ class M_Admin extends CI_Model
         // $this->db->where("regisanak.status", 0);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function getDataCatatAnak($id_catat)
+    {
+        $this->db->select('pencatatan.*, regisanak.*');
+        $this->db->from('regisanak');
+        $this->db->join('pencatatan', 'pencatatan.no_pasien = regisanak.no_pasien');
+        $this->db->where("pencatatan.id_pencatatan", $id_catat);
+        // $this->db->where("regisanak.status", 0);
+        $query = $this->db->get();
+        return $query->row_array();
     }
 
 }

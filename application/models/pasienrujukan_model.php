@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class pasienrujukan_model extends CI_Model
 {
@@ -17,57 +17,58 @@ class pasienrujukan_model extends CI_Model
     public $nopasien;
     public $diagnosa;
     public $tgl_pembuatan;
+    public $pasien_rujukan_dari;
 
     public function rules()
     {
         return [
-           ['field' => 'id_rujukan',
-            'label' => 'ID Rujukan',
-            'rules' => 'required|regex_match[/^[\p{L}\s]+$/]'],
+            ['field' => 'id_rujukan',
+                'label' => 'ID Rujukan',
+                'rules' => 'required|regex_match[/^[\p{L}\s]+$/]'],
 
             ['field' => 'no_rujukan',
-            'label' => 'Nomor Rujukan',
-            'rules' => 'required'],
+                'label' => 'Nomor Rujukan',
+                'rules' => 'required'],
 
             ['field' => 'puskesmas',
-            'label' => 'Puskesmas',
-            'rules' => 'required'],
+                'label' => 'Puskesmas',
+                'rules' => 'required'],
 
             ['field' => 'rumahsakit',
-            'label' => 'Rumah Sakit',
-            'rules' => 'required'],
+                'label' => 'Rumah Sakit',
+                'rules' => 'required'],
 
             ['field' => 'kab_kota',
-            'label' => 'KAB/KOTA',
-            'rules' => 'required'],
+                'label' => 'KAB/KOTA',
+                'rules' => 'required'],
 
             ['field' => 'poli',
-            'label' => 'POLI',
-            'rules' => 'required'],
+                'label' => 'POLI',
+                'rules' => 'required'],
 
             ['field' => 'namapasien',
-            'label' => 'Nama Pasien',
-            'rules' => 'required'],
-            
+                'label' => 'Nama Pasien',
+                'rules' => 'required'],
+
             ['field' => 'umur',
-            'label' => 'Umur',
-            'rules' => 'required'],
-            
+                'label' => 'Umur',
+                'rules' => 'required'],
+
             ['field' => 'alamat',
-            'label' => 'Alamat',
-            'rules' => 'required'],
-            
+                'label' => 'Alamat',
+                'rules' => 'required'],
+
             ['field' => 'nopasien',
-            'label' => 'No Pasien',
-            'rules' => 'required'],
-            
+                'label' => 'No Pasien',
+                'rules' => 'required'],
+
             ['field' => 'diagnosa',
-            'label' => 'Diagnosa Sementara',
-            'rules' => 'required'],
+                'label' => 'Diagnosa Sementara',
+                'rules' => 'required'],
 
             ['field' => 'tgl_pembuatan',
-            'label' => 'Tanggal Pembuatan',
-            'rules' => 'required']
+                'label' => 'Tanggal Pembuatan',
+                'rules' => 'required'],
 
         ];
     }
@@ -75,22 +76,22 @@ class pasienrujukan_model extends CI_Model
     {
         do {
             $query = $this->db->get_where($this->_table, array(
-                'id_rujukan' => $id
+                'id_rujukan' => $id,
             ));
-        } while ($query->num_rows()>0);
-        return $query->num_rows(); 
+        } while ($query->num_rows() > 0);
+        return $query->num_rows();
     }
 
     public function getAll()
     {
         return $this->db->get($this->_table)->result();
     }
-    
+
     public function countAllData()
     {
         return $this->db->count_all($this->_table);
     }
-    
+
     public function getById($id)
     {
         return $this->db->get_where($this->_table, ["id_rujukan" => $id])->row();
@@ -99,7 +100,8 @@ class pasienrujukan_model extends CI_Model
     public function save()
     {
         $post = $this->input->post();
-        $this->id_rujukan = $post["id_rujukan"];
+
+        // $this->id_rujukan = $post["id_rujukan"];
         $this->no_rujukan = $post["no_rujukan"];
         $this->puskesmas = $post["puskesmas"];
         // $this->rumahsakit = $post["rumahsakit"];
@@ -111,8 +113,10 @@ class pasienrujukan_model extends CI_Model
         $this->nopasien = $post["nopasien"];
         $this->diagnosa = $post["diagnosa"];
         $this->tgl_pembuatan = $post["tgl_pembuatan"];
+        $this->pasien_rujukan_dari = $post["rujukan_dari"];
+
         return $this->db->insert($this->_table, $this);
-        
+
     }
 
     public function update()
@@ -138,12 +142,12 @@ class pasienrujukan_model extends CI_Model
         return $this->db->delete($this->_table, array("id_rujukan" => $id));
     }
 
-	public function updateStatusRujuk($id, $status)
-	{
+    public function updateStatusRujuk($id, $status)
+    {
 
-		$this->db->set('status', $status);
-		$this->db->where('id_rujukan', $id);
-		$result = $this->db->update($this->_table);
-		return $result;		
-	}
+        $this->db->set('status', $status);
+        $this->db->where('id_rujukan', $id);
+        $result = $this->db->update($this->_table);
+        return $result;
+    }
 }

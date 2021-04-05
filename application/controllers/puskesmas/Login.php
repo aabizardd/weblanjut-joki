@@ -14,47 +14,11 @@ class Login extends CI_Controller
         $this->load->library('session');
     }
 
-    public function index()
-    {
-        if ($this->session->userdata('sesi_verify')) {
-            redirect('puskesmas/login_puskesmas');
-        }
-
-        $data['role'] = $this->uri->segment(3);
-        // echo $role;
-
-        $this->load->view('admin/puskesmas/login/verify_code', $data);
-    }
-
-    public function verify_code($uri)
-    {
-        // $roles = $this->uri->segment(3);
-
-        $code = $this->Puskesmas_model->getVerifyCode($uri);
-        // $adminCode = $this->M_Admin->cekKodeAdmin();
-
-        $kode = $this->input->post('code');
-
-            if ($kode == $code['password']) {
-                $this->session->set_userdata('sesi_verify', true);
-                if ($uri == 'Puskesmas') {
-                    redirect('puskesmas/login_puskesmas');
-                } elseif ($uri == 'Posyandu') {
-                    redirect('posyandu/login_posyandu');
-                } elseif ($uri == 'Superadmin'){
-                    redirect('admin/login');
-                }
-            } else {
-                $this->session->set_flashdata('pesan', 'kode verifikasi salah');
-                redirect('verify/code/' . $uri);
-            }
-    }
-
     public function cek_login()
     {
-        if (!$this->session->userdata('sesi_verify')) {
-            redirect('puskesmas');
-        }
+        // if (!$this->session->userdata('sesi_verify')) {
+        //     redirect('puskesmas');
+        // }
 
         $email = $this->input->post('email');
 

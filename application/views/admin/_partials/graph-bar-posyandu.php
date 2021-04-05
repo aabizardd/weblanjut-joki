@@ -30,9 +30,30 @@
 // }
 
 // Bar Chart Example
-<?php for ($i = 1; $i <= 3; $i++): ?>
+<?php
 
-var ctx = document.getElementById("myBarChart<?=$i;?>");
+$noo = 1;
+foreach ($graph as $itemm): ?>
+
+
+var dataGraph = [];
+
+<?php if ($itemm == "Jumlah Pasien"): ?>
+
+dataGraph = [<?php foreach ($graph1 as $g1): ?> <?=$g1->jml?>, <?php endforeach?>];
+
+<?php elseif ($itemm == "Buku Posyandu"): ?>
+
+// dataGraph = [4215, 5312, 6251, 7841, 9821, 9000];
+dataGraph = [<?php foreach ($graph2 as $g2): ?> <?=$g2->jml?>, <?php endforeach?>];
+
+<?php else: ?>
+
+dataGraph = [<?php foreach ($graph3 as $g3): ?> <?=$g3->jml?>, <?php endforeach?>];
+
+<?php endif;?>
+
+var ctx = document.getElementById("myBarChart<?=$noo++;?>");
 var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -44,7 +65,7 @@ var myBarChart = new Chart(ctx, {
             backgroundColor: "#4e73df",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
-            data: [4215, 5312, 6251, 7841, 9821, 14984],
+            data: dataGraph,
         }],
     },
     options: {
@@ -74,12 +95,12 @@ var myBarChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 15000,
+                    max: 10,
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
                     callback: function(value, index, values) {
-                        return '$' + number_format(value);
+                        return number_format(value);
                     }
                 },
                 gridLines: {
@@ -116,5 +137,5 @@ var myBarChart = new Chart(ctx, {
     }
 });
 
-<?php endfor;?>
+<?php endforeach;?>
 </script>

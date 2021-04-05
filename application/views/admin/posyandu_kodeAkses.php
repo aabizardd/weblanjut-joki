@@ -25,26 +25,26 @@
                             </thead>
                             <tbody>
                                 <?php $no = 0;
-                                foreach ($kodeAkses as $value) {
-                                    $no++; ?>
-                                    <tr>
-                                        <td><?= $no; ?></td>
-                                        <td><?php echo $value->password; ?></td>
-                                        <td><a class="btn btn-warning" href="<?php echo base_url(
-                                                                                    'admin/posyandu/editKodeAkses/' . $value->id_password
-                                                                                ); ?>">Ubah</a></td>
-                                    </tr>
+foreach ($kodeAkses as $value) {
+    $no++;?>
+                                <tr>
+                                    <td><?=$no;?></td>
+                                    <td><?php echo $value->password; ?></td>
+                                    <td><a class="btn btn-warning" href="<?php echo base_url(
+        'admin/posyandu/editKodeAkses/' . $value->id_password
+    ); ?>">Ubah</a></td>
+                                </tr>
 
-                                <?php } ?>
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <script>
-                $(document).ready(function() {
-                    $('#myTable').DataTable();
-                });
+            $(document).ready(function() {
+                $('#myTable').DataTable();
+            });
             </script>
         </div>
     </div>

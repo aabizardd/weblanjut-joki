@@ -2,11 +2,11 @@
 
     <?php $this->load->view('admin/_partials/breadcrumb');?>
 
-    <?php if ($this->session->flashdata('success')){ ?>
+    <?php if ($this->session->flashdata('success')) {?>
     <div class="alert alert-success" role="alert">
         <?php echo $this->session->flashdata('success'); ?>
     </div>
-    <?php }else if ($this->session->flashdata('error')){ ?>
+    <?php } else if ($this->session->flashdata('error')) {?>
     <div class="alert alert-danger" role="alert">
         <?php echo $this->session->flashdata('error'); ?>
     </div>
@@ -51,68 +51,82 @@
                     </thead>
                     <tbody>
                         <?php
-                        $no = 1;
-                        foreach ($pasienrujukans as $pasienrujukan): ?>
+$no = 1;
+foreach ($pasienrujukans as $pasienrujukan): ?>
                         <tr>
-                            <td width="80"><?= $no++;?></td>
+                            <td width="80"><?=$no++;?></td>
                             <td width="150">
-                                <?= $pasienrujukan->id_rujukan;?>
+                                <?=$pasienrujukan->id_rujukan;?>
                             </td>
                             <td width="150">
-                                <?= $pasienrujukan->no_rujukan;?>
+                                <?=$pasienrujukan->no_rujukan;?>
                             </td>
                             <td>
-                                <?= $pasienrujukan->puskesmas;?>
+                                <?=$pasienrujukan->puskesmas;?>
                             </td>
                             <!-- <td>
-                                <?= $pasienrujukan->rumahsakit;?>
+                                <?=$pasienrujukan->rumahsakit;?>
                             </td> -->
                             <td width="150">
-                                <?= $pasienrujukan->kab_kota;?>
+                                <?=$pasienrujukan->kab_kota;?>
                             </td>
                             <td width="150">
-                                <?= $pasienrujukan->poli;?>
+                                <?=$pasienrujukan->poli;?>
                             </td>
                             <td width="100">
-                                <?= $pasienrujukan->namapasien;?>
+                                <?=$pasienrujukan->namapasien;?>
                             </td>
                             <td>
-                                <?= $pasienrujukan->umur;?>
+                                <?=$pasienrujukan->umur;?>
                             </td>
                             <td>
-                                <?= $pasienrujukan->alamat;?>
-                            </td>
-
-                            <td>
-                                <?= $pasienrujukan->nopasien;?>
+                                <?=$pasienrujukan->alamat;?>
                             </td>
 
                             <td>
-                                <?= $pasienrujukan->diagnosa;?>
+                                <?=$pasienrujukan->nopasien;?>
+                            </td>
+
+                            <td>
+                                <?=$pasienrujukan->diagnosa;?>
                             </td>
                             <td>
-                                <?= $pasienrujukan->tgl_pembuatan;?>
+                                <?=$pasienrujukan->tgl_pembuatan;?>
                             </td>
 
 
 
 
                             <td width="160">
-                                <a href="<?= site_url('posyandu/pasienrujukan/edit_form/'.$pasienrujukan->id_rujukan) ?>"
+                                <a href="<?=site_url('posyandu/pasienrujukan/edit_form/' . $pasienrujukan->id_rujukan)?>"
                                     class="btn btn-small text-warning"><i class="fas fa-edit"></i> Edit</a>
-                                <a onclick="deleteConfirm('<?= site_url('posyandu/pasienrujukan/delete/'.$pasienrujukan->id_rujukan);?>')"
+                                <a onclick="deleteConfirm('<?=site_url('posyandu/pasienrujukan/delete/' . $pasienrujukan->id_rujukan);?>')"
                                     href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
-                                <!-- <a href="<?php echo site_url('posyandu/pasienrujukan/detail/'.$pasienrujukan->id_rujukan) ?>"
+                                <!-- <a href="<?php echo site_url('posyandu/pasienrujukan/detail/' . $pasienrujukan->id_rujukan) ?>"
 						 class="btn btn-small text-warning"><i class="fas fa-eye"></i> Detail</a> -->
-                                <a href="<?php echo site_url('posyandu/pasienrujukan/detail/'.$pasienrujukan->id_rujukan) ?>"
-                                    class="btn btn-small text-warning"><i class="fas fa-eye"></i> Print</a>
+                                <!-- <a href="<?php echo site_url('posyandu/pasienrujukan/detail/' . $pasienrujukan->id_rujukan) ?>"
+                                    class="btn btn-small text-warning"><i class="fas fa-eye"></i> Print</a> -->
+
+                                <div class="form-check onoffswitch">
+                                    <input type="hidden" id="idj" value="<?=$pasienrujukan->id_rujukan?>">
+
+                                    <input class="form-check-input" type="checkbox" id="<?=$pasienrujukan->id_rujukan?>"
+                                        data-id="<?=$pasienrujukan->id_rujukan?>"
+                                        <?php if ($pasienrujukan->status == 1) {?> checked <?php }?>>
+
+                                    <label class="form-check-label" for="<?=$pasienrujukan->id_rujukan?>">
+                                        Rujukan
+                                    </label>
+                                </div>
+
+
 
 
 
 
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach;?>
 
                     </tbody>
                 </table>
@@ -143,7 +157,7 @@
     </div>
 </div>
 
-<script src="<?= base_url('assets/vendor/jquery/jquery.min.js');?>"></script>
+<script src="<?=base_url('assets/vendor/jquery/jquery.min.js');?>"></script>
 <script>
 function deleteConfirm(url) {
     $('#btP').attr('href', url);
@@ -163,7 +177,7 @@ $(document).ready(function() {
             status = 1;
         }
         $.ajax({
-            url: "<?= base_url('posyandu/pasienrujukan/activate') ?>",
+            url: "<?=base_url('posyandu/pasienrujukan/activate')?>",
             method: "POST",
             data: {
                 id: id,

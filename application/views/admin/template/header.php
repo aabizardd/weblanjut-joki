@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Language" content="en">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Analytics Dashboard - This is an example dashboard created using build-in elements and components.
+        <title> Poli Kesehatan Ibu dan Anak
         </title>
         <meta name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
@@ -23,15 +23,17 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
 
-        <link href="<?= base_url('assets/admin/main.css') ?>" rel="stylesheet">
+        <link href="<?=base_url('assets/admin/main.css')?>" rel="stylesheet">
         <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/1.10.23/css/dataTables.jqueryui.min.css" rel="stylesheet">
         <!-- https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css -->
 
         <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
         <!-- <link href="https://cdn.datatables.net/1.10.23/css/dataTables.jqueryui.min.css" rel="stylesheet"> -->
-
-
+        <!--
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css"
+            rel="stylesheet" /> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 
 
     </head>
@@ -40,7 +42,14 @@
         <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
             <div class="app-header header-shadow">
                 <div class="app-header__logo">
-                    <div class="logo-src"></div>
+                    <!-- <div class="logo-src"> -->
+                    <div class="sidebar-brand-icon">
+                        <img src="<?php echo site_url('assets/img/bakti-husada.png'); ?>"
+                            style="width: 40px;height: 55px">
+                    </div>
+                    <div class="sidebar-brand-text mx-3">POLI KIA </div>
+
+                    <!-- </div>  -->
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -110,7 +119,7 @@
                                             <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                 class="p-0 btn">
                                                 <img width="42" class="rounded-circle"
-                                                    src="<?= base_url('assets/admin/images/avatars/1.jpg') ?>" alt="">
+                                                    src="<?=base_url('assets/admin/images/avatars/1.jpg')?>" alt="">
                                                 <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                             </a>
 
@@ -118,10 +127,13 @@
 
                                             <div tabindex="-1" role="menu" aria-hidden="true"
                                                 class="dropdown-menu dropdown-menu-right">
-                                                <a href="<?= base_url('admin/dashboard/editPassword') ?>" tabindex="0"
+
+
+
+                                                <a href="<?=base_url('admin/dashboard/editPassword')?>" tabindex="0"
                                                     class="dropdown-item">Edit Password</a>
 
-                                                <a href="<?= site_url('puskesmas/login/logout') ?>" tabindex="0"
+                                                <a href="<?=site_url('puskesmas/login/logout')?>" tabindex="0"
                                                     class="dropdown-item">Logout</a>
                                             </div>
                                         </div>

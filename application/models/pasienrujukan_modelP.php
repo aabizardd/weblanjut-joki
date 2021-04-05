@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class pasienrujukan_modelP extends CI_Model
 {
@@ -17,80 +17,85 @@ class pasienrujukan_modelP extends CI_Model
     public $nopasien;
     public $diagnosa;
     public $tgl_pembuatan;
-    
+    public $pasien_rujukan_dari;
 
     public function rules()
     {
         return [
             ['field' => 'id_rujukan',
-            'label' => 'ID Rujukan',
-            'rules' => 'required|regex_match[/^[\p{L}\s]+$/]'],
+                'label' => 'ID Rujukan',
+                'rules' => 'required|regex_match[/^[\p{L}\s]+$/]'],
 
             ['field' => 'no_rujukan',
-            'label' => 'Nomor Rujukan Pasien',
-            'rules' => 'required'],
+                'label' => 'Nomor Rujukan Pasien',
+                'rules' => 'required'],
 
             ['field' => 'puskesmas',
-            'label' => 'Nama Puskesmas',
-            'rules' => 'required'],
-            
+                'label' => 'Nama Puskesmas',
+                'rules' => 'required'],
+
             ['field' => 'rumahsakit',
-            'label' => 'Rumah Sakit Yang Dituju',
-            'rules' => 'required'],
+                'label' => 'Rumah Sakit Yang Dituju',
+                'rules' => 'required'],
 
             ['field' => 'kab_kota',
-            'label' => 'Kabupaten/Kota',
-            'rules' => 'required'],
+                'label' => 'Kabupaten/Kota',
+                'rules' => 'required'],
 
             ['field' => 'poli',
-            'label' => 'Poli Yang Dituju',
-            'rules' => 'required'],
+                'label' => 'Poli Yang Dituju',
+                'rules' => 'required'],
 
             ['field' => 'namapasien',
-            'label' => 'Nama Pasien',
-            'rules' => 'required'],
-            
+                'label' => 'Nama Pasien',
+                'rules' => 'required'],
+
             ['field' => 'umur',
-            'label' => 'Umur',
-            'rules' => 'required'],
-            
+                'label' => 'Umur',
+                'rules' => 'required'],
+
             ['field' => 'alamat',
-            'label' => 'Alamat',
-            'rules' => 'required'],
-            
+                'label' => 'Alamat',
+                'rules' => 'required'],
+
             ['field' => 'nopasien',
-            'label' => 'No Pasien',
-            'rules' => 'required'],
-            
+                'label' => 'No Pasien',
+                'rules' => 'required'],
+
             ['field' => 'diagnosa',
-            'label' => 'Diagnosa Sementara',
-            'rules' => 'required'],
+                'label' => 'Diagnosa Sementara',
+                'rules' => 'required'],
 
             ['field' => 'tgl_pembuatan',
-            'label' => 'Tanggal Pembuatan Surat',
-            'rules' => 'required']
+                'label' => 'Tanggal Pembuatan Surat',
+                'rules' => 'required'],
         ];
     }
     public function cek_data($id)
     {
         do {
             $query = $this->db->get_where($this->_table, array(
-                'id_rujukan' => $id
+                'id_rujukan' => $id,
             ));
-        } while ($query->num_rows()>0);
-        return $query->num_rows(); 
+        } while ($query->num_rows() > 0);
+        return $query->num_rows();
     }
 
     public function getAll()
     {
         return $this->db->get($this->_table)->result();
     }
-    
+
+    public function get_where($where)
+    {
+        return $this->db->get_where($this->_table, $where)->result();
+    }
+
     public function countAllData()
     {
         return $this->db->count_all($this->_table);
     }
-    
+
     public function getById($id)
     {
         return $this->db->get_where($this->_table, ["id_rujukan" => $id])->row();
@@ -111,7 +116,8 @@ class pasienrujukan_modelP extends CI_Model
         $this->nopasien = $post["nopasien"];
         $this->diagnosa = $post["diagnosa"];
         $this->tgl_pembuatan = $post["tgl_pembuatan"];
-       
+        $this->pasien_rujukan_dari = $post["rujukan_dari"];
+
         return $this->db->insert($this->_table, $this);
     }
 
@@ -130,7 +136,8 @@ class pasienrujukan_modelP extends CI_Model
         $this->nopasien = $post["nopasien"];
         $this->diagnosa = $post["diagnosa"];
         $this->tgl_pembuatan = $post["tgl_pembuatan"];
-        
+        $this->pasien_rujukan_dari = $post["rujukan_dari"];
+
         return $this->db->update($this->_table, $this, array('id_rujukan' => $post['id_rujukan']));
     }
 
@@ -139,14 +146,14 @@ class pasienrujukan_modelP extends CI_Model
         return $this->db->delete($this->_table, array("id_rujukan" => $id));
     }
 
-	public function updateStatusRujuk($id, $status)
-	{
+    public function updateStatusRujuk($id, $status)
+    {
 
-		$this->db->set('status', $status);
-		$this->db->where('id_rujukan', $id);
-		$result = $this->db->update($this->_table);
-		return $result;		
-	}
+        $this->db->set('status', $status);
+        $this->db->where('id_rujukan', $id);
+        $result = $this->db->update($this->_table);
+        return $result;
+    }
     // public function getAllLaporan()
     // {
     //     $this->db->select('pasienrujukan.*, regisanak.*');

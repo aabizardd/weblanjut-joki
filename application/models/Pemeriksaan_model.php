@@ -1,6 +1,7 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pemeriksaan_model extends CI_Model{
+class Pemeriksaan_model extends CI_Model
+{
     private $_table = "pemeriksaan"; //nama table
     public $id_pemeriksaan;
     // public $nama;
@@ -23,160 +24,159 @@ class Pemeriksaan_model extends CI_Model{
     public $detak_jantung;
     public $hpht;
     public $tp;
-    public $hb;  
+    public $hb;
     public $namaobat;
     public $tindakanmedis;
-    public $hbsag; 
+    public $hbsag;
     public $hiv;
-    public $sypilis; 
+    public $sypilis;
     public $pembayaran;
-   
+
     public function rules()
     {
         return [
             ['field' => 'id_pasien',
-            'label' => 'ID Pasien',
-            'rules' => 'required'],
+                'label' => 'ID Pasien',
+                'rules' => 'required'],
 
             // ['field' => 'id_reg',
             // 'label' => 'ID Reg',
             // 'rules' => 'required'],
 
             ['field' => 'id_petugas',
-            'label' => 'ID petugas',
-            'rules' => 'required'],
+                'label' => 'ID petugas',
+                'rules' => 'required'],
 
             ['field' => 'tgl_periksa',
-            'label' => 'Tanggal Periksa',
-            'rules' => 'required'],
-
-
-            ['field' => 'gravida',
-            'label' => 'Gravida',
-            'rules' => 'required'],
+                'label' => 'Tanggal Periksa',
+                'rules' => 'required'],
 
             ['field' => 'gravida',
-            'label' => 'Gravida',
-            'rules' => 'required'],
-            
+                'label' => 'Gravida',
+                'rules' => 'required'],
+
+            ['field' => 'gravida',
+                'label' => 'Gravida',
+                'rules' => 'required'],
+
             ['field' => 'partes',
-            'label' => 'Partes',
-            'rules' => 'required'],
-            
+                'label' => 'Partes',
+                'rules' => 'required'],
+
             ['field' => 'abortus',
-            'label' => 'Abortus',
-            'rules' => 'required'],
-            
+                'label' => 'Abortus',
+                'rules' => 'required'],
+
             ['field' => 'jarak_kehamilan',
-            'label' => 'Jarak Kehamilan',
-            'rules' => 'required'],
-            
+                'label' => 'Jarak Kehamilan',
+                'rules' => 'required'],
+
             ['field' => 'usia_kehamilan',
-            'label' => 'Usia Kehamilan',
-            'rules' => 'required'],
-            
+                'label' => 'Usia Kehamilan',
+                'rules' => 'required'],
+
             ['field' => 'tinggi_badan',
-            'label' => 'Tinggi Badan',
-            'rules' => 'required'],
-            
+                'label' => 'Tinggi Badan',
+                'rules' => 'required'],
+
             ['field' => 'lila',
-            'label' => 'Lingkar Lengan Atas',
-            'rules' => 'required'],
-            
+                'label' => 'Lingkar Lengan Atas',
+                'rules' => 'required'],
+
             ['field' => 'sistol',
-            'label' => 'Sistol',
-            'rules' => 'required'],
-            
+                'label' => 'Sistol',
+                'rules' => 'required'],
+
             ['field' => 'diastol',
-            'label' => 'Diastol',
-            'rules' => 'required'],
-            
+                'label' => 'Diastol',
+                'rules' => 'required'],
+
             ['field' => 'tetanus_toksoid',
-            'label' => 'Tetanus Toksoid',
-            'rules' => 'required'],
-            
+                'label' => 'Tetanus Toksoid',
+                'rules' => 'required'],
+
             ['field' => 'fe',
-            'label' => 'Zat Besi (Fe)',
-            'rules' => 'required'],
-            
+                'label' => 'Zat Besi (Fe)',
+                'rules' => 'required'],
+
             ['field' => 'tfu',
-            'label' => 'Tinggi Fundus Uteri',
-            'rules' => 'required'],
-            
+                'label' => 'Tinggi Fundus Uteri',
+                'rules' => 'required'],
+
             ['field' => 'letak_bayi',
-            'label' => 'Letak Bayi',
-            'rules' => 'required'],
+                'label' => 'Letak Bayi',
+                'rules' => 'required'],
 
             ['field' => 'detak_jantung',
-            'label' => 'Detak Jantung',
-            'rules' => 'required'],
-            
+                'label' => 'Detak Jantung',
+                'rules' => 'required'],
+
             ['field' => 'hpht',
-            'label' => 'Hari Pertama Haid Terakhir',
-            'rules' => 'required'],
-            
+                'label' => 'Hari Pertama Haid Terakhir',
+                'rules' => 'required'],
+
             ['field' => 'tp',
-            'label' => 'Taksiran Persalinan',
-            'rules' => 'required'],
-            
+                'label' => 'Taksiran Persalinan',
+                'rules' => 'required'],
+
             ['field' => 'hb',
-            'label' => 'Hemoglobin (hb)',
-            'rules' => 'required'],
-            
+                'label' => 'Hemoglobin (hb)',
+                'rules' => 'required'],
+
             ['field' => 'namaobat',
-            'label' => 'Nama Obat',
-            'rules' => 'required'],
+                'label' => 'Nama Obat',
+                'rules' => 'required'],
 
             ['field' => 'tindakanmedis',
-            'label' => 'Tindakan Medis',
-            'rules' => 'required'],
-            
+                'label' => 'Tindakan Medis',
+                'rules' => 'required'],
+
             ['field' => 'hbsag',
-            'label' => 'HBSAG',
-            'rules' => 'required'],
-            
+                'label' => 'HBSAG',
+                'rules' => 'required'],
+
             ['field' => 'hiv',
-            'label' => 'HIV',
-            'rules' => 'required'],
-            
+                'label' => 'HIV',
+                'rules' => 'required'],
+
             ['field' => 'sypilis',
-            'label' => 'Sypilis',
-            'rules' => 'required'],
-            
+                'label' => 'Sypilis',
+                'rules' => 'required'],
+
             ['field' => 'pembayaran',
-            'label' => 'Pembayaran',
-            'rules' => 'required']
+                'label' => 'Pembayaran',
+                'rules' => 'required'],
         ];
     }
 
     public function getAll()
     {
-        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg','inner');
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg', 'inner');
         return $this->db->get($this->_table)->result();
     }
-    
+
     public function countAllData()
     {
         return $this->db->count_all($this->_table);
     }
 
-    public function getAllById($id=null)
+    public function getAllById($id = null)
     {
-        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg','inner');
-        $this->db->where('ibuhamil.id_reg',$id);
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg', 'inner');
+        $this->db->where('ibuhamil.id_reg', $id);
         return $this->db->get($this->_table)->result();
     }
 
     public function getById($id)
     {
-        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg','inner');
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg', 'inner');
         return $this->db->get_where($this->_table, ["id_pemeriksaan" => $id])->row();
     }
 
-    public function getDataPemeriksaanPasien($key='')
+    public function getDataPemeriksaanPasien($key = '')
     {
-        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg','inner');
-        $this->db->where('ibuhamil.id_reg',$key);
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg', 'inner');
+        $this->db->where('ibuhamil.id_reg', $key);
         return $this->db->get($this->_table)->result();
     }
 
@@ -184,7 +184,7 @@ class Pemeriksaan_model extends CI_Model{
     {
         $this->db->select_max('id_pemeriksaan', 'pemeriksaan');
         $temp = $this->db->get($this->_table)->row();
-        return gettype($temp->pemeriksaan)==NULL?1:(int)$temp->pemeriksaan+1;
+        return gettype($temp->pemeriksaan) == null ? 1 : (int) $temp->pemeriksaan + 1;
     }
 
     public function save()
@@ -195,7 +195,7 @@ class Pemeriksaan_model extends CI_Model{
         // $this->id_reg = $post['id_reg'];
         $this->id_petugas = $post['id_petugas'];
         $this->tgl_periksa = $post['tgl_periksa'];
-    
+
         $this->gravida = $post['gravida'];
         $this->partes = $post['partes'];
         $this->abortus = $post['abortus'];
@@ -213,7 +213,7 @@ class Pemeriksaan_model extends CI_Model{
         $this->hpht = $post['hpht'];
         $this->tp = $post['tp'];
         $this->hb = $post['hb'];
-      
+
         $this->namaobat = $post['namaobat'];
         $this->tindakanmedis = $post['tindakanmedis'];
         $this->hbsag = $post['hbsag'];
@@ -233,7 +233,7 @@ class Pemeriksaan_model extends CI_Model{
         // $this->id_reg = $post['id_reg'];
         $this->id_petugas = $post['id_petugas'];
         $this->tgl_periksa = $post['tgl_periksa'];
-     
+
         $this->gravida = $post['gravida'];
         $this->partes = $post['partes'];
         $this->abortus = $post['abortus'];
@@ -251,7 +251,7 @@ class Pemeriksaan_model extends CI_Model{
         $this->hpht = $post['hpht'];
         $this->tp = $post['tp'];
         $this->hb = $post['hb'];
-      
+
         $this->namaobat = $post['namaobat'];
         $this->tindakanmedis = $post['tindakanmedis'];
         $this->hbsag = $post['hbsag'];

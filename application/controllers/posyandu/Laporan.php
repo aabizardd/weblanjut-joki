@@ -20,7 +20,7 @@ class Laporan extends CI_Controller
 
     }
 
-    public function index()
+    public function index($bln = null)
     {
         $data["pendaftaran"] = $this->pencatatan_model->getAllLaporan();
 
@@ -35,9 +35,22 @@ class Laporan extends CI_Controller
         $this->load->view('posiandu/laporan/index', $data);
         $this->load->view('layout/foot');
 
-        $data['graph'] = 'posyandu';
+        // $data['maxValPosy'] = $this->regisanak_model->getMaxValPosy();
+
+        // $data['graphh'] = 'posyandu';
+
+        if (!is_null($bln)) {
+            $data['graph1'] = $this->regisanak_model->getDataGraph(1, $bln);
+            $data['graph2'] = $this->regisanak_model->getDataGraph(1, $bln);
+            $data['graph3'] = $this->regisanak_model->getDataGraph(2, $bln);
+        } else {
+            $data['graph1'] = $this->regisanak_model->getDataGraph(1);
+            $data['graph2'] = $this->regisanak_model->getDataGraph(1);
+            $data['graph3'] = $this->regisanak_model->getDataGraph(2);
+        }
 
         $this->load->view('admin/_partials/graph-bar-posyandu', $data);
+
     }
 
     public function history()
