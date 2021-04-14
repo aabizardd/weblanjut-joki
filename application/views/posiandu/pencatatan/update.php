@@ -111,19 +111,18 @@
                                         <label for="nama_bidan" class="col-sm-2 col-form-label">Kategori Usia</label>
                                         <div class="col">
                                             <select id="inputState" class="form-control" name="kategori">
+
+                                                <?php foreach ($kat_usia as $k): ?>
                                                 <option <?php
-if ($pencatatan->kategori == 'Bayi (0-12 bln)') {
+if ($pencatatan->kategori == $k->usia) {
     echo "selected";
-}?> value="Bayi (0-12 bln)">Bayi (0-12 bln)</option>
-                                                <option <?php
-if ($pencatatan->kategori == 'Batita (16-19 bln)') {
-    echo "selected";
-}?> value="Batita (16-19 bln)">Batita (16-19 bln)</option>
-                                                <option <?php
-if ($pencatatan->kategori == 'Balita (16-60 bln)') {
-    echo "selected";
-}?> value="Balita (16-60 bln)">Balita (16-60 bln)</option>
+}?> value="<?=$k->usia?>"><?=$k->usia?></option>
+
+
+                                                <?php endforeach?>
+
                                             </select>
+
                                         </div>
                                     </div>
                                 </div>
@@ -197,42 +196,16 @@ if ($pencatatan->kategori == 'Balita (16-60 bln)') {
                                         <label for="nama_bidan" class="col-sm-2 col-form-label">Jenis Imunisasi</label>
                                         <div class="col">
                                             <select id="inputState" class="form-control" name="jenis_imunisasi">
+                                                <?php foreach ($imunisasi as $i): ?>
                                                 <option <?php
-if ($pencatatan->jenis_imunisasi == '0 - 7 hari (HBO)') {
+if ($pencatatan->jenis_imunisasi == $i->imunisasi) {
     echo "selected";
-}?> value="0 - 7 hari (HBO)">0 - 7 hari (HBO)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '1 bulan (BCG + Volio 1)') {
-    echo "selected";
-}?> value="1 bulan (BCG + Volio 1)">1 bulan (BCG + Volio 1)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '2 bulan (BPT1 +Volio2)') {
-    echo "selected";
-}?> value="2 bulan (BPT1 +Volio2)">2 bulan (BPT1 +Volio2)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '3 bulan (BPT2 +Volio3)') {
-    echo "selected";
-}?> value="3 bulan (BPT2 +Volio3)">3 bulan (BPT2 +Volio3)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '4 bulan (BPT3 +Volio4)') {
-    echo "selected";
-}?> value="4 bulan (BPT3 +Volio4)">4 bulan (BPT3 +Volio4)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '9 bulan (Campak)') {
-    echo "selected";
-}?> value="9 bulan (Campak)">9 bulan (Campak)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '18 bulan (Bostor BPT)') {
-    echo "selected";
-}?> value="18 bulan (Bostor BPT)">18 bulan (Bostor BPT)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '2 tahun (Bostor Campak)') {
-    echo "selected";
-}?> value="2 tahun (Bostor Campak)">2 tahun (Bostor Campak)</option>
-                                                <option <?php
-if ($pencatatan->jenis_imunisasi == '5 tahun (DT)') {
-    echo "selected";
-}?> value="5 tahun (DT)">5 tahun (DT)</option>
+}?> value="<?=$i->imunisasi?>"><?=$i->imunisasi?></option>
+
+                                                <?php endforeach;?>
+
+
+
                                             </select>
                                         </div>
                                     </div>
@@ -284,14 +257,17 @@ if ($pencatatan->jenis_imunisasi == '5 tahun (DT)') {
                                         <div class="col">
                                             <select id="inputState" name="vitamin" class="form-control">
                                                 <option>-- PILIH --</option>
+
+                                                <?php foreach ($vitamin as $v): ?>
+
                                                 <option <?php
-if ($pencatatan->vitamin == 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru') {
+if ($pencatatan->vitamin == $v->vitamin) {
     echo "selected";
-}?> value="Vitamin A (umur 6 bulan - 1 tahun ) warna biru">Vitamin A (umur 6 bulan - 1 tahun ) warna biru</option>
-                                                <option <?php
-if ($pencatatan->vitamin == 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah') {
-    echo "selected";
-}?> value="Vitamin A (umur 1 tahun - 5 tahun ) warna merah">Vitamin A (umur 1 tahun - 5 tahun ) warna merah</option>
+}?> value="<?=$v->vitamin?>"><?=$v->vitamin?></option>
+
+                                                <?php endforeach?>
+
+
                                             </select>
                                         </div>
                                     </div>
@@ -310,15 +286,17 @@ if ($pencatatan->vitamin == 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah') {
                                             <select id="inputState" class="form-control" name="obat">
                                                 <option>-- PILIH --</option>
 
+                                                <?php foreach ($obat_cacing as $o): ?>
 
                                                 <option <?php
-if ($pencatatan->obat == '1/2 pil (umur 1 - 2 tahun)') {
+if ($pencatatan->obat == $o->obatCacing) {
     echo "selected";
-}?> value="1/2 pil (umur 1 - 2 tahun)">1/2 pil (umur 1 - 2 tahun)</option>
-                                                <option <?php
-if ($pencatatan->obat == '1 pil (umur 2 - 5 tahun)') {
-    echo "selected";
-}?> value="1 pil (umur 2 - 5 tahun)">1 pil (umur 2 - 5 tahun)</option>
+}?> value="<?=$o->obatCacing?>"><?=$o->obatCacing?></option>
+
+                                                <?php endforeach?>
+
+
+
                                             </select>
                                         </div>
                                     </div>

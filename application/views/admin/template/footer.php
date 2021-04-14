@@ -248,7 +248,7 @@ var data = [];
 
 datas = [<?php foreach ($graph1 as $g): ?> <?=$g->jml?>, <?php endforeach;?>];
 
-<?php elseif ($item == "Buku KTA"): ?>
+<?php elseif ($item == "Buku KIA"): ?>
 
 datas = [<?php foreach ($graph2 as $g): ?> <?=$g->jml?>, <?php endforeach;?>];
 

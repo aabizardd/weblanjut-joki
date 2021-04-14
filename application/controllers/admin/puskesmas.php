@@ -556,7 +556,7 @@ class Puskesmas extends CI_Controller
 
         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-        $namaGrafik = ['Jumlah Pasien', 'Buku KTA', 'Jumlah Pemeriksaan Pasien'];
+        $namaGrafik = ['Jumlah Pasien', 'Buku KIA', 'Jumlah Pemeriksaan Pasien'];
         $data['graph'] = $namaGrafik;
 
         $data['bulan'] = $bulan;

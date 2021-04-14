@@ -11,6 +11,8 @@
     </div>
     <?php }?>
 
+
+
     <!-- DataTables -->
     <div class="card mb-3">
         <div class="card-header">
@@ -100,11 +102,20 @@
                                     <div class="form-group row">
                                         <label for="nama_bidan" class="col-sm-2 col-form-label">Kategori Usia</label>
                                         <div class="col">
+
+
                                             <select id="inputState" class="form-control" name="kategori">
-                                                <option value="Bayi (0-12 bln)">Bayi (0-12 bln)</option>
-                                                <option value="Batita (1-3 thn)">Batita (1-3 thn)</option>
-                                                <option value="Balita (0-5 thn)">Balita (0-5 thn)</option>
+
+                                                <?php foreach ($kat_usia as $item): ?>
+
+                                                <option value="<?=$item->usia?>"><?=$item->usia?></option>
+
+                                                <?php endforeach?>
+
+
                                             </select>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -174,14 +185,12 @@
                                         <label for="nama_bidan" class="col-sm-2 col-form-label">Jenis Imunisasi</label>
                                         <div class="col">
                                             <select id="inputState" class="form-control" name="jenis_imunisasi">
-                                                <option value="0 - 7 hari (HBO)">0 - 7 hari (HBO)</option>
-                                                <option value="1 bulan (BCG + Volio 1)">1 bulan (BCG)</option>
-                                                <option value="2 bulan (BPT1 +Volio2)">2 bulan (DPT1 +Volio1 1/2)</option>
-                                                <option value="3 bulan (BPT2 +Volio3)">3 bulan (DPT2 +Volio2)</option>
-                                                <option value="4 bulan (BPT3 +Volio4)">4 bulan (DPT3 +Volio3)</option>
-                                                <option value="9 bulan (Campak)">9 bulan (Campak)</option>
-                                                <option value="18 bulan (Bostor BPT)">18 bulan (Bostor DPT)</option>
-                                                <option value="2 tahun (Bostor Campak)">2 tahun (Bostor Campak)</option>
+
+                                                <?php foreach ($imunisasi as $i): ?>
+                                                <option value="<?=$i->imunisasi?>"><?=$i->imunisasi?></option>
+                                                <?php endforeach?>
+
+
                                                 <!-- <option value="5 tahun (DT)">5 tahun (DT)</option> -->
                                             </select>
                                         </div>
@@ -232,10 +241,15 @@
                                         <label for="nama_bidan" class="col-sm-2 col-form-label">Vitamin</label>
                                         <div class="col">
                                             <select id="inputState" name="vitamin" class="form-control">
-                                                <option value="Vitamin A (umur 6 bulan - 1 tahun ) warna biru">Vitamin A
-                                                    (umur 6 bulan - 1 tahun ) warna biru</option>
-                                                <option value="Vitamin A (umur 1 tahun - 5 tahun ) warna merah">Vitamin
-                                                    A (umur 1 tahun - 5 tahun ) warna merah</option>
+
+                                                <?php foreach ($vitamin as $v): ?>
+
+                                                <option value="<?=$v->vitamin?>">
+                                                    <?=$v->vitamin?></option>
+
+
+                                                <?php endforeach?>
+
                                             </select>
                                         </div>
                                     </div>
@@ -252,10 +266,16 @@
                                         <label for="nama_bidan" class="col-sm-2 col-form-label">Obat Cacing</label>
                                         <div class="col">
                                             <select id="inputState" class="form-control" name="obat">
-                                                <option value="&#189; pil (umur 1 - 2 tahun)">&#189; pil (umur 1 - 2
-                                                    tahun)</option>
-                                                <option value="1 pil (umur 2 - 5 tahun)">1 pil (umur 2 - 5 tahun)
-                                                </option>
+
+                                                <?php foreach ($obat_cacing as $o): ?>
+
+                                                <option value="<?=$o->obatCacing?>">
+                                                    <?=$o->obatCacing?></option>
+
+
+                                                <?php endforeach?>
+
+
                                             </select>
                                         </div>
                                     </div>
@@ -280,6 +300,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- <input type="hidden" name="id_wilayah" value="<?=$this->session->userdata('id_wilayah')?>"> -->
 
                     <input name="tgl_pencatatan" type="hidden"
                         value="<?php echo gmdate("Y-m-d", time() + 60 * 60 * 7); ?>">

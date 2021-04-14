@@ -20,6 +20,7 @@ class Pencatatan_model extends CI_Model
     public $obat;
     public $notelp;
     public $tgl_pencatatan;
+    public $idWilayah;
 
     public function rules()
     {
@@ -148,6 +149,7 @@ class Pencatatan_model extends CI_Model
 
         $this->id_pencatatan = '';
         $this->no_pasien = $post["no_pasien"];
+        $this->idWilayah = $this->session->userdata('id_wilayah');
         $this->nama_bidan = $post["nama_bidan"];
         $this->umur = $post["umur"];
         $this->kategori = $post["kategori"];
@@ -279,7 +281,7 @@ class Pencatatan_model extends CI_Model
         $this->db->from('regisanak r');
         $this->db->join('pencatatan p', 'p.no_pasien = r.no_pasien');
         $this->db->where('p.id_pencatatan', $id);
-        // $this->db->where('pencatatan.status', 1);
+// $this->db->where('pencatatan.status', 1);
         $query = $this->db->get();
         return $query;
     }

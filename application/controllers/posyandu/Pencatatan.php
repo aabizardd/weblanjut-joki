@@ -78,6 +78,11 @@ class Pencatatan extends CI_Controller
             show_404();
         }
 
+        $data['kat_usia'] = $this->db->get('kategori_usia')->result();
+        $data['imunisasi'] = $this->db->get('imunisasi')->result();
+        $data['vitamin'] = $this->db->get('vitamin')->result();
+        $data['obat_cacing'] = $this->db->get('obat_cacing')->result();
+
         $this->load->view('layout/posiandu/head.php');
         $this->load->view('posiandu/pencatatan/update', $data);
         $this->load->view('layout/foot.php');
