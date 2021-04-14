@@ -19,7 +19,7 @@
                             <div class="widget-heading">Data Ibu Hamil</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span><?= $ibu ?></span></div>
+                            <div class="widget-numbers text-white"><span><?=$ibu?></span></div>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                             <div class="widget-heading">Kunjungan Pemeriksaan</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span><?= $pemeriksaan ?></span></div>
+                            <div class="widget-numbers text-white"><span><?=$pemeriksaan?></span></div>
                         </div>
                     </div>
                 </div>
@@ -41,12 +41,12 @@
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
                             <div class="widget-heading">Tanggal<?php
-                                                                $tanggal = mktime(date('m'), date("d"), date('Y'));
-                                                                date_default_timezone_set("Asia/Jakarta");
-                                                                ?></div>
+$tanggal = mktime(date('m'), date("d"), date('Y'));
+date_default_timezone_set("Asia/Jakarta");
+?></div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span><?= date("d-m-Y", $tanggal) . "</b>"; ?></span>
+                            <div class="widget-numbers text-white"><span><?=date("d-m-Y", $tanggal) . "</b>";?></span>
                             </div>
                         </div>
                     </div>

@@ -732,6 +732,8 @@ class Puskesmas extends CI_Controller
         $id_pemeriksaan = $this->input->post('id_pemeriksaan');
         $pembayaran = $this->input->post('pembayaran');
 
+        // var_dump($pembayaran);die();
+
         $data = [
             'pembayaran' => $pembayaran,
         ];

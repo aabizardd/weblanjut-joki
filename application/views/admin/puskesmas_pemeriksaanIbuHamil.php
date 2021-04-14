@@ -256,15 +256,8 @@ foreach ($pemeriksaans as $value) {
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text" for="letak_bayi">Letak Bayi</label>
                                             </div>
-                                            <select class="custom-select" id="letak-bayi" name="letak_bayi" disabled>
-                                                <option selected>Pilih letak bayi</option>
-                                                <option value="Letak Kepala" id="letak-bayi-kepala">LKEP (Letak Kepala)
-                                                </option>
-                                                <option value="Letak Bokong" id="letak-bayi-bokong">LETBO (Letak Bokong)
-                                                </option>
-                                                <option value="Letak Lintang" id="letak-bayi-lintang">LETLI (Letak
-                                                    Lintang)</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="letak_bayi" name="letak_bayi"
+                                                readonly value="">
                                         </div>
 
                                         <div class="form-group row">
@@ -294,13 +287,7 @@ foreach ($pemeriksaans as $value) {
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text" for="hb">HB (Hemoglobin)</label>
                                             </div>
-                                            <select class="custom-select" id="hb" name="hb" disabled>
-                                                <option selected>Pilih kondisi hb</option>
-                                                <option value="Rendah" id="hb-rendah">Rendah ( &lt; 10 gram &percnt; )
-                                                </option>
-                                                <option value="Normal" id="hb-normal">Normal ( &gt; 11 gram &percnt; )
-                                                </option>
-                                            </select>
+                                            <input type="text" class="form-control" id="hb" name="hb" readonly value="">
                                         </div>
                                         <!-- <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -381,11 +368,8 @@ foreach ($pemeriksaans as $value) {
                                                 <label class="input-group-text" for="jenis_pembayaran">Jenis
                                                     Pembayaran</label>
                                             </div>
-                                            <select class="custom-select" id="pembayaran" name="pembayaran" disabled>
-                                                <option value="JAMSOSKES" id="pembayaran-jamsoskes">Jamsoskes</option>
-                                                <option value="BPJS" id="pembayaran-bpjs">BPJS</option>
-                                                <option value="Bayar" id="pembayaran-bayar">Bayar</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="pembayaran" name="pembayaran"
+                                                value="" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -427,22 +411,28 @@ function detailConfirm(id_pemeriksaan, nama, id_pasien, id_petugas, tgl_periksa,
     $('#namaobat').attr('value', namaobat);
     $('#tindakanmedis').attr('value', tindakanmedis);
 
-    if (letak_bayi == 'Letak Kepala') {
-        $('#letak-bayi-kepala').attr('selected', 'true');
-    } else if (letak_bayi == 'Letak Bokong') {
-        $('#letak-bayi-bokong').attr('selected', 'true');
-    } else {
-        $('#letak-bayi-lintang').attr('selected', 'true');
-    }
+    $('#pembayaran').attr('value', pembayaran);
+
+    $('#hb').attr('value', hb);
+    $('#letak_bayi').attr('value', letak_bayi);
+
+    // if (letak_bayi == 'Letak Kepala') {
+    //     $('#letak-bayi-kepala').attr('selected', 'true');
+    // } else if (letak_bayi == 'Letak Bokong') {
+    //     $('#letak-bayi-bokong').attr('selected', 'true');
+    // } else {
+    //     $('#letak-bayi-lintang').attr('selected', 'true');
+    // }
+
     $('#detak-jantung').attr('value', detak_jantung);
     $('#hpht').attr('value', hpht);
     $('#tp').attr('value', tp);
 
-    if (hb == 'Rendah') {
-        $('#hb-rendah').attr('selected', 'true');
-    } else {
-        $('#hb-normal').attr('selected', 'true');
-    }
+    // if (hb == 'Rendah') {
+    //     $('#hb-rendah').attr('selected', 'true');
+    // } else {
+    //     $('#hb-normal').attr('selected', 'true');
+    // }
 
     if (gol_dar == 'AB') {
         $('#gol-dar-ab').attr('selected', 'true');
@@ -471,13 +461,13 @@ function detailConfirm(id_pemeriksaan, nama, id_pasien, id_petugas, tgl_periksa,
         $('#sypilis-positif').attr('selected', 'true');
     }
 
-    if (pembayaran == 'Jamsoskes') {
-        $('#pembayaran-jamsoskes').attr('selected', 'true');
-    } else if (pembayaran == 'BPJS') {
-        $('#pembayaran-bpjs').attr('selected', 'true');
-    } else {
-        $('#pembayaran-bayar').attr('selected', 'true');
-    }
+    // if (pembayaran == 'Jamsoskes') {
+    //     $('#pembayaran-jamsoskes').attr('selected', 'true');
+    // } else if (pembayaran == 'BPJS') {
+    //     $('#pembayaran-bpjs').attr('selected', 'true');
+    // } else {
+    //     $('#pembayaran-bayar').attr('selected', 'true');
+    // }
 
     $('#detailModal').modal();
 }
