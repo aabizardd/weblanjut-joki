@@ -68,6 +68,8 @@ class Mpetugas extends CI_Model
     //  {
     //      return $this->db->get_where($this->_table, ["id_petugas" => $id])->row();
     //  }
+    
+    
 
     public function save()
     {
@@ -80,7 +82,7 @@ class Mpetugas extends CI_Model
         $this->username = $post["username"];
         $this->password = $post["password"];
         $this->nama = $post["nama"];
-        $this->foto = $post["foto"];
+        $this->foto = $this->_uploadImage();
         // $this->foto = $this->_uploadImage();
         // 'filecover' => $gambar
         $this->status = "posyandu";
@@ -251,7 +253,8 @@ class Mpetugas extends CI_Model
         $this->id_petugas = $post["id_petugas"];
         $this->username = $post["username"];
         $this->nama = $post["nama"];
-        $this->foto = $post["foto"];
+        // $this->foto = $post["foto"];
+        $this->foto = $this->_uploadImage();
         $this->password = $post["password"];
         $this->status = $post["status"];
         return $this->db->update($this->_table, $this, array('id_petugas' => $post['id_petugas']));

@@ -42,7 +42,7 @@
                     <div class="form-group">
                         <label for="no_rujukan">Nomor Rujukan *</label>
                         <input class="form-control <?php echo form_error('no_rujukan') ? 'is-invalid' : '' ?>"
-                            type="number" name="no_rujukan" placeholder="no_rujukan">
+                            type="number" name="no_rujukan" placeholder="no_rujukan" required>
                         <div class="invalid-feedback">
                             <?php echo form_error('no_rujukan') ?>
                         </div>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label for="puskesmas">Puskesmas *</label>
                         <input class="form-control <?php echo form_error('puskesmas') ? 'is-invalid' : '' ?>"
-                            type="text" name="puskesmas" placeholder="Puskesmas"></textarea>
+                            type="text" name="puskesmas" placeholder="Puskesmas" required></textarea>
                         <div class="invalid-feedback">
                             <?php echo form_error('puskesmas') ?>
                         </div>
@@ -66,7 +66,7 @@
                     <div class="form-group">
                         <label for="kab_kota">KAB/KOTA *</label>
                         <input class="form-control <?php echo form_error('kab_kota') ? 'is-invalid' : '' ?>" type="text"
-                            name="kab_kota" placeholder="KAB/KOTA"></textarea>
+                            name="kab_kota" placeholder="KAB/KOTA" required></textarea>
                         <div class="invalid-feedback">
                             <?php echo form_error('kab_kota') ?>
                         </div>
@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label for="no_rujukan">POLI *</label>
                         <input class="form-control <?php echo form_error('poli') ? 'is-invalid' : '' ?>" type="text"
-                            name="poli" placeholder="Poli"></textarea>
+                            name="poli" placeholder="Poli" required></textarea>
                         <div class="invalid-feedback">
                             <?php echo form_error('poli') ?>
                         </div>

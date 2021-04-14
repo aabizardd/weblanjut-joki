@@ -53,14 +53,16 @@
 								</div>
 							</div>
 
-							<div class="form-group">
+							
+
+							<!-- <div class="form-group">
 								<label for="foto">Foto *</label>
 								<input class="form-control <?php echo form_error('foto') ? 'is-invalid':'' ?>"
 								 type="file" name="foto" placeholder="Foto Petugas" value="<?= $petugas->foto;?>"/>
 								<div class="invalid-feedback">
 									<?php echo form_error('foto') ?>
 								</div>
-							</div>
+							</div> -->
 
 							<!-- <div class="custom-file">
 								<label for="foto">Foto *</label>

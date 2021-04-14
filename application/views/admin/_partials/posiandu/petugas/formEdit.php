@@ -43,8 +43,68 @@
 									<?php echo form_error('nama') ?>
 								</div>
 							</div>
-
 							<div class="form-group">
+                                    <label for="foto">Foto *</label>
+                                    <!-- <textarea class="form-control <?php echo form_error('foto') ? 'is-invalid' : '' ?>"
+                                        id="foto" name="foto"><?=$petugas->foto;?></textarea> -->
+                                    <!-- <img src="" class="rounded-circle" alt="..."> -->
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                aria-describedby="inputGroupFileAddon01" name="file">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="foto_lama" value="<?=$petugas->foto;?>">
+
+                                    <div class="invalid-feedback">
+                                        <?php echo form_error('foto') ?>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group">
+                                        <label for="password">Password *</label>
+                                        <input
+                                            class="form-control <?php echo form_error('nopasien') ? 'is-invalid' : '' ?>"
+                                            type="password" name="password" placeholder="Password"
+                                            value="<?=$petugas->password;?>">
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('password') ?>
+                                        </div>
+                                    </div> -->
+									<div class="form-group">
+								<label for="password">Password *</label>
+								<input class="form-control <?php echo form_error('nopasien') ? 'is-invalid':'' ?>"
+								 type="password" name="password" placeholder="Password" value="<?= $petugas->password; ?>">
+								<div class="invalid-feedback">
+									<?php echo form_error('password') ?>
+								</div>
+							</div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="pekerjaan_suami">Status Tempat</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01" name="status">
+                                        <option selected>Pilih Status</option>
+                                        <option value="puskesmas"
+                                            <?=$petugas->status == 'puskesmas' ? 'selected' : ''?>>
+                                            Puskesmas
+                                        </option>
+                                        <option value="posyandu" <?=$petugas->status == 'posyandu' ? 'selected' : ''?>>
+                                            Posyandu
+                                        </option>
+
+                                    </select>
+                                </div>
+
+
+							<!-- <div class="form-group">
 								<label for="foto">Foto *</label>
 								<textarea class="form-control <?php echo form_error('foto') ? 'is-invalid':'' ?>" id="foto" name="foto"><?= $petugas->foto; ?></textarea>
 								<div class="invalid-feedback">
@@ -68,7 +128,7 @@
 								<div class="invalid-feedback">
 									<?php echo form_error('status') ?>
 								</div>
-							</div>
+							</div> -->
 
 					
 							

@@ -16,9 +16,9 @@
     <div class="card mb-3">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-8">
+                <!-- <div class="col-md-8">
                     <a href="<?php echo site_url('posyandu/petugas/add_form') ?>"><i class="fas fa-plus"></i> Tambah</a>
-                </div>
+                </div> -->
                 <div class="col-md-4 pull-right">
                     <h4><b>Data Petugas Posyandu</b></h4>
                 </div>
@@ -63,9 +63,10 @@
                             <td>
                                 <?= $petugas->nama;?>
                             </td>
-                            <td>
+                            <td><img src="<?= base_url('upload/petugas_posyandu/').$petugas->foto; ?>" alt="" style="width: 150px; height: 150px;"></td>
+                            <!-- <td>
                                 <img src="<?= base_url('upload/petugas_posyandu/').$petugas->foto;?>" width="150">
-                            </td> 
+                            </td>  -->
                             <!-- <td><img src="foto/<?= base_url()?> "$petugas; ?></td> -->
                              <!-- <td><img  src='<?=base_url()?>upload/<?=$r->filecover;?>'></td> -->
                             <td>

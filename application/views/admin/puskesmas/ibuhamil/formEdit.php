@@ -15,8 +15,8 @@
         </div>
         <div class="card-body">
 
-            <form action="<?php echo site_url('puskesmas/ibuhamil/edit_save/' . ) ?>" method="post">
-                <input type="hidden" name="id_reg" value="<?=;?>">
+            <form action="<?php echo site_url('puskesmas/ibuhamil/edit_save/') ?>" method="post">
+                <input type="hidden" name="id_reg">
 
                 <!-- <div class="form-group">
 								<label for="id_reg">ID Pasien *</label>

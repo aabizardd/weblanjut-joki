@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <a href="<?=base_url('admin/puskesmas/dataPetugas')?>" class="btn btn-danger mb-2"><i
+                <a href="<?=base_url('admin/posyandu/dataPetugas')?>" class="btn btn-danger mb-2"><i
                         class="fas fa-arrow-left"></i> Kembali</a>
                 <div class="main-card mb-3 card">
 

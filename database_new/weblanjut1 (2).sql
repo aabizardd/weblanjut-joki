@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2021 at 08:02 PM
+-- Generation Time: Apr 06, 2021 at 08:29 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -271,13 +271,14 @@ CREATE TABLE `pemeriksaan` (
 --
 
 INSERT INTO `pemeriksaan` (`id_pemeriksaan`, `id_reg`, `id_pasien`, `id_petugas`, `idWilayah`, `tgl_periksa`, `gravida`, `partes`, `abortus`, `jarak_kehamilan`, `usia_kehamilan`, `tinggi_badan`, `lila`, `sistol`, `diastol`, `tetanus_toksoid`, `fe`, `tfu`, `letak_bayi`, `detak_jantung`, `hpht`, `tp`, `hb`, `namaobat`, `tindakanmedis`, `hbsag`, `hiv`, `sypilis`, `pembayaran`) VALUES
-(5, 0, 1212, 5092, 1, '2020-01-02', 1, 1, 2, 3, 6, 145, 22, 90, 80, '11', 33, 44, 'Pilih letak bayi', '90/100', '2020-12-03', '2020-12-25', 'Pilih kondisi hb', 'tidak ada ', 'medis', 'Negatif', 'Positif', 'Negatif', 'Jamsoskes'),
+(5, 0, 1212, 5092, 1, '2020-01-02', 29, 1, 2, 3, 6, 145, 22, 90, 80, '11', 33, 44, 'LETBO (Letak Bokong)', '90/100', '2020-12-03', '2020-12-25', 'Rendah (< 10 gram %)', 'cacing pita', 'medis', 'Negatif', 'Negatif', 'Negatif', NULL),
 (6, 0, 778866, 21231, 1, '2020-12-03', 0, 0, 1, 1, 4, 177, 54, 89, 99, '53', 17, 19, 'Letak Bokong', '90/100', '2020-11-29', '2021-01-09', 'Normal', 'neurobion', 'memberikan obat tambah darah', 'Negatif', 'Positif', 'Positif', 'Bayar'),
 (7, 0, 555, 50924, 1, '2020-12-03', 1, 0, 2, 2, 3, 155, 32, 45, 55, '5', 6, 7, 'Letak Kepala', '90/100', '2020-12-03', '2020-12-03', 'Rendah', 'tidak ada ', 'melakukan pemeriksaan rutin', 'Positif', 'Negatif', 'Negatif', 'Bayar'),
 (8, 0, 505432, 2705, 1, '2020-12-21', 0, 0, 2, 4, 8, 145, 56, 90, 110, '34', 60, 6, 'Letak Bokong', '90/100', '2020-12-07', '2021-03-31', 'Pilih kondisi hb', 'neuobion ', 'memberikan obat tambah darah', 'Negatif', 'Negatif', 'Negatif', 'Jamsoskes'),
 (9, 0, 131, 2705, 2, '2020-12-21', 0, 0, 1, 6, 9, 156, 45, 80, 90, '5', 67, 50, 'Letak Kepala', '90/100', '2020-11-29', '2021-01-28', 'Normal', 'tidak ada ', 'melakukan pemeriksaan saja', 'Negatif', 'Negatif', 'Negatif', 'BPJS'),
 (10, 0, 555, 270500, 3, '2020-12-24', 1, 1, 2, 7, 9, 165, 23, 80, 90, '50', 42, 12, 'Letak Bokong', '90/100', '2020-10-13', '2021-03-03', 'Rendah', 'neurobion', 'memberikan obat tambah darah', 'Negatif', 'Negatif', 'Negatif', 'Bayar'),
-(11, 0, 1212, 5092, 0, '2021-04-07', 12, 12, 12, 1, 1, 123, 12, 12, 12, '12', 121, 121, 'LETBO (Letak Bokong)', 'ada', '2021-03-30', '2021-04-07', 'Rendah (< 10 gram %)', 'asdas', 'adasda', 'Negatif', 'Negatif', 'Negatif', 'Jamsoskes');
+(11, 0, 1212, 5092, 0, '2021-04-07', 12, 12, 12, 1, 1, 123, 12, 12, 12, '12', 121, 121, 'LETBO (Letak Bokong)', 'ada', '2021-03-30', '2021-04-07', 'Rendah (< 10 gram %)', 'asdas', 'adasda', 'Negatif', 'Negatif', 'Negatif', 'Jamsoskes'),
+(12, 0, 1212, 5092, 0, '2021-04-06', 12, 112, 12, 121, 12, 12, 12, 112, 12, '12', 12, 12, 'LKEP (Letak Kepala)', '12', '2021-03-28', '2021-05-07', 'Rendah (< 10 gram %)', '12', '12', 'Positif', 'Positif', 'Positif', 'BPJS');
 
 -- --------------------------------------------------------
 
@@ -624,7 +625,7 @@ ALTER TABLE `password_akses`
 -- AUTO_INCREMENT for table `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
-  MODIFY `id_pemeriksaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pemeriksaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pencatatan`

@@ -11,7 +11,7 @@
 
             <form action="<?php echo site_url('posyandu/pasienrujukan/add') ?>" method="post" class="needs-validation"
                 novalidate>
-                <!-- <div class="form-group">
+                <div class="form-group">
 								<label for="id_rujukan">ID Rujukan*</label>
 								<input class="form-control <?php echo form_error('id_rujukan') ? 'is-invalid' : '' ?>"
 								 type="number" name="id_rujukan" placeholder="ID Rujukan" required/>
@@ -22,11 +22,11 @@
 								<div class="valid-feedback">
 									Looks Good
 								</div>
-							</div> -->
+							</div>
                 <div class="form-group">
-                    <label for="no_rujukan">Nomor Rujukan *</label>
-                    <input class="form-control <?php echo form_error('no_rujukan') ? 'is-invalid' : '' ?>" type="number"
-                        name="no_rujukan" placeholder="no_rujukan"></textarea>
+                    <label for="no_rujukan" >Nomor Rujukan *</label>
+                    <input class="form-control <?php echo form_error('no_rujukan') ? 'is-invalid' : '' ?>" type="number" 
+                        name="no_rujukan" placeholder="no_rujukan" required ></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('no_rujukan') ?>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label for="puskesmas">Puskesmas *</label>
                     <input class="form-control <?php echo form_error('puskesmas') ? 'is-invalid' : '' ?>" type="text"
-                        name="puskesmas" placeholder="Puskesmas"></textarea>
+                        name="puskesmas" placeholder="Puskesmas" required ></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('puskesmas') ?>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="kab_kota">KAB/KOTA *</label>
                     <input class="form-control <?php echo form_error('kab_kota') ? 'is-invalid' : '' ?>" type="text"
-                        name="kab_kota" placeholder="KAB/KOTA"></textarea>
+                        name="kab_kota" placeholder="KAB/KOTA"required></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('kab_kota') ?>
                     </div>
@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <label for="no_rujukan">POLI *</label>
                     <input class="form-control <?php echo form_error('poli') ? 'is-invalid' : '' ?>" type="text"
-                        name="poli" placeholder="Poli"></textarea>
+                        name="poli" placeholder="Poli" required></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('poli') ?>
                     </div>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label for="namapasien">Nama Pasien *</label>
                     <input class="form-control <?php echo form_error('namapasien') ? 'is-invalid' : '' ?>" type="text"
-                        name="namapasien" placeholder="Nama Pasien" />
+                        name="namapasien" placeholder="Nama Pasien" required/>
                     <div class="invalid-feedback">
                         <?php echo form_error('namapasien') ?>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label for="umur">Umur *</label>
                     <input class="form-control <?php echo form_error('umur') ? 'is-invalid' : '' ?>" type="text"
-                        name="umur" placeholder="Umur"></textarea>
+                        name="umur" placeholder="Umur" required></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('umur') ?>
                     </div>
@@ -89,7 +89,7 @@
                 <div class="form-group">
                     <label for="alamat">Alamat *</label>
                     <textarea class="form-control <?php echo form_error('alamat') ? 'is-invalid' : '' ?>" id="alamat"
-                        name="alamat" placeholder="Alamat Lengkap" rows="3"></textarea>
+                    required="alamat" name="alamat" placeholder="Alamat Lengkap" rows="3" required></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('alamat') ?>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="form-group">
                     <label for="nopasien">No Pasien *</label>
                     <input class="form-control <?php echo form_error('nopasien') ? 'is-invalid' : '' ?>" type="text"
-                        name="nopasien" placeholder="No Pasien"></textarea>
+                        name="nopasien" placeholder="No Pasien" required></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('nopasien') ?>
                     </div>
@@ -107,7 +107,7 @@
                 <div class="form-group">
                     <label for="diagnosa">Diagnosa *</label>
                     <input class="form-control <?php echo form_error('diagnosa') ? 'is-invalid' : '' ?>" type="text"
-                        name="diagnosa" placeholder="Diagnosa"></textarea>
+                        name="diagnosa" placeholder="Diagnosa" required></textarea>
                     <div class="invalid-feedback">
                         <?php echo form_error('diagnosa') ?>
                     </div>

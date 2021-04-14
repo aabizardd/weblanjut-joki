@@ -17,10 +17,13 @@ class Petugas extends CI_Controller
         $this->load->model("pasienrujukan_model");
         $this->load->library('form_validation');
     }
+
+
     public function index()
     {
         $petugas = $this->Mpetugas;
-        $data['daftarpetugas'] = $petugas->getAll();
+        $data['daftarpetugas'] = $this->db->get_where('petugas', array('status' => 'posyandu'))->result();
+        // $data['daftarpetugas'] = $petugas->getAll();
 
         $this->load->view('layout/posiandu/head.php');
 
@@ -49,6 +52,8 @@ class Petugas extends CI_Controller
 
         $this->load->view('layout/foot.php');
     }
+
+
 
     public function add()
     {

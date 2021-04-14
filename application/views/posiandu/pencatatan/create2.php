@@ -102,8 +102,8 @@
                                         <div class="col">
                                             <select id="inputState" class="form-control" name="kategori">
                                                 <option value="Bayi (0-12 bln)">Bayi (0-12 bln)</option>
-                                                <option value="Batita (16-19 bln)">Batita (16-19 bln)</option>
-                                                <option value="Balita (16-60 bln)">Balita (16-60 bln)</option>
+                                                <option value="Batita (1-3 thn)">Batita (1-3 thn)</option>
+                                                <option value="Balita (0-5 thn)">Balita (0-5 thn)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -175,14 +175,14 @@
                                         <div class="col">
                                             <select id="inputState" class="form-control" name="jenis_imunisasi">
                                                 <option value="0 - 7 hari (HBO)">0 - 7 hari (HBO)</option>
-                                                <option value="1 bulan (BCG + Volio 1)">1 bulan (BCG + Volio 1)</option>
-                                                <option value="2 bulan (BPT1 +Volio2)">2 bulan (BPT1 +Volio2)</option>
-                                                <option value="3 bulan (BPT2 +Volio3)">3 bulan (BPT2 +Volio3)</option>
-                                                <option value="4 bulan (BPT3 +Volio4)">4 bulan (BPT3 +Volio4)</option>
+                                                <option value="1 bulan (BCG + Volio 1)">1 bulan (BCG)</option>
+                                                <option value="2 bulan (BPT1 +Volio2)">2 bulan (DPT1 +Volio1 1/2)</option>
+                                                <option value="3 bulan (BPT2 +Volio3)">3 bulan (DPT2 +Volio2)</option>
+                                                <option value="4 bulan (BPT3 +Volio4)">4 bulan (DPT3 +Volio3)</option>
                                                 <option value="9 bulan (Campak)">9 bulan (Campak)</option>
-                                                <option value="18 bulan (Bostor BPT)">18 bulan (Bostor BPT)</option>
+                                                <option value="18 bulan (Bostor BPT)">18 bulan (Bostor DPT)</option>
                                                 <option value="2 tahun (Bostor Campak)">2 tahun (Bostor Campak)</option>
-                                                <option value="5 tahun (DT)">5 tahun (DT)</option>
+                                                <!-- <option value="5 tahun (DT)">5 tahun (DT)</option> -->
                                             </select>
                                         </div>
                                     </div>

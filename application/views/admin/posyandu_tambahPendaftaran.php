@@ -41,7 +41,7 @@
                                                             <input name="no_pasien"
                                                                 <?php echo form_error('no_pasien') ? 'is-invalid' : '' ?>
                                                                 type="number" class="form-control" id="no_pasien"
-                                                                placeholder="No NIK/No BPJS/No KIS/No KMS">
+                                                                placeholder="No NIK/No BPJS/No KIS/No KMS" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -53,7 +53,7 @@
                                                             Ibu</label>
                                                         <div class="col">
                                                             <input name="nama_ibu" type="text" class="form-control"
-                                                                id="nama_ibu" placeholder="Masukan Nama Ibu">
+                                                                id="nama_ibu" placeholder="Masukan Nama Ibu" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -72,7 +72,7 @@
                                                             <input name="nama_anak" type="text"
                                                                 <?php echo form_error('nama_anak') ? 'is-invalid' : '' ?>
                                                                 class="form-control" id="nama_anak"
-                                                                placeholder="Masukan Nama">
+                                                                placeholder="Masukan Nama" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,7 +82,7 @@
                                                             Ibu</label>
                                                         <div class="col">
                                                             <input name="p_ibu" type="text" class="form-control"
-                                                                id="p_ibu" placeholder="Masukan Pekerjaan Ibu">
+                                                                id="p_ibu" placeholder="Masukan Pekerjaan Ibu" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,21 +98,21 @@
                                                         <label for="ttl" class="col-sm-2 col-form-label">TTL</label>
                                                         <div class="col-sm-4">
                                                             <input name="tempat_lahir" id="tempat_lahir" type="text"
-                                                                class="form-control" placeholder="Tempat">
+                                                                class="form-control" placeholder="Tempat" required>
                                                         </div>
                                                         <div class="col-sm-5">
                                                             <input name="tanggal_lahir" id="tanggal_lahir" type="date"
-                                                                class="form-control" placeholder="Last name">
+                                                                class="form-control" placeholder="Last name" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <div class="form-group row">
-                                                        <label for="p_ayah" class="col-sm-3 col-form-label">Nama
+                                                        <label for="p_ayah" class="col-sm-3 col-form-label" required>Nama
                                                             Ayah</label>
                                                         <div class="col">
                                                             <input name="nama_ayah" type="text" class="form-control"
-                                                                id="nama_ayah" placeholder="Masukan Nama Ayah">
+                                                                id="nama_ayah" placeholder="Masukan Nama Ayah" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,11 +137,11 @@
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <div class="form-group row">
-                                                        <label for="p_ayah" class="col-sm-3 col-form-label">Pekerjaan
+                                                        <label for="p_ayah" class="col-sm-3 col-form-label" required>Pekerjaan
                                                             Ayah</label>
                                                         <div class="col">
                                                             <input name="p_ayah" type="text" class="form-control"
-                                                                id="p_ayah" placeholder="Masukan Pekerjaan Ayah">
+                                                                id="p_ayah" placeholder="Masukan Pekerjaan Ayah" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -158,7 +158,7 @@
                                                             class="col-sm-2 col-form-label">Alamat</label>
                                                         <div class="col-sm-9">
                                                             <textarea name="alamat" class="form-control" id="alamat"
-                                                                rows="3" placeholder="Masukan Alamat"></textarea>
+                                                                rows="3" placeholder="Masukan Alamat" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>

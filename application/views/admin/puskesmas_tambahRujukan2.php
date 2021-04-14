@@ -88,8 +88,8 @@
                     <div class="form-group">
                         <label for="namapasien">Nama Pasien *</label>
                         <input class="form-control <?php echo form_error('namapasien') ? 'is-invalid' : '' ?>"
-                            type="text" name="namapasien" placeholder="Nama Pasien"
-                            value="<?=$pencatatan['nama_anak']?>" readonly />
+                            type="text" name="namapasien" placeholder="Nama Pasien" value="<?=$pencatatan['nama']?>"
+                            readonly />
                         <div class="invalid-feedback">
                             <?php echo form_error('namapasien') ?>
                         </div>
@@ -119,9 +119,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nopasien">No Pasien *</label>
+                        <label for="nopasien">ID Pasien *</label>
                         <input class="form-control <?php echo form_error('nopasien') ? 'is-invalid' : '' ?>" type="text"
-                            name="nopasien" placeholder="No Pasien" value="<?=$pencatatan['no_pasien']?>" readonly>
+                            name="nopasien" placeholder="No Pasien" value="<?=$pencatatan['id_pasien']?>" readonly>
                         <div class="invalid-feedback">
                             <?php echo form_error('nopasien') ?>
                         </div>
@@ -130,7 +130,7 @@
                     <div class="form-group">
                         <label for="diagnosa">Diagnosa *</label>
                         <input class="form-control <?php echo form_error('diagnosa') ? 'is-invalid' : '' ?>" type="text"
-                            name="diagnosa" placeholder="Diagnosa" value="<?=$pencatatan['diagnosa']?>" readonly>
+                            name="diagnosa" placeholder="Diagnosa" value="">
                         <div class="invalid-feedback">
                             <?php echo form_error('diagnosa') ?>
                         </div>

@@ -15,6 +15,16 @@
             Kategori</a>
         <div class="row">
             <div class="col-sm">
+
+                <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> -->
+
+                <?=$this->session->flashdata('pesan')?>
+
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <a class="btn btn-success mb-1" href="<?php echo base_url(
@@ -46,6 +56,9 @@ foreach ($pemeriksaans as $value) {
                                             <i class="fas fa-info"></i> Detail</a>
                                         <a class="btn btn-warning" href="<?php echo base_url(
         'admin/puskesmas/editPemeriksaan/' . $value->id_pemeriksaan); ?>">Update</a>
+
+                                        <a class="btn btn-danger" href="<?php echo base_url(
+        'admin/puskesmas/deletePemeriksaan/' . $value->id_pemeriksaan); ?>">Hapus</a>
 
                                     </td>
 

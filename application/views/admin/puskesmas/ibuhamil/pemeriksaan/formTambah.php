@@ -193,7 +193,7 @@
                                     <option selected>Pilih letak bayi</option>
                                     <?php foreach ($letakBayi as $item): ?>
 
-                                    <option value="<?= $item->letakBayi ?>"><?= $item->letakBayi ?></option>
+                                    <option value="<?=$item->letakBayi?>"><?=$item->letakBayi?></option>
 
                                     <?php endforeach;?>
                                 </select>
@@ -224,11 +224,11 @@
                                 <select class="custom-select" id="hb" name="hb">
                                     <option selected>Pilih kondisi hb</option>
 
-                                    <?php foreach ($hb as $item) : ?>
+                                    <?php foreach ($hb as $item): ?>
 
-                                    <option value="<?= $item->kondisiHb ?>"><?= $item->kondisiHb ?></option>
+                                    <option value="<?=$item->kondisiHb?>"><?=$item->kondisiHb?></option>
 
-                                    <?php endforeach; ?>
+                                    <?php endforeach;?>
 
                                 </select>
                             </div>
@@ -302,7 +302,7 @@
                                                 Pemeriksaan</label>
                                             <div class="col-sm-3">
                                                 <input type="text" class="form-control" id="id-pemeriksaan"
-                                                    value="<?=$count?>" readonly>
+                                                    value="<?=$count?>" readonly name="">
                                             </div>
                                             <label for="jarak_kehamilan" class="col-sm-2 col-form-label">Nama
                                                 Pasien</label>
@@ -317,7 +317,7 @@
                                     <hr>
                                     <div class="col-lg-4">
                                         <input type="hidden" name="id_pasien" value="<?=$pemeriksaan->id_reg?>">
-                                        <input type="hidden" name="id_pemeriksaan" value="">
+                                        <!-- <input type="hidden" name="id_pemeriksaan" value=""> -->
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text" for="hbsag">HBSAG</label>
@@ -388,10 +388,10 @@
                                     <label class="input-group-text" for="jenis_pembayaran">Jenis Pembayaran</label>
                                 </div>
                                 <select class="custom-select" id="pembayaran" name="pembayaran" autofocus>
-                                    <?php foreach ($pembayaran as $item) :?>
-                                    <option value="<?= strtoupper($item->pembayaran) ?>"><?= $item->pembayaran; ?>
+                                    <?php foreach ($pembayaran as $item): ?>
+                                    <option value="<?=strtoupper($item->pembayaran)?>"><?=$item->pembayaran;?>
                                     </option>
-                                    <?php endforeach; ?>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>

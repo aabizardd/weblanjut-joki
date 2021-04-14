@@ -206,4 +206,25 @@ class Ibuhamil_model extends CI_Model
         return $query->row_array();
     }
 
+    public function getIbuHamilAndPemeriksaan2($id)
+    {
+        $this->db->select('*');
+        $this->db->from('pemeriksaan');
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg');
+        $this->db->where('id_pemeriksaan', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function getCountPemeriksaan()
+    {
+        // SELECT id_pemeriksaan FROM `pemeriksaan` ORDER by id_pemeriksaan desc limit 1
+        $this->db->select('id_pemeriksaan');
+        $this->db->from('pemeriksaan');
+        $this->db->order_by('id_pemeriksaan', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
 }

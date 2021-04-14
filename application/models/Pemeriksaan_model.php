@@ -190,7 +190,7 @@ class Pemeriksaan_model extends CI_Model
     public function save()
     {
         $post = $this->input->post();
-        $this->id_pemeriksaan = '';
+        $this->id_pemeriksaan = $post['id_pemeriksaan'];
         $this->id_pasien = $post['id_pasien'];
         // $this->id_reg = $post['id_reg'];
         $this->id_petugas = $post['id_petugas'];
@@ -221,6 +221,39 @@ class Pemeriksaan_model extends CI_Model
         $this->sypilis = $post['sypilis'];
 
         $this->pembayaran = $post['pembayaran'];
+
+        return $this->db->insert($this->_table, $this);
+    }
+
+    public function save2()
+    {
+        $post = $this->input->post();
+        $this->id_pemeriksaan = $post['id_pemeriksaan'];
+        $this->id_pasien = $post['id_pasien'];
+        // $this->id_reg = $post['id_reg'];
+        $this->id_petugas = $post['id_petugas'];
+        $this->tgl_periksa = $post['tgl_periksa'];
+
+        $this->gravida = $post['gravida'];
+        $this->partes = $post['partes'];
+        $this->abortus = $post['abortus'];
+        $this->jarak_kehamilan = $post['jarak_kehamilan'];
+        $this->usia_kehamilan = $post['usia_kehamilan'];
+        $this->tinggi_badan = $post['tinggi_badan'];
+        $this->lila = $post['lila'];
+        $this->sistol = $post['sistol'];
+        $this->diastol = $post['diastol'];
+        $this->tetanus_toksoid = $post['tetanus_toksoid'];
+        $this->fe = $post['fe'];
+        $this->tfu = $post['tfu'];
+        $this->letak_bayi = $post['letak_bayi'];
+        $this->detak_jantung = $post['detak_jantung'];
+        $this->hpht = $post['hpht'];
+        $this->tp = $post['tp'];
+        $this->hb = $post['hb'];
+
+        $this->namaobat = $post['namaobat'];
+        $this->tindakanmedis = $post['tindakanmedis'];
 
         return $this->db->insert($this->_table, $this);
     }
@@ -266,5 +299,46 @@ class Pemeriksaan_model extends CI_Model
     public function delete($id)
     {
         return $this->db->delete($this->_table, array("id_pemeriksaan" => $id));
+    }
+
+    public function update_pemeriksaan()
+    {
+        $post = $this->input->post();
+        $this->id_pemeriksaan = $post['id_pemeriksaan'];
+        $this->id_pasien = $post['id_pasien'];
+        // $this->id_reg = $post['id_reg'];
+        $this->id_petugas = $post['id_petugas'];
+        $this->tgl_periksa = $post['tgl_periksa'];
+
+        $this->gravida = $post['gravida'];
+        $this->partes = $post['partes'];
+        $this->abortus = $post['abortus'];
+        $this->jarak_kehamilan = $post['jarak_kehamilan'];
+        $this->usia_kehamilan = $post['usia_kehamilan'];
+        $this->tinggi_badan = $post['tinggi_badan'];
+        $this->lila = $post['lila'];
+        $this->sistol = $post['sistol'];
+        $this->diastol = $post['diastol'];
+        $this->tetanus_toksoid = $post['tetanus_toksoid'];
+        $this->fe = $post['fe'];
+        $this->tfu = $post['tfu'];
+        $this->letak_bayi = $post['letak_bayi'];
+        $this->detak_jantung = $post['detak_jantung'];
+        $this->hpht = $post['hpht'];
+        $this->tp = $post['tp'];
+        $this->hb = $post['hb'];
+
+        $this->namaobat = $post['namaobat'];
+        $this->tindakanmedis = $post['tindakanmedis'];
+
+        return $this->db->update($this->_table, $this, array('id_pemeriksaan' => $post['id_pemeriksaan']));
+    }
+
+    public function getAllByIdPemeriksaan($id_periksa)
+    {
+        $this->db->join('ibuhamil', 'pemeriksaan.id_pasien = ibuhamil.id_reg', 'inner');
+        $this->db->where('pemeriksaan.id_pemeriksaan', $id_periksa);
+        return $this->db->get($this->_table)->row_array();
+
     }
 }

@@ -43,7 +43,7 @@ class Login extends CI_Controller
                         $this->session->set_flashdata(
                             'message',
                             '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-							<strong>Maaf!</strong> username atau password salah!
+							<strong>Maaf!</strong> Password salah!
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 							</button>
@@ -67,16 +67,8 @@ class Login extends CI_Controller
             }
         } else {
             //email belum terdaftar
-            // $this->session->set_flashdata(
-            //     'alert',
-            //     '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            // <strong>Maaf!</strong> akun kamu belum terdaftar!
-            // <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            // <span aria-hidden="true">&times;</span>
-            // </button>
-            //   </div>'
-            // );
-            // redirect('puskesmas/login_puskesmas');
+            // var_dump($user);die();
+            // redirect('admin/login');
         }
 
         // tampilkan halaman login

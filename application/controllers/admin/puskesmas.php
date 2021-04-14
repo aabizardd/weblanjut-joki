@@ -102,7 +102,12 @@ class Puskesmas extends CI_Controller
 
     public function tambahRujukan1()
     {
-        $data["pencatatan"] = $this->M_Admin->get_by_role_pencatatanMedis();
+
+        $pemeriksaan = $this->pemeriksaan_model;
+
+        $data['pemeriksaans'] = $pemeriksaan->getAll();
+
+        // $data["pencatatan"] = $this->M_Admin->get_by_role_pencatatanMedis();
         // $data = ['showGraph' => null];
         $data['showGraph'] = null;
 
@@ -114,12 +119,12 @@ class Puskesmas extends CI_Controller
 
     public function tambahRujukan2($id)
     {
-        $data["pasienrujukans"] = $this->M_Admin->getAllPasienRujukan();
+        // $data["pasienrujukans"] = $this->M_Admin->getAllPasienRujukan();
         $data = ['showGraph' => null];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
-        $data['pencatatan'] = $this->M_Admin->getDataCatatAnak($id);
+        $data['pencatatan'] = $this->pemeriksaan_model->getAllByIdPemeriksaan($id);
 
         $this->load->view('admin/puskesmas_tambahRujukan2', $data);
         $this->load->view('admin/template/footer', $data);
@@ -285,6 +290,22 @@ class Puskesmas extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    public function deletePemeriksaan($id)
+    {
+
+        $this->db->delete('pemeriksaan', ['id_pemeriksaan' => $id]);
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Berhasil!</strong> Data pemeriksaan ' . $id . ' berhasil dihapus.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>');
+
+        redirect('admin/puskesmas/pemeriksaanIbuHamil');
+
+    }
+
     public function tambahPemeriksaan1()
     {
         $data['ibuhamil'] = $this->ibuhamil_model->getAll();
@@ -298,14 +319,81 @@ class Puskesmas extends CI_Controller
     public function tambahPemeriksaan2($id = null)
     {
         // $data["pemeriksaan"] = $this->Pemeriksaan_model->getAll();
+
         $data = ['showGraph' => null];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
         $data['pemeriksaan_ibuhamil'] = $this->ibuhamil_model->getIbuHamilAndPemeriksaan($id);
+        $data['last_pemeriksaan'] = $this->ibuhamil_model->getCountPemeriksaan();
+
+        $data['letakBayi'] = $this->ibuhamil_model->getAllKategori("Letak Bayi");
+        $data['hb'] = $this->ibuhamil_model->getAllKategori("HB");
+        $data['pembayaran'] = $this->ibuhamil_model->getAllKategori("Jenis Pembayaran");
+        $data['count'] = $this->pemeriksaan_model->getId();
+        $data['pemeriksaan'] = $this->ibuhamil_model->getById($id);
 
         $this->load->view('admin/puskesmas_tambahPemeriksaan2', $data);
+
+        // $this->load->view('admin/puskesmas_tambahPemeriksaan2', $data);
         $this->load->view('admin/template/footer', $data);
+    }
+
+    public function add_pemeriksaan()
+    {
+        $pemeriksaan = $this->pemeriksaan_model;
+
+        $pemeriksaan->save2();
+        $this->session->set_flashdata('success', 'Berhasil ditambahkan');
+        $this->session->set_flashdata('error');
+
+        $id_pemeriksaan = $this->input->post('id_pemeriksaan');
+
+        redirect('admin/puskesmas/add_diagnosa/' . $id_pemeriksaan);
+    }
+
+    public function add_diagnosa($id_pemeriksaan)
+    {
+
+        $data = ['showGraph' => null];
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data['pemeriksaan_pasien'] = $this->ibuhamil_model->getIbuHamilAndPemeriksaan2($id_pemeriksaan);
+        $data['pembayaran'] = $this->ibuhamil_model->getAllKategori("Jenis Pembayaran");
+
+        $this->load->view('admin/puskesmas_addDiagnosaPembayaran', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function add_pemeriksaan2()
+    {
+
+        $id_pemeriksaan = $this->input->post('id_pemeriksaan');
+        $hbsag = $this->input->post('hbsag');
+        $hiv = $this->input->post('hiv');
+        $sypilis = $this->input->post('sypilis');
+        $sypilis = $this->input->post('sypilis');
+        $pembayaran = $this->input->post('pembayaran');
+
+        $data = [
+            'hbsag' => $hbsag,
+            'hiv' => $hiv,
+            'sypilis' => $sypilis,
+            'pembayaran' => $pembayaran,
+        ];
+
+        $this->db->update('pemeriksaan', $data, "id_pemeriksaan = $id_pemeriksaan");
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Berhasil!</strong> Data pemeriksaan berhasil ditambahkan.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>');
+
+        redirect('admin/puskesmas/pemeriksaanIbuHamil');
+
     }
 
     public function editPemeriksaan($id)
@@ -589,5 +677,75 @@ class Puskesmas extends CI_Controller
             $this->M_Admin->deleteKategori('letak_bayi', ['id_letak' => $id]);
             redirect('admin/puskesmas/kelolaKategori');
         }
+    }
+
+    public function edit_save_pemeriksaan()
+    {
+        $pemeriksaan = $this->pemeriksaan_model;
+
+        // $validation = $this->form_validation;
+
+        // var_dump($this->input->post());die;
+
+        $pemeriksaan_id = $this->input->post('id_pemeriksaan');
+
+        $pemeriksaan->update_pemeriksaan();
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Berhasil!</strong> data pemeriksaan berhasil diubah.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>');
+
+        // redirect(site_url('puskesmas/ibuhamil/pemeriksaan/edit/'.$id));
+        redirect('admin/puskesmas/editPemeriksaan/' . $pemeriksaan_id);
+    }
+
+    public function edit_save_diagnosis()
+    {
+        $id_pemeriksaan = $this->input->post('id_pemeriksaan');
+        $hbsag = $this->input->post('hbsag');
+        $hiv = $this->input->post('hiv');
+        $sypilis = $this->input->post('sypilis');
+
+        $data = [
+            'hbsag' => $hbsag,
+            'hiv' => $hiv,
+            'sypilis' => $sypilis,
+        ];
+
+        $this->db->update('pemeriksaan', $data, "id_pemeriksaan = $id_pemeriksaan");
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Berhasil!</strong> data pemeriksaan berhasil diubah.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>');
+
+        // redirect(site_url('puskesmas/ibuhamil/pemeriksaan/edit/'.$id));
+        redirect('admin/puskesmas/editPemeriksaan/' . $id_pemeriksaan);
+    }
+
+    public function edit_save_pembayaran()
+    {
+        $id_pemeriksaan = $this->input->post('id_pemeriksaan');
+        $pembayaran = $this->input->post('pembayaran');
+
+        $data = [
+            'pembayaran' => $pembayaran,
+        ];
+
+        $this->db->update('pemeriksaan', $data, "id_pemeriksaan = $id_pemeriksaan");
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Berhasil!</strong> data pemeriksaan berhasil diubah.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>');
+
+        // redirect(site_url('puskesmas/ibuhamil/pemeriksaan/edit/'.$id));
+        redirect('admin/puskesmas/editPemeriksaan/' . $id_pemeriksaan);
     }
 }

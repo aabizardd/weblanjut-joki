@@ -10,8 +10,49 @@ class petugas extends CI_Controller {
         $this->load->model('Mpetugas');  
     }
 
+    // public function dataPetugas()
+    // {
+    //     $petugas = $this->Mpetugas;
+    //     $data['daftarpetugas'] = $this->db->get_where('petugas', array('status' => 'posyandu'))->result();
+
+    //     $data['showGraph'] = null;
+
+    //     $this->load->view('admin/template/header');
+    //     $this->load->view('admin/template/sidebar');
+
+    //     $this->load->view('admin/posyandu_petugas', $data);
+    //     $this->load->view('admin/template/footer', $data);
+    // }
+
+    public function tambahPetugas()
+    {
+        $petugas = $this->Mpetugas->getAll();
+        $data = ['showGraph' => null];
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $this->load->view('admin/posyandu_tambahPetugas', [
+            'data' => $petugas, //model ke view
+        ]);
+        $this->load->view('admin/template/footer', $data);
+    }
+
+    public function editPetugas($id)
+    {
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+
+        $data["petugas"] = $this->Mpetugas->getById($id);
+
+        $data["petugas"] = $this->Mpetugas->getById($id);
+
+        $this->load->view('admin/posyandu_ubahPetugas', $data);
+        $this->load->view('admin/template/footer', $this->foot);
+    }
+
     public function index(){//fungsi default
         $tugas=$this->Mpetugas->selectData();
+        $tugas['petugas'] = $this->db->get_where('petugas', array('status' => 'posyandu'))->result();
         $this->load->view('layout/header');
         
         $this->load->view('tugas/page_index',[
@@ -27,6 +68,7 @@ class petugas extends CI_Controller {
             $this->form_validation->set_rules('username','Email','required');
             $this->form_validation->set_rules('nama','Nama Lengkap','required');
             $this->form_validation->set_rules('password','password','required');
+            $this->form_validation->set_rules('status','status','required');
             if ($this->form_validation->run() == TRUE){
                 $this->Mpetugas->insertMk();
                 $this->session->set_flashdata('success','Berhasil Disimpan');

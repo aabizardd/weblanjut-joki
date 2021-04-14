@@ -7,21 +7,23 @@
                                 <i class="pe-7s-info icon-gradient bg-mean-fruit">
                                 </i>
                             </div>
-                            <div>Data Pemeriksaan Ibu Hamil</div>
+                            <div>Tambah Data Pemeriksaan Ibu Hamil</div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body" id="formPemeriksaan" style="background-color:#2980b9; color: white">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="alert alert-info" role="alert">
-                                    Silahkan masukan data pemeriksaan
+                <form action="<?=site_url('admin/puskesmas/add_pemeriksaan/' . $pemeriksaan->id_reg)?>"
+                    enctype="multipart/form-data" method="POST">
+                    <div class="card-body" id="formPemeriksaan">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="alert alert-info" role="alert">
+                                        Silahkan masukan data pemeriksaan
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <form action="">
+
                             <div class="row">
                                 <hr>
                                 <div class="col">
@@ -32,7 +34,7 @@
                                                     Pemeriksaan</label>
                                                 <div class="col-sm-2">
                                                     <input type="text" class="form-control" name="id_pemeriksaan"
-                                                        value="<?=$pemeriksaan_ibuhamil['id_pemeriksaan']?>" readonly>
+                                                        value="<?=$last_pemeriksaan['id_pemeriksaan'] + 1?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,14 +73,15 @@
                                         <label for="id_petugas" class="col-sm-6 col-form-label">ID Petugas</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="id_petugas" name="id_petugas"
-                                                value="<?=$pemeriksaan_ibuhamil['id_petugas']?>">
+                                                value="<?=$pemeriksaan_ibuhamil['id_petugas']?>" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="tgl_periksa" class="col-sm-6 col-form-label">Tanggal Periksa</label>
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" id="tgl_periksa" name="tgl_periksa">
+                                            <input type="date" class="form-control" id="tgl_periksa" name="tgl_periksa"
+                                                required>
                                         </div>
                                     </div>
 
@@ -90,15 +93,15 @@
                                             Abortus)</label>
                                         <div class="col-sm-2">
                                             <input type="number" class="form-control" id="gravida" name="gravida"
-                                                placeholder="G" autofocus>
+                                                placeholder="G" autofocus required>
                                         </div>
                                         <div class="col-sm-2">
                                             <input type="number" class="form-control" id="partes" name="partes"
-                                                placeholder="P">
+                                                placeholder="P" required>
                                         </div>
                                         <div class="col-sm-2">
                                             <input type="number" class="form-control" id="abortus" name="abortus"
-                                                placeholder="A">
+                                                placeholder="A" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -106,7 +109,7 @@
                                             Kehamilan</label>
                                         <div class="col-sm-6">
                                             <input type="number" class="form-control" id="jarak_kehamilan"
-                                                name="jarak_kehamilan" placeholder="Jarak Kehamilan">
+                                                name="jarak_kehamilan" placeholder="Jarak Kehamilan" required>
                                         </div>
                                         <label class="col-form-label">Bulan</label>
                                     </div>
@@ -115,7 +118,7 @@
                                             Kehamilan</label>
                                         <div class="col-sm-6">
                                             <input type="number" class="form-control" id="usia_kehamilan"
-                                                name="usia_kehamilan" placeholder="Usia Kehamilan">
+                                                name="usia_kehamilan" placeholder="Usia Kehamilan" required>
                                         </div>
                                         <label class="col-form-label">Bulan</label>
                                     </div>
@@ -123,7 +126,7 @@
                                         <label for="tinggi_badan" class="col-sm-4 col-form-label">Tinggi Badan</label>
                                         <div class="col-sm-6">
                                             <input type="number" class="form-control" id="tinggi_badan"
-                                                name="tinggi_badan" placeholder="Tinggi Badan">
+                                                name="tinggi_badan" placeholder="Tinggi Badan" required>
                                         </div>
                                         <label class="col-form-label">CM</label>
                                     </div>
@@ -131,7 +134,7 @@
                                         <label for="lila" class="col-sm-4 col-form-label">LILA</label>
                                         <div class="col-sm-6">
                                             <input type="number" class="form-control" id="lila" name="lila"
-                                                placeholder="Lingkar Lengan Atas">
+                                                placeholder="Lingkar Lengan Atas" required>
                                         </div>
                                         <label class="col-form-label">CM</label>
                                     </div>
@@ -139,12 +142,12 @@
                                         <label for="tekanan_darah" class="col-sm-4 col-form-label">Tekanan Darah</label>
                                         <div class="col-sm-3">
                                             <input type="number" class="form-control" id="sistol" name="sistol"
-                                                placeholder="Sistol">
+                                                placeholder="Sistol" required>
                                         </div>
                                         <label class="col-form-label">/</label>
                                         <div class="col-sm-3">
                                             <input type="number" class="form-control" id="diastol" name="diastol"
-                                                placeholder="Diastol">
+                                                placeholder="Diastol" required>
                                         </div>
                                     </div>
 
@@ -152,7 +155,7 @@
                                         <label for="tetanus_toksoid" class="col-sm-4 col-form-label">TT</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" id="tetanus_toksoid"
-                                                name="tetanus_toksoid" placeholder="Tetanus Toksoid">
+                                                name="tetanus_toksoid" placeholder="Tetanus Toksoid" required>
                                         </div>
                                     </div>
 
@@ -163,14 +166,14 @@
                                         <label for="fe" class="col-sm-4 col-form-label">Fe</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" id="fe" name="fe"
-                                                placeholder="Zat Besi (Fe)">
+                                                placeholder="Zat Besi (Fe)" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="tfu" class="col-sm-2 col-form-label">TFU</label>
                                         <div class="col-sm-6">
                                             <input type="number" class="form-control" id="tfu" name="tfu"
-                                                placeholder="Tinggi Fundus Uteri">
+                                                placeholder="Tinggi Fundus Uteri" required>
                                         </div>
                                         <label class="col-form-label">CM</label>
                                     </div>
@@ -179,7 +182,7 @@
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="letak_bayi">Letak Bayi</label>
                                         </div>
-                                        <select class="custom-select" id="letak-bayi" name="letak_bayi">
+                                        <select class="custom-select" id="letak-bayi" name="letak_bayi" required>
                                             <option selected>Pilih letak bayi</option>
                                             <?php foreach ($letakBayi as $item): ?>
 
@@ -192,27 +195,27 @@
                                         <label for="detak_jantung" class="col-sm-6 col-form-label">Detak Jantung</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="detak_jantung"
-                                                name="detak_jantung">
+                                                name="detak_jantung" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="hpht" class="col-sm-6 col-form-label">HPHT (Hari Pertama Haid
                                             Terakhir)</label>
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" id="hpht" name="hpht">
+                                            <input type="date" class="form-control" id="hpht" name="hpht" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="tp" class="col-sm-6 col-form-label">TP (Taksiran Persalinan)</label>
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" id="tp" name="tp">
+                                            <input type="date" class="form-control" id="tp" name="tp" required>
                                         </div>
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="hb">HB (Hemoglobin)</label>
                                         </div>
-                                        <select class="custom-select" id="hb" name="hb">
+                                        <select class="custom-select" id="hb" name="hb" required>
                                             <option selected>Pilih kondisi hb</option>
 
                                             <?php foreach ($hb as $item): ?>
@@ -239,7 +242,8 @@
                                     <div class="form-group row">
                                         <label for="namaobat" class="col-sm-6 col-form-label">Nama Obat</label>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="namaobat" name="namaobat">
+                                            <input type="text" class="form-control" id="namaobat" name="namaobat"
+                                                required>
                                         </div>
                                     </div>
 
@@ -248,37 +252,28 @@
                                             Medis</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="tindakanmedis"
-                                                name="tindakanmedis">
+                                                name="tindakanmedis" required>
                                         </div>
                                     </div>
+
+                                    <input type="hidden" name="id_pasien" value="<?=$this->uri->segment(4)?>">
 
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-10"></div>
                                 <div class="col-sm-2">
-                                    <button type="button" class="btn btn-success" data-toggle="modal" id="btn-diagnosa"
-                                        data-target="#diagnosaModal">Next</button>
+                                    <input type="submit" class="btn btn-success" value="Lanjut">
                                 </div>
                             </div>
 
+                        </div>
                     </div>
-                </div>
+                </form>
 
 
             </div>
         </div>
-
-
-
-
-
-        <!-- end modal diagnosa -->
-
-
-
-
-
 
 
         </div>
@@ -287,175 +282,21 @@
         <!-- Modal -->
         <!-- modal diagnosa -->
         <!-- Modal -->
-        <div class="modal fade" id="diagnosaModal" tabindex="-1" role="dialog" aria-labelledby="modalDetailTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalDetailTitle">Hasil Diagnosa</h5>
-                    </div>
-                    <div class="modal-body" style="background-color:#2980b9;">
-                        <div class="container-fluid">
-                            <!-- DataTables -->
-                            <div class="card mb-3">
-                                <div class="card-body" style="color: black">
-                                    <div class="container">
-                                        <div class="row">
-                                            <hr>
-                                            <div class="col">
-                                                <div class="form-group row">
-                                                    <label for="jarak_kehamilan" class="col-sm-3 col-form-label">Id
-                                                        Pemeriksaan</label>
-                                                    <div class="col-sm-3">
-                                                        <input type="text" class="form-control" id="id-pemeriksaan">
-                                                    </div>
-                                                    <label for="jarak_kehamilan" class="col-sm-2 col-form-label">Nama
-                                                        Pasien</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="nama-pasien">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <hr>
-                                            <div class="col-lg-4">
-                                                <input type="hidden" name="id_pasien">
-                                                <input type="hidden" name="id_pemeriksaan" value="">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="hbsag">HBSAG</label>
-                                                    </div>
-                                                    <select class="custom-select" id="hbsag" name="hbsag" autofocus>
-                                                        <option value="Negatif">Negatif</option>
-                                                        <option value="Positif">Positif</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="hiv">HIV</label>
-                                                    </div>
-                                                    <select class="custom-select" id="hiv" name="hiv">
-                                                        <option value="Negatif">Negatif</option>
-                                                        <option value="Positif">Positif</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="sypilis">Sypilis</label>
-                                                    </div>
-                                                    <select class="custom-select" id="sypilis" name="sypilis">
-                                                        <option value="Negatif">Negatif</option>
-                                                        <option value="Positif">Positif</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                        <button type="button" class="btn btn-success" data-toggle="modal" id="btn-bayar"
-                            data-target="#bayarModal">Bayar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MOdal Pembayaran -->
-        <!-- Modal -->
-        <div class="modal fade" id="bayarModal" tabindex="-1" role="dialog" aria-labelledby="bayarModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="bayarModalLabel">Pembayaran</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <label class="input-group-text" for="jenis_pembayaran">Jenis
-                                                Pembayaran</label>
-                                        </div>
-                                        <select class="custom-select" id="pembayaran" name="pembayaran" autofocus>
-                                            <?php foreach ($pembayaran as $item): ?>
-                                            <option value="<?=strtoupper($item->pembayaran)?>"><?=$item->pembayaran;?>
-                                            </option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <small>* Silahkan pilih jenis pembayaran</small>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="btn-cancel-me"
-                            data-dismiss="modal">Kembali</button>
-                        <input type="submit" class="btn btn-primary" value="Oke">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- end modal Pembayaran -->
 
 
-        </form>
 
 
-        <!-- Logout Delete Confirmation-->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a id="btP" class="btn btn-danger" href="#">Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+
+
 
         <script src="<?=base_url('assets/vendor/jquery/jquery.min.js');?>"></script>
-        <script>
-		
-$(document).ready(function() {
 
-    $('#btn-diagnosa').click(function() {
-        $('#diagnosaModal').modal();
-    });
-    $("#btn-cancel-me").click(function() {
-        location.reload(true);
-    });
-    $('#btn-bayar').click(function() {
-        $('#diagnosaModal').modal("toggle");
-        $('#bayarModal').modal();
-        alert('a;dasd')
-    });
-});
-        </script>
+
+
+
+
+
 
         </div>
