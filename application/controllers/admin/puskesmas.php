@@ -681,7 +681,6 @@ class Puskesmas extends CI_Controller
 
     public function edit_save_pemeriksaan()
     {
-        $pemeriksaan = $this->pemeriksaan_model;
 
         // $validation = $this->form_validation;
 
@@ -689,7 +688,34 @@ class Puskesmas extends CI_Controller
 
         $pemeriksaan_id = $this->input->post('id_pemeriksaan');
 
-        $pemeriksaan->update_pemeriksaan();
+        $data = [
+            'id_pemeriksaan' => $this->input->post('id_pemeriksaan'),
+            'id_pasien' => $this->input->post('id_pasien'),
+            'id_petugas' => $this->input->post('id_petugas'),
+            'tgl_periksa' => $this->input->post('tgl_periksa'),
+            'gravida' => $this->input->post('gravida'),
+            'partes' => $this->input->post('partes'),
+            'abortus' => $this->input->post('abortus'),
+            'jarak_kehamilan' => $this->input->post('jarak_kehamilan'),
+            'usia_kehamilan' => $this->input->post('usia_kehamilan'),
+            'tinggi_badan' => $this->input->post('tinggi_badan'),
+            'lila' => $this->input->post('lila'),
+            'sistol' => $this->input->post('sistol'),
+            'diastol' => $this->input->post('diastol'),
+            'tetanus_toksoid' => $this->input->post('tetanus_toksoid'),
+            'fe' => $this->input->post('fe'),
+            'tfu' => $this->input->post('tfu'),
+            'letak_bayi' => $this->input->post('letak_bayi'),
+            'detak_jantung' => $this->input->post('detak_jantung'),
+            'hpht' => $this->input->post('hpht'),
+            'tp' => $this->input->post('tp'),
+            'hb' => $this->input->post('hb'),
+            'namaobat' => $this->input->post('namaobat'),
+            'tindakanmedis' => $this->input->post('tindakanmedis'),
+        ];
+
+        $this->db->update('pemeriksaan', $data, array('id_pemeriksaan' => $pemeriksaan_id));
+
         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
 		<strong>Berhasil!</strong> data pemeriksaan berhasil diubah.
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
