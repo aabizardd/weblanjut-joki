@@ -147,9 +147,16 @@ class Pencatatan_model extends CI_Model
     {
         $post = $this->input->post();
 
+        $id_wilayah = "";
+        if (empty($this->session->userdata('id_wilayah'))) {
+            $id_wilayah = $post["idWilayah"];
+        } else {
+            $id_wilayah = $this->session->userdata('id_wilayah');
+        }
+
         $this->id_pencatatan = '';
         $this->no_pasien = $post["no_pasien"];
-        $this->idWilayah = $this->session->userdata('id_wilayah');
+        $this->idWilayah = $id_wilayah;
         $this->nama_bidan = $post["nama_bidan"];
         $this->umur = $post["umur"];
         $this->kategori = $post["kategori"];
@@ -172,6 +179,13 @@ class Pencatatan_model extends CI_Model
     {
         $post = $this->input->post();
 
+        $id_wilayah = "";
+        if (empty($this->session->userdata('id_wilayah'))) {
+            $id_wilayah = $post["idWilayah"];
+        } else {
+            $id_wilayah = $this->session->userdata('id_wilayah');
+        }
+
         $this->id_pencatatan = $post["id_pencatatan"];
         $this->no_pasien = $post["no_pasien"];
         $this->nama_bidan = $post["nama_bidan"];
@@ -188,6 +202,7 @@ class Pencatatan_model extends CI_Model
         $this->obat = $post["obat"];
         $this->notelp = $post["notelp"];
         $this->tgl_pencatatan = $post["tgl_pencatatan"];
+        $this->idWilayah = $id_wilayah;
 
         return $this->db->update($this->_table, $this, array('id_pencatatan' => $post['id_pencatatan']));
     }

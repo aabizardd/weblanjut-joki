@@ -67,7 +67,7 @@ class Pencatatan extends CI_Controller
         $validation->set_rules($pencatatan->rules());
 
         if ($validation->run()) {
-            $regisanak_model->update();
+            // $regisanak_model->update();
             $this->session->set_flashdata('success', 'Data berhasil diedit');
             redirect(site_url('posyandu/Pencatatan'));
 
@@ -83,9 +83,9 @@ class Pencatatan extends CI_Controller
         $data['vitamin'] = $this->db->get('vitamin')->result();
         $data['obat_cacing'] = $this->db->get('obat_cacing')->result();
 
-        $this->load->view('layout/posiandu/head.php');
+        $this->load->view('layout/posiandu/head');
         $this->load->view('posiandu/pencatatan/update', $data);
-        $this->load->view('layout/foot.php');
+        $this->load->view('layout/foot');
 
     }
 

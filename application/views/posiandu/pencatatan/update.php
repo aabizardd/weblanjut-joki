@@ -23,7 +23,7 @@
                     <h4><b>Edit Pencatatan</b></h4>
                 </div>
             </div>
-            <div class="card-body" style="background-color:#2980b9; color: white">
+            < class="card-body" style="background-color:#2980b9; color: white">
                 <form action="<?php echo site_url('posyandu/Pencatatan/update') ?>" method="post"
                     enctype="multipart/form-data">
                     <div class="row">
@@ -333,7 +333,7 @@ if ($pencatatan->obat == $o->obatCacing) {
                         </div>
                     </div>
                 </form>
-            </div>
+            </ div>
         </div>
     </div>
 

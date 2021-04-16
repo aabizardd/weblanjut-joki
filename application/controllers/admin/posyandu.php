@@ -380,12 +380,19 @@ class Posyandu extends CI_Controller
 
     public function tambahPencatatan2($id)
     {
+
         $data["pencatatan"] = $this->M_Admin->getAllPasienPosyandu();
+
         $data = ['showGraph' => null];
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
         $data['pasien'] = $this->db->get_where('regisanak', ['no_pasien' => $id])->row_array();
+        $data['kat_usia'] = $this->db->get('kategori_usia')->result();
+        $data['imunisasi'] = $this->db->get('imunisasi')->result();
+        $data['vitamin'] = $this->db->get('vitamin')->result();
+        $data['obat_cacing'] = $this->db->get('obat_cacing')->result();
+        $data['wilayah'] = $this->db->get('wilayah')->result();
 
         $this->load->view('admin/posyandu_tambahPencatatan2', $data);
         $this->load->view('admin/template/footer', $data);
@@ -399,6 +406,10 @@ class Posyandu extends CI_Controller
         $data["pencatatan"] = $this->Pencatatan_model->getById($id);
 
         $data['pasien'] = $this->Pencatatan_model->getNamaAnak($id)->row_array();
+        $data['kat_usia'] = $this->db->get('kategori_usia')->result();
+        $data['imunisasi'] = $this->db->get('imunisasi')->result();
+        $data['vitamin'] = $this->db->get('vitamin')->result();
+        $data['obat_cacing'] = $this->db->get('obat_cacing')->result();
 
         // $data["pencatatan"] = $this->Pencatatan_model->getById($id);
 
@@ -802,6 +813,8 @@ class Posyandu extends CI_Controller
     {
         $pencatatan = $this->Pencatatan_model;
         $pencatatan->update();
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Data berhasil diubah! </div>');
 
         redirect('admin/posyandu/pencatatanMedis/');
 
