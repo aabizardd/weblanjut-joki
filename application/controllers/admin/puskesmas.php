@@ -469,6 +469,108 @@ class Puskesmas extends CI_Controller
         $this->load->view('admin/template/footer', $data);
     }
 
+    public function tambahDataPetugas($tipe)
+    {
+
+        $petugas = $this->Petugas_model;
+
+        $email = $this->input->post('email');
+
+        $cek_email = $petugas->getPetugasPuskesmasByEmail($email);
+
+        if ($cek_email) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger fade show" role="alert">Email sudah ada, silahkan gunakan email yang lain!</div>');
+
+            redirect('admin/' . $tipe . '/dataPetugas');
+        } else {
+            $token = base64_encode(random_bytes(32));
+            $user_token = [
+                'email' => $email,
+                'token' => $token,
+                'date_created' => time(),
+            ];
+
+            $digits = 6;
+            $password_login = str_pad(rand(0, pow(10, $digits) - 1), $digits, '0', STR_PAD_LEFT);
+
+            $data = [
+                'username' => $this->input->post('email'),
+                'nama' => $this->input->post('nama_lengkap'),
+                'foto' => 'default.jpg',
+                'password' => $password_login,
+                'status' => $tipe,
+                'id_wilayah' => $this->input->post('id_wilayah'),
+                'status_aktif' => 0,
+            ];
+
+            $this->db->insert('petugas', $data);
+
+            $this->db->insert('user_token', $user_token);
+            $this->_sendEmail($token, 'verify', $password_login, $tipe);
+
+            $this->session->set_userdata('sesi_verify', true);
+
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Berhasil ditambahkan dan email aktivasi telah dikirim!</div>');
+
+            redirect('admin/' . $tipe . '/dataPetugas');
+
+        }
+
+    }
+
+    private function _sendEmail($token, $type, $password_login, $tipe_role)
+    {
+        $this->load->library('email');
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'rezaayu613@gmail.com',
+            'smtp_pass' => 'Telkom!!',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+        ];
+
+        $this->email->initialize($config);
+        $this->email->from('rezaayu613@gmail.com', 'Admin App');
+        $this->email->to($this->input->post('email'));
+
+        if ($type == 'verify') {
+            $this->email->subject('Account Verification');
+
+            if ($tipe_role == "puskesmas") {
+                $this->email->message(
+                    'click this link to verify your account : <a href="' .
+                    base_url() .
+                    'puskesmas/Login/verifikasi?email=' .
+                    $this->input->post('email') .
+                    '&token=' .
+                    urlencode($token) .
+                    '">Activate</a> <br> password login is ' . $password_login
+                );
+            } else {
+                $this->email->message(
+                    'click this link to verify your account : <a href="' .
+                    base_url() .
+                    'posyandu/PetugasPosiandu/verify?email=' .
+                    $this->input->post('email') .
+                    '&token=' .
+                    urlencode($token) .
+                    '">Activate</a> <br> password login is ' . $password_login
+                );
+            }
+
+        }
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die();
+        }
+    }
+
     public function ubahPetugas()
     {
 
@@ -558,11 +660,8 @@ class Puskesmas extends CI_Controller
 
         $namaGrafik = ['Jumlah Pasien', 'Buku KIA', 'Jumlah Pemeriksaan Pasien'];
         $data['graph'] = $namaGrafik;
-
         $data['bulan'] = $bulan;
-
         $data['wilayah'] = $this->ibuhamil_model->getWilayah();
-
         $data['showGraph'] = "puskesmas";
 
         if (!is_null($bln)) {
@@ -775,5 +874,6 @@ class Puskesmas extends CI_Controller
 
         // redirect(site_url('puskesmas/ibuhamil/pemeriksaan/edit/'.$id));
         redirect('admin/puskesmas/editPemeriksaan/' . $id_pemeriksaan);
+
     }
 }

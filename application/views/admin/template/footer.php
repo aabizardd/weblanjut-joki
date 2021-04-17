@@ -8,6 +8,76 @@
 
 </html>
 
+
+<!-- Large modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true" id="modal-tambah-petugas">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Data Petugas
+                    <?=strtoupper($this->uri->segment(2))?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?=base_url('admin/puskesmas/tambahDataPetugas/' . $this->uri->segment(2))?>" method="POST">
+                <div class="modal-body">
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Nama Lengkap</label>
+                        <input type="text" class="form-control" required name="nama_lengkap">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            required name="email">
+
+                    </div>
+
+                    <?php if ($this->uri->segment(2) == "posyandu"): ?>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Wilayah</label>
+                        <select class="custom-select" id="inputGroupSelect01" required name="id_wilayah">
+                            <option value="" selected>Choose...</option>
+
+
+                            <?php foreach ($wilayah as $w): ?>
+
+                            <option value="<?=$w->id_wilayah?>"><?=$w->nama_wilayah?></option>
+
+                            <?php endforeach?>
+                        </select>
+                    </div>
+
+                    <!-- <div class="input-group mb-3">
+                        <label for="exampleInputEmail1">Email</label>
+
+                    </div> -->
+
+                    <?php endif?>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js">
 </script>
@@ -380,4 +450,6 @@ var myChart = new Chart(ctx, {
 <!--
 https://code.jquery.com/jquery-3.5.1.js
 https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js
+
+
 https://cdn.datatables.net/1.10.23/js/dataTables.jqueryui.min.js -->

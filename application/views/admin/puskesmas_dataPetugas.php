@@ -11,6 +11,15 @@
                 </div>
             </div>
         </div>
+
+        <button type="button" class="btn mr-2 mb-2 btn-primary" data-toggle="modal"
+            data-target="#modal-tambah-petugas"><i class="fas fa-plus"></i> Tambah Data Petugas</button>
+
+        <?=$this->session->flashdata('pesan')?>
+
+
+
+
         <div class="row">
             <div class="col-sm">
                 <div class="main-card mb-3 card">
@@ -43,7 +52,7 @@
     'admin/puskesmas/editPetugas/' . $value->id_petugas
 ); ?>">Update</a>
                                         <a class="btn btn-danger" href="<?php echo base_url(
-    'admin/posyandu/deletePetugas/' . $value->id_petugas
+    'admin/posyandu/deletePetugas/' . $value->id_petugas . '/' . 'puskesmas'
 ); ?>">Delete</a>
                                     </td>
                                 </tr>
@@ -59,5 +68,10 @@
             });
             </script>
         </div>
+
+
+
     </div>
+
+
 </div>

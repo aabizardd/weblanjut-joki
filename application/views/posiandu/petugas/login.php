@@ -88,13 +88,9 @@
 
 
 
-                                        <hr>
 
-                                        <div class="text-center">
-                                            <a class="small" href="<?php echo site_url(
-    'posyandu/PetugasPosiandu/registrasi'
-); ?>">Create an Account!</a>
-                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>

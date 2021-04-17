@@ -260,6 +260,8 @@ class Posyandu extends CI_Controller
 
         $data['showGraph'] = null;
 
+        $data['wilayah'] = $this->db->get('wilayah')->result();
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
 
@@ -292,7 +294,7 @@ class Posyandu extends CI_Controller
         $this->load->view('admin/template/footer', $this->foot);
     }
 
-    public function deletePetugas($id = null)
+    public function deletePetugas($id = null, $tipe = "")
     {
         if (!isset($id)) {
             show_404();
@@ -300,7 +302,16 @@ class Posyandu extends CI_Controller
 
         if ($this->Mpetugas->delete($id)) {
             $this->session->set_flashdata('success', 'Berhasil dihapus');
-            redirect(site_url('admin/posyandu/dataPetugas'));
+
+            if ($tipe == "puskesmas") {
+
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success fade show" role="alert">Petugas berhasil dihapus!</div>');
+
+                redirect(site_url('admin/puskesmas/dataPetugas'));
+            } else {
+                redirect(site_url('admin/posyandu/dataPetugas'));
+            }
+
         }
     }
 

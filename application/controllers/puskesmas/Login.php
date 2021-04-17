@@ -94,4 +94,83 @@ class Login extends CI_Controller
         //fungsi default
         $this->load->view('posiandu/petugas/registrasi');
     }
+
+    public function verifikasi()
+    {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+
+        // var_dump($email);die();
+
+        $user = $this->db
+            ->get_where('petugas', [
+                'username' => $email,
+            ])
+            ->row_array();
+
+        if ($user) {
+            $user_token = $this->db
+                ->get_where('user_token', ['token' => $token])
+                ->row_array();
+
+            if ($user_token) {
+                if (time() - $user_token['date_created'] < 60 * 60 * 24) {
+                    $this->db->set('status_aktif', 1);
+                    $this->db->where('username', $email);
+                    $this->db->update('petugas');
+
+                    $this->db->delete('user_token', ['email' => $email]);
+
+                    $this->session->set_flashdata(
+                        'alert',
+                        '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            			<strong>Selamat!</strong> ' .
+                        $email .
+                        ' Sudah aktif. Silahkan Login!
+           				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              			<span aria-hidden="true">&times;</span>
+            			</button>
+          				</div>'
+                    );
+                    redirect('puskesmas/login_puskesmas');
+                } else {
+                    $this->db->delete('petugas', ['username' => $email]);
+                    $this->db->delete('user_token', ['email' => $email]);
+
+                    $this->session->set_flashdata(
+                        'alert',
+                        '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+           Token expired!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>'
+                    );
+                    redirect('puskesmas/login_puskesmas');
+                }
+            } else {
+                $this->session->set_flashdata(
+                    'alert',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+           Account activation failed! Wrong token.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>'
+                );
+                redirect('puskesmas/login_puskesmas');
+            }
+        } else {
+            $this->session->set_flashdata(
+                'alert',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+           Account activation failed! Wrong email.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>'
+            );
+            redirect('puskesmas/login_puskesmas');
+        }
+    }
 }
