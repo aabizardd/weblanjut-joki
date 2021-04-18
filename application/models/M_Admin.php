@@ -151,9 +151,13 @@ class M_Admin extends CI_Model
         return $query->result();
     }
 
-    public function selectAll($table)
+    public function selectAll($table, $where)
     {
-        return $this->db->get($table);
+        if ($where == null) {
+            return $this->db->get($table);
+        }elseif($table == 'pekerjaan'){
+            return $this->db->get_where($table, array('tipe' => $where));
+        }
     }
 
     public function selectWhere($table, $where)

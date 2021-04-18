@@ -692,9 +692,11 @@ class Puskesmas extends CI_Controller
 
     public function kelolaKategori()
     {
-        $data['jenisBayar'] = $this->M_Admin->selectAll('jenis_pembayaran')->result_array();
-        $data['kondisihb'] = $this->M_Admin->selectAll('kondisi_hb')->result_array();
-        $data['letakbayi'] = $this->M_Admin->selectAll('letak_bayi')->result_array();
+        $data['jenisBayar'] = $this->M_Admin->selectAll('jenis_pembayaran', null)->result_array();
+        $data['kondisihb'] = $this->M_Admin->selectAll('kondisi_hb', null)->result_array();
+        $data['letakbayi'] = $this->M_Admin->selectAll('letak_bayi', null)->result_array();
+        $data['Psuami'] = $this->M_Admin->selectAll('pekerjaan', 'suami')->result_array();
+        $data['Ppasien'] = $this->M_Admin->selectAll('pekerjaan', 'pasien')->result_array();
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/puskesmas_kelolaKategori', $data);
@@ -712,7 +714,10 @@ class Puskesmas extends CI_Controller
         } elseif ($type == 'letakBayi') {
             $data = $this->M_Admin->selectWhere('letak_bayi', ['id_letak' => $id])->row();
             echo json_encode($data);
-        }
+        } elseif ($type == 'pekerjaan') {
+            $data = $this->M_Admin->selectWhere('pekerjaan', ['id_pekerjaan' => $id])->row();
+            echo json_encode($data);
+        } 
     }
 
     public function addkategori($type)
@@ -735,8 +740,14 @@ class Puskesmas extends CI_Controller
             $data = [
                 'letakBayi' => $this->input->post('letakBayi'),
             ];
-
             $this->M_Admin->insert('letak_bayi', $data);
+            redirect('admin/puskesmas/kelolaKategori');
+        } elseif ($type == 'pekerjaan') {
+            $data = [
+                'nama_pekerjaan' => $this->input->post('pekerjaan'),
+                'tipe' => $this->input->post('tipe'),
+            ];
+            $this->M_Admin->insert('pekerjaan', $data);
             redirect('admin/puskesmas/kelolaKategori');
         }
     }
@@ -761,6 +772,12 @@ class Puskesmas extends CI_Controller
             ];
             $this->M_Admin->updatekategori('letak_bayi', ['id_letak' => $id], $data);
             redirect('admin/puskesmas/kelolaKategori');
+        } elseif ($type == 'pekerjaan') {
+            $data = [
+                'nama_pekerjaan' => $this->input->post('pekerjaan'),
+            ];
+            $this->M_Admin->updatekategori('pekerjaan', ['id_pekerjaan' => $id], $data);
+            redirect('admin/puskesmas/kelolaKategori');
         }
     }
 
@@ -774,6 +791,9 @@ class Puskesmas extends CI_Controller
             redirect('admin/puskesmas/kelolaKategori');
         } elseif ($type == 'letakBayi') {
             $this->M_Admin->deleteKategori('letak_bayi', ['id_letak' => $id]);
+            redirect('admin/puskesmas/kelolaKategori');
+        } elseif ($type == 'pekerjaan') {
+            $this->M_Admin->deleteKategori('pekerjaan', ['id_pekerjaan' => $id]);
             redirect('admin/puskesmas/kelolaKategori');
         }
     }

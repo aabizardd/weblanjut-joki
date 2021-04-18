@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <h5>Jenis Pembayaran</h5>
                         <a href="#" class="mb-2 mr-2 btn btn-success" data-toggle="modal" data-target=".addJenisModal">Tambah Kategori</a>
-                        <table class="mb-0 table" id="myTable">
+                        <table class="mb-0 table" id="kategorijp">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -33,8 +33,10 @@
                                         <td><?= $no; ?></td>
                                         <td><?= $value['pembayaran']; ?></td>
                                         <td>
-                                            <a href="#" class="mb-2 mr-1 btn btn-warning" id="editJenisBayar" data-toggle="modal" data-target=".editJenisbayarModal" data-id="<?= $value['id_jenis'] ?>">Edit</a>
-                                            <a href="<?= base_url('admin/puskesmas/hapusKategori/jenisBayar/').$value['id_jenis']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            <div class="btn btn-group">
+                                                <a href="#" class="mb-2 mr-1 btn btn-warning" id="editJenisBayar" data-toggle="modal" data-target=".editJenisbayarModal" data-id="<?= $value['id_jenis'] ?>">Edit</a>
+                                                <a href="<?= base_url('admin/puskesmas/hapusKategori/jenisBayar/') . $value['id_jenis']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -48,7 +50,7 @@
                     <div class="card-body">
                         <h5>Kondisi HB</h5>
                         <a href="#" class="mb-2 mr-2 btn btn-success" data-toggle="modal" data-target=".addkondisiHB">Tambah Kategori</a>
-                        <table class="mb-0 table" id="myTable">
+                        <table class="mb-0 table" id="kategorikh">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -64,8 +66,10 @@
                                         <td><?= $no; ?></td>
                                         <td><?= $value['kondisiHb']; ?></td>
                                         <td>
-                                            <a href="#" class="mb-2 mr-1 btn btn-warning" id="editKondisiHb" data-toggle="modal" data-target=".editKondisiHbModal" data-id="<?= $value['id_hb'] ?>">Edit</a>
-                                            <a href="<?= base_url('admin/puskesmas/hapusKategori/kondisiHb/').$value['id_hb']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            <div class="btn btn-group">
+                                                <a href="#" class="mb-2 mr-1 btn btn-warning" id="editKondisiHb" data-toggle="modal" data-target=".editKondisiHbModal" data-id="<?= $value['id_hb'] ?>">Edit</a>
+                                                <a href="<?= base_url('admin/puskesmas/hapusKategori/kondisiHb/') . $value['id_hb']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -79,7 +83,7 @@
                     <div class="card-body">
                         <h5>Letak Bayi</h5>
                         <a href="#" class="mb-2 mr-2 btn btn-success" data-toggle="modal" data-target=".addLetakBayi">Tambah Kategori</a>
-                        <table class="mb-0 table" id="myTable">
+                        <table class="mb-0 table" id="kategorilb">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -95,8 +99,72 @@
                                         <td><?= $no; ?></td>
                                         <td><?= $value['letakBayi']; ?></td>
                                         <td>
-                                            <a href="#" class="mb-2 mr-1 btn btn-warning" id="editLetakBayi" data-toggle="modal" data-target=".editLetakBayiModal" data-id="<?= $value['id_letak'] ?>">Edit</a>
-                                            <a href="<?= base_url('admin/puskesmas/hapusKategori/letakBayi/').$value['id_letak']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            <div class="btn btn-group">
+                                                <a href="#" class="mb-2 mr-1 btn btn-warning" id="editLetakBayi" data-toggle="modal" data-target=".editLetakBayiModal" data-id="<?= $value['id_letak'] ?>">Edit</a>
+                                                <a href="<?= base_url('admin/puskesmas/hapusKategori/letakBayi/') . $value['id_letak']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5>Pekerjaan Pasien</h5>
+                        <button class="mb-2 mr-2 btn btn-success" id="addPekerjaanP" data-toggle="modal" data-target=".pekerjaan">Tambah Kategori</button>
+                        <table class="mb-0 table" id="kategoripp">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Pekerjaan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($Ppasien as $key => $value) { ?>
+                                    <tr>
+                                        <td><?= $key + 1 ?></td>
+                                        <td><?= $value['nama_pekerjaan'] ?></td>
+                                        <td>
+                                            <div class="btn btn-group">
+                                                <button href="#" class="mb-2 mr-1 btn btn-warning editPekerjaanP" data-toggle="modal" data-target=".pekerjaan" data-id="<?= $value['id_pekerjaan'] ?>">Edit</button>
+                                                <a href="<?= base_url('admin/puskesmas/hapusKategori/pekerjaan/') . $value['id_pekerjaan']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5>Pekerjaan Suami</h5>
+                        <button class="mb-2 mr-2 btn btn-success" id="addPekerjaanS" data-toggle="modal" data-target=".pekerjaan">Tambah Kategori</button>
+                        <table class="mb-0 table" id="kategorips">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Pekerjaan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($Psuami as $key => $value) { ?>
+                                    <tr>
+                                        <td><?= $key + 1 ?></td>
+                                        <td><?= $value['nama_pekerjaan'] ?></td>
+                                        <td>
+                                            <div class="btn btn-group">
+                                                <button href="#" class="mb-2 mr-1 btn btn-warning editPekerjaanS" data-toggle="modal" data-target=".pekerjaan" data-id="<?= $value['id_pekerjaan'] ?>">Edit</button>
+                                                <a href="<?= base_url('admin/puskesmas/hapusKategori/pekerjaan/') . $value['id_pekerjaan']; ?>" class="mb-2 mr-1 btn btn-danger">Delete</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -208,7 +276,7 @@
     </div>
 </div>
 
-<div class="modal fade editKondisiHbModal"  id="ModalEditKondisiHb" tabindex="-1" role="dialog" aria-labelledby="editKondisiHbModalLabel" aria-hidden="true">
+<div class="modal fade editKondisiHbModal" id="ModalEditKondisiHb" tabindex="-1" role="dialog" aria-labelledby="editKondisiHbModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -305,3 +373,36 @@
     </div>
 </div>
 
+<!-- kelola kategori pekerjaan -->
+<div class="modal fade pekerjaan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pekerjaanTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?= form_open_multipart('admin/puskesmas/addkategori/pekerjaan', ['class' => 'modal-form', 'id' => 'pekerjaan']); ?>
+            <div class="modal-body">
+                <div class="form-group form-input">
+                    <div class="row">
+                        <div class="col-md-2 text-sm-left">
+                            <label for="input-pekerjaan" id="pekerjaanLabel" class="col-form-label text-dark"></label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" name="pekerjaan" class="form-control" id="input-pekerjaan">
+                            <input type="text" name="tipe" class="form-control" id="input-tipe" hidden>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" id="submitButton" class="btn btn-primary"></button>
+            </div>
+            <?= form_close(); ?>
+        </div>
+    </div>
+</div>
