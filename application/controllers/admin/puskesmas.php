@@ -651,7 +651,7 @@ class Puskesmas extends CI_Controller
         return $namaFilesBaru;
     }
 
-    public function laporanPuskesmas($bln = null)
+    public function laporanPuskesmas()
     {
 
         $data['ibuhamils'] = $this->ibuhamil_model->getAll();
@@ -664,15 +664,30 @@ class Puskesmas extends CI_Controller
         $data['wilayah'] = $this->ibuhamil_model->getWilayah();
         $data['showGraph'] = "puskesmas";
 
-        if (!is_null($bln)) {
-            $data['graph1'] = $this->ibuhamil_model->getDataGraph(1, $bln);
-            $data['graph2'] = $this->ibuhamil_model->getDataGraph(1, $bln);
-            $data['graph3'] = $this->ibuhamil_model->getDataGraph(2, $bln);
-        } else {
+        $bln = $this->input->post('bulan');
+        $thn = $this->input->post('tahun');
+
+        $tanggal = $thn . "-" . $bln;
+
+        if (is_null($bln) && is_null($thn) || $bln == "" && $thn == "") {
             $data['graph1'] = $this->ibuhamil_model->getDataGraph(1);
             $data['graph2'] = $this->ibuhamil_model->getDataGraph(1);
             $data['graph3'] = $this->ibuhamil_model->getDataGraph(2);
+        } else {
+            $data['graph1'] = $this->ibuhamil_model->getDataGraph(1, $tanggal);
+            $data['graph2'] = $this->ibuhamil_model->getDataGraph(1, $tanggal);
+            $data['graph3'] = $this->ibuhamil_model->getDataGraph(2, $tanggal);
         }
+
+        // if (!is_null($bln)) {
+        //     $data['graph1'] = $this->ibuhamil_model->getDataGraph(1, $bln);
+        //     $data['graph2'] = $this->ibuhamil_model->getDataGraph(1, $bln);
+        //     $data['graph3'] = $this->ibuhamil_model->getDataGraph(2, $bln);
+        // } else {
+        //     $data['graph1'] = $this->ibuhamil_model->getDataGraph(1);
+        //     $data['graph2'] = $this->ibuhamil_model->getDataGraph(1);
+        //     $data['graph3'] = $this->ibuhamil_model->getDataGraph(2);
+        // }
 
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
@@ -717,7 +732,7 @@ class Puskesmas extends CI_Controller
         } elseif ($type == 'pekerjaan') {
             $data = $this->M_Admin->selectWhere('pekerjaan', ['id_pekerjaan' => $id])->row();
             echo json_encode($data);
-        } 
+        }
     }
 
     public function addkategori($type)

@@ -12,22 +12,57 @@
             </div>
         </div>
 
-        <div class="mb-2 mr-2 btn-group">
-            <button class="btn btn-primary btn-lg">Bulan</button>
-            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
-                class="dropdown-toggle-split dropdown-toggle btn btn-primary btn-lg"><span class="sr-only">Toggle
-                    Dropdown</span>
-            </button>
-            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
-                <?php
-$no = 1;
-foreach ($bulan as $item): ?>
-                <a href="<?=base_url('admin/posyandu/laporan/') . date('Y') . '-' . str_pad($no++, 2, "0", STR_PAD_LEFT);?>"
-                    tabindex="0" class="dropdown-item"><?=$item?></a>
-                <?php endforeach;?>
 
+
+        <form action="<?=base_url('admin/posyandu/laporan')?>" method="POST">
+            <div class="row">
+
+                <div class="col-2">
+
+                    <div class="input-group mb-3">
+
+                        <select class="custom-select" id="inputGroupSelect01" name="bulan" required>
+                            <option selected value="">Choose...</option>
+                            <?php
+$num = 1;
+foreach ($bulan as $item): ?>
+                            <option value="<?=str_pad($num++, 2, "0", STR_PAD_LEFT)?>"><?=$item?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col-2">
+
+                    <div class="input-group mb-3">
+
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" id="tahun" aria-describedby="emailHelp"
+                                placeholder="Tahun" name="tahun" required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-2">
+
+                    <!-- <label for="exampleInputEmail1">asdas</label> -->
+                    <div class="input-group mb-3">
+
+                        <button class="btn btn-primary" type="submit" name="cari">Cari</button>
+
+                    </div>
+
+
+                </div>
             </div>
-        </div>
+        </form>
+
+
 
         <div class="row">
             <?php

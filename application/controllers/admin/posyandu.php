@@ -440,7 +440,7 @@ class Posyandu extends CI_Controller
         }
     }
 
-    public function laporan($bln = null)
+    public function laporan()
     {
         $data["pendaftaran"] = $this->M_Admin->getAllLaporanPosyandu();
 
@@ -453,17 +453,35 @@ class Posyandu extends CI_Controller
 
         $data['bulan'] = $bulan;
 
-        $data['wilayah'] = $this->M_Admin->selectAll('wilayah');
+        $data['wilayah'] = $this->M_Admin->selectAllWilayah('wilayah');
 
-        if (!is_null($bln)) {
-            $data['graph1'] = $this->Regisanak_model->getDataGraph(1, $bln);
-            $data['graph2'] = $this->Regisanak_model->getDataGraph(1, $bln);
-            $data['graph3'] = $this->Regisanak_model->getDataGraph(2, $bln);
-        } else {
+        $bln = $this->input->post('bulan');
+        $thn = $this->input->post('tahun');
+
+        $tanggal = $thn . "-" . $bln;
+        // if (isset($_POST['cari'])) {
+        //     var_dump($tanggal);die();
+        // }
+
+        if (is_null($bln) && is_null($thn) || $bln == "" && $thn == "") {
             $data['graph1'] = $this->Regisanak_model->getDataGraph(1);
             $data['graph2'] = $this->Regisanak_model->getDataGraph(1);
             $data['graph3'] = $this->Regisanak_model->getDataGraph(2);
+        } else {
+            $data['graph1'] = $this->Regisanak_model->getDataGraph(1, $tanggal);
+            $data['graph2'] = $this->Regisanak_model->getDataGraph(1, $tanggal);
+            $data['graph3'] = $this->Regisanak_model->getDataGraph(2, $tanggal);
         }
+
+        // if (!is_null($bln)) {
+        //     $data['graph1'] = $this->Regisanak_model->getDataGraph(1, $bln);
+        //     $data['graph2'] = $this->Regisanak_model->getDataGraph(1, $bln);
+        //     $data['graph3'] = $this->Regisanak_model->getDataGraph(2, $bln);
+        // } else {
+        //     $data['graph1'] = $this->Regisanak_model->getDataGraph(1);
+        //     $data['graph2'] = $this->Regisanak_model->getDataGraph(1);
+        //     $data['graph3'] = $this->Regisanak_model->getDataGraph(2);
+        // }
 
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');

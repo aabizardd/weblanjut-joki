@@ -155,9 +155,14 @@ class M_Admin extends CI_Model
     {
         if ($where == null) {
             return $this->db->get($table);
-        }elseif($table == 'pekerjaan'){
+        } elseif ($table == 'pekerjaan') {
             return $this->db->get_where($table, array('tipe' => $where));
         }
+    }
+
+    public function selectAllWilayah($tabel)
+    {
+        return $this->db->get($tabel);
     }
 
     public function selectWhere($table, $where)
