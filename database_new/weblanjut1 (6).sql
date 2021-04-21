@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 08:29 AM
+-- Generation Time: Apr 21, 2021 at 07:16 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -59,6 +59,14 @@ CREATE TABLE `imunisasi` (
   `imunisasi` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `imunisasi`
+--
+
+INSERT INTO `imunisasi` (`id_imunisasi`, `imunisasi`) VALUES
+(2, 'imunisasi A'),
+(3, '0 - 7 hari (HBO)');
+
 -- --------------------------------------------------------
 
 --
@@ -106,7 +114,8 @@ CREATE TABLE `jenis_pembayaran` (
 INSERT INTO `jenis_pembayaran` (`id_jenis`, `pembayaran`) VALUES
 (1, 'Jamsoskes'),
 (3, 'BPJS'),
-(4, 'Bayar');
+(4, 'Bayar'),
+(6, 'COD');
 
 -- --------------------------------------------------------
 
@@ -124,7 +133,9 @@ CREATE TABLE `kategori_usia` (
 --
 
 INSERT INTO `kategori_usia` (`id_usia`, `usia`) VALUES
-(1, 'Balita(16-90 bulan)');
+(1, 'Balita(16-90 bulan)'),
+(2, 'Bayi (0-10 bulan)'),
+(3, 'Batita (1-3 thn)');
 
 -- --------------------------------------------------------
 
@@ -163,7 +174,8 @@ CREATE TABLE `letak_bayi` (
 INSERT INTO `letak_bayi` (`id_letak`, `letakBayi`) VALUES
 (1, 'LETBO (Letak Bokong)'),
 (2, 'LKEP (Letak Kepala)'),
-(3, 'LETLI (Letak Lintang)');
+(3, 'LETLI (Letak Lintang)'),
+(5, 'LENJEH');
 
 -- --------------------------------------------------------
 
@@ -175,6 +187,14 @@ CREATE TABLE `obat_cacing` (
   `id_obat` int(11) NOT NULL,
   `obatCacing` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `obat_cacing`
+--
+
+INSERT INTO `obat_cacing` (`id_obat`, `obatCacing`) VALUES
+(1, '1/2 pil (umur 1 - 2 tahun)'),
+(2, '1 pil (umur 2 - 5 tahun)');
 
 -- --------------------------------------------------------
 
@@ -231,6 +251,28 @@ INSERT INTO `password_akses` (`id_password`, `role`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pekerjaan`
+--
+
+CREATE TABLE `pekerjaan` (
+  `id_pekerjaan` int(11) NOT NULL,
+  `nama_pekerjaan` varchar(255) DEFAULT NULL,
+  `tipe` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pekerjaan`
+--
+
+INSERT INTO `pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `tipe`) VALUES
+(1, 'PNS', 'pasien'),
+(2, 'Guru', 'suami'),
+(4, 'Wirausaha', 'pasien'),
+(5, 'Karyawan Swasta', 'suami');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pemeriksaan`
 --
 
@@ -263,7 +305,7 @@ CREATE TABLE `pemeriksaan` (
   `hbsag` enum('Positif','Negatif') DEFAULT NULL,
   `hiv` enum('Positif','Negatif') DEFAULT NULL,
   `sypilis` enum('Positif','Negatif') DEFAULT NULL,
-  `pembayaran` enum('Jamsoskes','BPJS','Bayar') DEFAULT NULL
+  `pembayaran` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -271,14 +313,14 @@ CREATE TABLE `pemeriksaan` (
 --
 
 INSERT INTO `pemeriksaan` (`id_pemeriksaan`, `id_reg`, `id_pasien`, `id_petugas`, `idWilayah`, `tgl_periksa`, `gravida`, `partes`, `abortus`, `jarak_kehamilan`, `usia_kehamilan`, `tinggi_badan`, `lila`, `sistol`, `diastol`, `tetanus_toksoid`, `fe`, `tfu`, `letak_bayi`, `detak_jantung`, `hpht`, `tp`, `hb`, `namaobat`, `tindakanmedis`, `hbsag`, `hiv`, `sypilis`, `pembayaran`) VALUES
-(5, 0, 1212, 5092, 1, '2020-01-02', 29, 1, 2, 3, 6, 145, 22, 90, 80, '11', 33, 44, 'LETBO (Letak Bokong)', '90/100', '2020-12-03', '2020-12-25', 'Rendah (< 10 gram %)', 'cacing pita', 'medis', 'Negatif', 'Negatif', 'Negatif', NULL),
+(5, 0, 1212, 5092, 1, '2020-01-02', 29, 1, 2, 3, 6, 145, 22, 90, 80, '11', 33, 44, 'LENJEH', '90/100', '2020-12-03', '2020-12-25', 'Rendah (< 10 gram %)', 'cacing pita', 'medis', 'Negatif', 'Negatif', 'Negatif', 'Bayar'),
 (6, 0, 778866, 21231, 1, '2020-12-03', 0, 0, 1, 1, 4, 177, 54, 89, 99, '53', 17, 19, 'Letak Bokong', '90/100', '2020-11-29', '2021-01-09', 'Normal', 'neurobion', 'memberikan obat tambah darah', 'Negatif', 'Positif', 'Positif', 'Bayar'),
 (7, 0, 555, 50924, 1, '2020-12-03', 1, 0, 2, 2, 3, 155, 32, 45, 55, '5', 6, 7, 'Letak Kepala', '90/100', '2020-12-03', '2020-12-03', 'Rendah', 'tidak ada ', 'melakukan pemeriksaan rutin', 'Positif', 'Negatif', 'Negatif', 'Bayar'),
 (8, 0, 505432, 2705, 1, '2020-12-21', 0, 0, 2, 4, 8, 145, 56, 90, 110, '34', 60, 6, 'Letak Bokong', '90/100', '2020-12-07', '2021-03-31', 'Pilih kondisi hb', 'neuobion ', 'memberikan obat tambah darah', 'Negatif', 'Negatif', 'Negatif', 'Jamsoskes'),
 (9, 0, 131, 2705, 2, '2020-12-21', 0, 0, 1, 6, 9, 156, 45, 80, 90, '5', 67, 50, 'Letak Kepala', '90/100', '2020-11-29', '2021-01-28', 'Normal', 'tidak ada ', 'melakukan pemeriksaan saja', 'Negatif', 'Negatif', 'Negatif', 'BPJS'),
 (10, 0, 555, 270500, 3, '2020-12-24', 1, 1, 2, 7, 9, 165, 23, 80, 90, '50', 42, 12, 'Letak Bokong', '90/100', '2020-10-13', '2021-03-03', 'Rendah', 'neurobion', 'memberikan obat tambah darah', 'Negatif', 'Negatif', 'Negatif', 'Bayar'),
-(11, 0, 1212, 5092, 0, '2021-04-07', 12, 12, 12, 1, 1, 123, 12, 12, 12, '12', 121, 121, 'LETBO (Letak Bokong)', 'ada', '2021-03-30', '2021-04-07', 'Rendah (< 10 gram %)', 'asdas', 'adasda', 'Negatif', 'Negatif', 'Negatif', 'Jamsoskes'),
-(12, 0, 1212, 5092, 0, '2021-04-06', 12, 112, 12, 121, 12, 12, 12, 112, 12, '12', 12, 12, 'LKEP (Letak Kepala)', '12', '2021-03-28', '2021-05-07', 'Rendah (< 10 gram %)', '12', '12', 'Positif', 'Positif', 'Positif', 'BPJS');
+(11, 0, 1212, 5092, 2, '2021-04-07', 12, 12, 12, 1, 1, 123, 12, 12, 12, '12', 121, 121, 'LETBO (Letak Bokong)', 'ada', '2021-03-30', '2021-04-07', 'Rendah (< 10 gram %)', 'asdas', 'adasda', 'Negatif', 'Negatif', 'Negatif', 'Jamsoskes'),
+(12, 0, 1212, 5092, 2, '2021-04-06', 12, 112, 12, 121, 12, 12, 12, 112, 12, '12', 12, 12, 'LKEP (Letak Kepala)', '12', '2021-03-28', '2021-05-07', 'Rendah (< 10 gram %)', '12', '12', 'Positif', 'Positif', 'Positif', 'BPJS');
 
 -- --------------------------------------------------------
 
@@ -313,34 +355,8 @@ CREATE TABLE `pencatatan` (
 --
 
 INSERT INTO `pencatatan` (`id_pencatatan`, `no_pasien`, `id_petugas`, `idWilayah`, `nama_bidan`, `umur`, `kategori`, `tinggi`, `bb`, `temperatur`, `lingkar`, `jenis_imunisasi`, `diagnosa`, `penyuluhan`, `vitamin`, `obat`, `notelp`, `tgl_pencatatan`, `status`) VALUES
-(0, '8777', 0, 4, 'anass', '2', 'Bayi (0-12 bln)', '98', '6', '36', '48', '2 bulan (BPT1 +Volio2)', 'Demam Tinggi', 'memberikan anak vitamin ', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '082285139826', '2021-04-02', 1),
-(11, '1234', 1, 2, 'wsgj', '1', 'Bayi (0-12 bln)', '42', '3', '32', '33', '0 - 7 hari (HBO)', 'demam', 'rceoh', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '6282285139826', '2020-03-09', 1),
-(14, '1024', 2, 1, 'gh', '3', 'Bayi (0-12 bln)', '123', '45', '32', '33', '2 bulan (BPT1 +Volio2)', 'sehat', 'tidak ada', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '6282285139826', '2020-03-13', 1),
-(15, '022', 3, 3, 'gukguk', '19', 'Bayi (0-12 bln)', '36', '4', '34', '34', '0 - 7 hari (HBO)', 'sehat', 'tidak ada', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '6282285139826', '2020-03-13', 1),
-(16, '133', 1, 3, 'wsgj', '2', 'Batita (16-19 bln)', '4245', '2', '32', '31', '0 - 7 hari (HBO)', 'gf', 'bjkdsha', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '6282285139826', '2020-03-13', 0),
-(19, '133', 2, 2, 'gh', '3', 'Bayi (0-12 bln)', '67', '7', '34', '34', '0 - 7 hari (HBO)', 'sehat', 'tidak ada', 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah', '½ pil (umur 1 - 2 tahun)', '6282285139826', '2020-03-13', 0),
-(37, '02', 1, 4, 'nana', '4', 'Bayi (0-12 bln)', '56', '44', '38', '46', '0 - 7 hari (HBO)', 'sehat', 'tidak ada', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '08346348289', '2020-04-20', 1),
-(38, '1024', 3, 2, 'nani', '18', 'Batita (16-19 bln)', '89', '2', '33', '67', '0 - 7 hari (HBO)', 'sehat', 'tdk ada', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '9374694044', '2020-12-16', 1),
-(39, '342', 0, 1, 'nani', '18', 'Bayi (0-12 bln)', '87', '4', '34', '48', '0 - 7 hari (HBO)', 'flu', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '62813946498', '2020-12-20', 1),
-(40, '12', 0, 2, 'nani', '12', 'Bayi (0-12 bln)', '87', '4', '34', '84', '0 - 7 hari (HBO)', 'flu', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '6283035387', '2020-12-21', 1),
-(41, '33', 0, 1, 'naniaaa', '14', 'Bayi (0-12 bln)', '84', '6', '36', '46', '0 - 7 hari (HBO)', 'flu', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '8798794', '2021-04-02', 1),
-(42, '138', 0, 2, 'naniaa', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 1),
-(43, '01', 0, 4, 'Linda', '12', 'Batita (16-19 bln)', '87', '8', '36', '48', '9 bulan (Campak)', 'Demam Tinggi', 'memberikan anak vitamin ', 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah', '1 pil (umur 2 - 5 tahun)', '6282285139828', '2021-04-02', 1),
-(44, '42', 0, 4, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam Tinggi', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '1/2 pil (umur 1 - 2 tahun)', '08247290207', '2020-12-24', 0),
-(45, '33', 0, 4, 'naniaa', '18', 'Bayi (0-12 bln)', '87', '6', '38', '47', '0 - 7 hari (HBO)', 'Demam Tinggi', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '083758912289', '2021-04-02', 1),
-(47, '01', 0, 1, 'sata', '12', 'Bayi (0-12 bln)', '148', '6', '34', '48', '0 - 7 hari (HBO)', 'flu', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '82285139826', '2021-04-02', 1),
-(48, '01', 0, 2, 'ghass', '12', 'Bayi (0-12 bln)', '87', '8', '36', '48', '0 - 7 hari (HBO)', 'sehat', 'tdk ada', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '910926728', '2021-04-02', 0),
-(49, '42', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(50, '42', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(51, '42', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(52, '42', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(53, '138', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(54, '138', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(55, '138', 0, 0, 'nani', '12', 'Bayi (0-12 bln)', '78', '6', '36', '48', '0 - 7 hari (HBO)', 'Demam', 'rujuk ke puskesmas makrayu', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '-- PILIH --', '08247290207', '2021-04-02', 0),
-(56, '8777', 0, 0, 'naniaa', '12', 'Batita (16-19 bln)', '12', '113', '13', '13', '1 bulan (BCG + Volio 1)', 'atat', 'asdsa', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '1312312', '2021-04-02', 0),
-(57, '8777', 0, 0, 'anakk', '12', 'Bayi (0-12 bln)', '132', '12', '21', '112', '0 - 7 hari (HBO)', 'adasdasd', 'aaa', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '½ pil (umur 1 - 2 tahun)', '081231221231', '2021-04-02', 0),
-(58, '8777', 0, 0, 'hiyahiya', '3', 'Batita (16-19 bln)', '12', '12', '12', '12', '1 bulan (BCG + Volio 1)', 'aa', 'aa', 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah', '½ pil (umur 1 - 2 tahun)', '1232131', '2021-04-02', 0),
-(59, '001', 0, 0, 'naniaa', '12', 'Bayi (0-12 bln)', '12', '12', '12', '12', '0 - 7 hari (HBO)', 'addas', 'adas', 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah', '½ pil (umur 1 - 2 tahun)', '1232131', '2021-04-02', 0);
+(65, '002', 0, 2, 'oke1', '12', 'Bayi (0-10 bulan)', '12', '12', '12', '12', '0 - 7 hari (HBO)', 'asd', 'adas', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '1/2 pil (umur 1 - 2 tahun)', '12321321', '2021-04-16', 0),
+(66, '001', 0, 2, 'asdsad', '12', 'Balita(16-90 bulan)', '12', '12', '12', '12', 'imunisasi A', 'dasdas', 'adasdsa', 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru', '1/2 pil (umur 1 - 2 tahun)', '21321312', '2021-04-16', 0);
 
 -- --------------------------------------------------------
 
@@ -364,9 +380,9 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `nama`, `foto`, `password`, `status`, `id_wilayah`, `status_aktif`) VALUES
-(3, 'superadmin@mail.com', 'superadmin', 'img_602a6c648d478.jpg', '12345', 'superadmin', NULL, 1),
-(7, 'reza@mail.com', 'reza', 'img_602a6c648d478.jpg', '12345', 'posyandu', '2', 1),
-(17, 'cosager773@684hh.com', 'Nathaniel', '606b30393f0b2.png', '1234', 'puskesmas', NULL, 1);
+(3, 'superadmin@mail.com', 'superadmin', 'img_602a6c648d478.jpg', '1234', 'superadmin', NULL, 1),
+(7, 'reza@mail.com', 'reza', 'img_602a6c648d478.jpg', '1234', 'posyandu', '2', 1),
+(17, 'cosager773@684hh.com', 'Nathaniel', '607bcfb762d2d.png', '1234', 'puskesmas', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -414,22 +430,6 @@ CREATE TABLE `user_token` (
   `date_created` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `user_token`
---
-
-INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
-(2, 'reza@mail.com', '/qqBEhBzikTKPMS/5ObTTZYK6g1VZEkoc6RFG+JpR/M=', '1613392996'),
-(4, 'm.abizard1123@gmail.com', '7teHabNBxWRqhTUvQ7NZYRaOtU2B7Guw12Bx1YgoR5w=', '1617336257'),
-(5, 'm.abizard1123@gmail.com', 'bjgjyz15XaykVHTwRsVWR5FDVuQW9nhyOQ3NMgLe5sw=', '1617616395'),
-(6, 'm.abizard1123@gmail.com', 'GmB6NUf3pRIOoYt7yBSqQP7SBxbpqvKwBjTGQTeeH+A=', '1617616417'),
-(7, 'm.abizard1123@gmail.com', 'klNlTGiIgFfigth3q9rmbHCoqQe43Mrk12sNpdngTvo=', '1617616446'),
-(8, 'm.abizard1123@gmail.com', 'OR0zLZlwcmDba/X/K6yaf1OXh8TFw4EykLEDHpe0/to=', '1617616532'),
-(9, 'm.abizard1123@gmail.com', 'w3u8jb3JgkbysjW2Oz02Gke3xcfjXkg0JayNzqY0BDg=', '1617616742'),
-(10, 'm.abizard1123@gmail.com', 'Pl6eXmEy0RFxwdF7oI44mBQYSFjMCCpNOZ0VUBBF2rQ=', '1617616836'),
-(11, 'm.abizard1123@gmail.com', 'Oq2xVkJMyqgeL2zyWh6Jc3i/K8JwPLTtoQi/KHApi3M=', '1617616900'),
-(12, 'm.abizard1123@gmail.com', '3w1DixWKilCd83RnO/8cU3ieO8dg+VRfo2dzmJ1NzE0=', '1617616936');
-
 -- --------------------------------------------------------
 
 --
@@ -440,6 +440,15 @@ CREATE TABLE `vitamin` (
   `id_vitamin` int(11) NOT NULL,
   `vitamin` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vitamin`
+--
+
+INSERT INTO `vitamin` (`id_vitamin`, `vitamin`) VALUES
+(2, 'Vitamin A (umur 6 bulan - 1 tahun ) warna biru'),
+(3, 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah'),
+(4, 'Vitamin A (umur 1 tahun - 5 tahun ) warna merah');
 
 -- --------------------------------------------------------
 
@@ -467,8 +476,7 @@ INSERT INTO `wilayah` (`id_wilayah`, `nama_wilayah`, `kelurahan`, `rw`, `rt`, `n
 (4, 'Wilayah 4', '30 Ilir', '1 - 16', '1 - 60', 'Posyandu D'),
 (5, 'Wilayah 5', '32 Ilir', '1 - 8', '1 - 38', 'Posyandu E'),
 (6, 'Wliayah 6', '35 Ilir', '1 - 7', '1 - 36', 'Posyandu F'),
-(7, 'Wilayah 7', 'Kemang Manis', '1 - 4', '1 - 13', 'Posyandu G'),
-(9, 'Jawa Barat', 'Cisarua', '22', '1-3', 'Posyandu Cisarua');
+(7, 'Wilayah 7', 'Kemang Manis', '1 - 4', '1 - 13', 'Posyandu G');
 
 --
 -- Indexes for dumped tables
@@ -519,6 +527,12 @@ ALTER TABLE `letak_bayi`
   ADD PRIMARY KEY (`id_letak`);
 
 --
+-- Indexes for table `obat_cacing`
+--
+ALTER TABLE `obat_cacing`
+  ADD PRIMARY KEY (`id_obat`);
+
+--
 -- Indexes for table `pasienrujukan`
 --
 ALTER TABLE `pasienrujukan`
@@ -529,6 +543,12 @@ ALTER TABLE `pasienrujukan`
 --
 ALTER TABLE `password_akses`
   ADD PRIMARY KEY (`id_password`);
+
+--
+-- Indexes for table `pekerjaan`
+--
+ALTER TABLE `pekerjaan`
+  ADD PRIMARY KEY (`id_pekerjaan`);
 
 --
 -- Indexes for table `pemeriksaan`
@@ -583,19 +603,19 @@ ALTER TABLE `wilayah`
 -- AUTO_INCREMENT for table `imunisasi`
 --
 ALTER TABLE `imunisasi`
-  MODIFY `id_imunisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_imunisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `jenis_pembayaran`
 --
 ALTER TABLE `jenis_pembayaran`
-  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kategori_usia`
 --
 ALTER TABLE `kategori_usia`
-  MODIFY `id_usia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kondisi_hb`
@@ -607,7 +627,13 @@ ALTER TABLE `kondisi_hb`
 -- AUTO_INCREMENT for table `letak_bayi`
 --
 ALTER TABLE `letak_bayi`
-  MODIFY `id_letak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_letak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `obat_cacing`
+--
+ALTER TABLE `obat_cacing`
+  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pasienrujukan`
@@ -622,6 +648,12 @@ ALTER TABLE `password_akses`
   MODIFY `id_password` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `pekerjaan`
+--
+ALTER TABLE `pekerjaan`
+  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
@@ -631,25 +663,25 @@ ALTER TABLE `pemeriksaan`
 -- AUTO_INCREMENT for table `pencatatan`
 --
 ALTER TABLE `pencatatan`
-  MODIFY `id_pencatatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_pencatatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `vitamin`
 --
 ALTER TABLE `vitamin`
-  MODIFY `id_vitamin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_vitamin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wilayah`
