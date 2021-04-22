@@ -151,7 +151,7 @@ class M_Admin extends CI_Model
         return $query->result();
     }
 
-    public function selectAll($table, $where)
+    public function selectAll($table, $where = null)
     {
         if ($where == null) {
             return $this->db->get($table);
